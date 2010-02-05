@@ -11,11 +11,9 @@
 (epa-file-enable)
 (setq epa-file-cache-passphrase-for-symmetric-encryption t)
 
-;;用户资料设定
 (setq user-full-name "Binjo"
       user-mail-address binjo-main-account)
 
-;;服务器的设定
 (setq gnus-select-method '(nntp "news.cn99.com"))
 (setq gnus-secondary-select-methods `((nntp "news.gmane.org")
 ;;                                      (nnfolder "")
@@ -115,10 +113,10 @@ PORT smtp service."
                                        ,binjo-comp-server
                                        25)))))
 
-;;自动换行功能。
+;; auto fill
 (add-hook 'message-mode-hook
    (lambda ()
-     (setq fill-column 80);;这里的80是等一行到了80个字符后开始换行
+     (setq fill-column 80)
      (turn-on-auto-fill)))
 
 ;; don't quote the signature
@@ -134,7 +132,7 @@ PORT smtp service."
       sc-preferred-header-style 1
       )
 
-;; 改变阅读新闻时窗口的布局，窗口划分为上4下6（比例）
+;; framework
 (gnus-add-configuration '(article
                           (vertical 1.0
                                     (summary .4 point)
@@ -142,9 +140,9 @@ PORT smtp service."
 
 (setq gnus-summary-line-format ":%U%R %B %s %-60=| %5L |%-10,8f |%&user-date; \n")
 
-;;开启记分
-(setq gnus-use-adaptive-scoring t)
-(setq gnus-save-score t)
+;; score
+(setq gnus-use-adaptive-scoring t
+      gnus-save-score t)
 
 (add-hook 'mail-citation-hook 'sc-cite-original)
 (add-hook 'message-sent-hook 'gnus-score-followup-article)
@@ -156,7 +154,7 @@ PORT smtp service."
                            "Content-Transfer-Encoding:\\|"
                            "^X-mailer:\\|^X-Newsreader:\\|^X-Sender:\\|"
                            gnus-visible-headers))))
-;; 新闻组分组
+
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 
 (defvar gnus-default-adaptive-score-alist
@@ -221,7 +219,7 @@ PORT smtp service."
         (not gnus-thread-sort-by-number)
         ))
 
-;;中文设置
+;; Chinese related settings
 (setq gnus-summary-show-article-charset-alist
       '((1 . cn-gb-2312) (2 . big5) (3 . gbk) (4 . utf-8)))
 
@@ -230,8 +228,6 @@ PORT smtp service."
       gnus-newsgroup-ignored-charsets
       '(unknown-8bit x-unknown iso-8859-1 ISO-8859-15 x-gbk GB18030 gbk DEFAULT_CHARSET))
 
-;另外，有些用web方式发出的邮件里有html，加入下面的设置，只看其中的
-;plain text部分：
 (eval-after-load "mm-decode"
   '(progn
      (add-to-list 'mm-discouraged-alternatives "text/html")
@@ -247,19 +243,15 @@ PORT smtp service."
 (require 'bbdb)
 (bbdb-initialize 'gnus 'message)
 
-;; bbdb 自己检查你填写的电话是否符合北美标准，
-;; 如果你不是生活在北美，应该取消这种检查
 (setq bbdb-north-american-phone-numbers-p nil)
 
-;; 把你的 email 地址告诉 bbdb
 (setq bbdb-user-mail-names
       (regexp-opt `(,binjo-main-account
                     ,binjo-fake-account
                     ,binjo-comp-account)))
-(setq
- bbdb-complete-name-allow-cycling t         ;; 补全 email 地址的时候循环往复
- bbdb-use-pop-up nil                        ;; No popup-buffers
- bbdb-dwim-net-address-allow-redundancy t)  ;; include name
+(setq bbdb-complete-name-allow-cycling t         ;; cycle
+      bbdb-use-pop-up nil                        ;; No popup-buffers
+      bbdb-dwim-net-address-allow-redundancy t)  ;; include name
 (eval-after-load "message"
   '(define-key message-mode-map (kbd "<backtab>" ) 'bbdb-complete-name))
 

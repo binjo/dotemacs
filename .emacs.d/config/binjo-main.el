@@ -56,8 +56,6 @@
         (setq tab-stop-list (cons (* x 4) tab-stop-list))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 启动最大化窗口设置
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun w32-minimize-frame ()
   "Minimized the current frame"
   (interactive)

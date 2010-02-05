@@ -45,7 +45,7 @@
 ;;   '(progn
 ;;      (setq TeX-output-view-style
 ;;            (cons '("^pdf$" "." "start \"title\" %o") TeX-output-view-style)
-;;            ;»ò(cons '("^pdf$" "." "cmdproxy /C %o ") TeX-output-view-style)
+;;            ;(cons '("^pdf$" "." "cmdproxy /C %o ") TeX-output-view-style)
 ;;       )))
 
 ;; sql-config
