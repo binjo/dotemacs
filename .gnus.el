@@ -244,7 +244,6 @@ PORT smtp service."
 (setq gnus-use-cache 'passive)
 
 ;; bbdb
-(add-to-list 'load-path "~/.emacs.d/site-lisp/bbdb-2.35/lisp")
 (require 'bbdb)
 (bbdb-initialize 'gnus 'message)
 
