@@ -100,8 +100,6 @@
 
 ;; douban
 (require 'douban-emacs)
-(setq douban-api-public-key "0b642f07fed1668e222c8d17fc7433aa")
-(setq douban-api-secret-key "7e1b4e3ffadc4841")
 (global-set-key (kbd "C-c d n") 'douban-create-note)
 
 (require 'edit-server)
