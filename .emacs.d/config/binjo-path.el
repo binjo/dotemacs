@@ -53,7 +53,8 @@
                     "~/.emacs.d/site-lisp/yasnippet"
                     "~/.emacs.d/site-lisp/emms/lisp"
                     "~/.emacs.d/site-lisp/douban"
-                    "~/.emacs.d/site-lisp/emacs_chrome/servers")
+                    "~/.emacs.d/site-lisp/emacs_chrome/servers"
+                    "~/.emacs.d/site-lisp/twit")
               load-path))
 
 (provide 'binjo-path)
