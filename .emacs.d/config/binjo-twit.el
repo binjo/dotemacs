@@ -65,5 +65,10 @@
 
 (add-hook 'twit-new-tweet-hook 'binjo-twit-hook-notify-new-tweets)
 
+(if binjo-at-company-p
+    (progn
+      (run-with-timer "08:30am" nil 'twit-follow-recent-tweets)
+      (run-with-timer "18:00pm" nil 'twit-stop-following-tweets)))
+
 (provide 'binjo-twit)
 ;;; binjo-twit.el ends here

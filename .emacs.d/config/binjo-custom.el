@@ -208,5 +208,6 @@ This is because some levels' updating takes too long time."
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; proxy
-(setq url-proxy-services '(("http" . "172.25.25.4:808"))
-      url-using-proxy t)
+(if binjo-at-company-p
+    (setq url-proxy-services '(("http" . "172.25.25.4:808"))
+          url-using-proxy t))
