@@ -212,7 +212,7 @@ PORT smtp service."
       message-elide-ellipsis "[...]\n"
       )
 
-;;≈≈–Ú
+;; sort
 (setq gnus-thread-sort-functions
       '(
         (not gnus-thread-sort-by-date)
