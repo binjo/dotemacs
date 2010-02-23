@@ -102,8 +102,13 @@
 (require 'douban-emacs)
 (global-set-key (kbd "C-c d n") 'douban-create-note)
 
-(require 'edit-server)
-(edit-server-start)
+(if binjo-at-company-p
+    (progn
+      (require 'edit-server)
+      (edit-server-start)))
+
+(require 'magit)
+(global-set-key (kbd "C-c g m") 'magit-status)
 
 (setq last-kbd-macro
    [?\C-e ?: ?3 ?: ?* ?: ?\C-\M-% ?\[ ?- ?| ?\\ ?  ?| ?\C-q ?\C-j ?\] return return ?! ?\C-x ?\C-s ?\C-a ?\C-k ?\C-z])
