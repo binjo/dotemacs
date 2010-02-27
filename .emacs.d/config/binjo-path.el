@@ -46,7 +46,7 @@
                     "~/.emacs.d/site-lisp/wubi"
                     "~/.emacs.d/site-lisp/template/lisp"
                     "~/.emacs.d/site-lisp/ruby-mode"
-                    "~/.emacs.d/site-lisp/ejacs-11-27-08"
+                    "~/.emacs.d/site-lisp/ejacs"
                     "~/.emacs.d/site-lisp/mmm-mode-0.4.8"
                     "~/.emacs.d/site-lisp/bbdb-2.35/lisp"
                     "~/.emacs.d/site-lisp/smex"
