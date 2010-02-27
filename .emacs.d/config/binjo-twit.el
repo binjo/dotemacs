@@ -67,8 +67,8 @@
 
 (if binjo-at-company-p
     (progn
-      (run-with-timer "08:30am" nil 'twit-follow-recent-tweets)
-      (run-with-timer "18:00pm" nil 'twit-stop-following-tweets)))
+      (run-with-timer "08:30am" (* 24 60 60) 'twit-follow-recent-tweets)
+      (run-with-timer "18:00pm" (* 24 60 60) 'twit-stop-following-tweets)))
 
 (provide 'binjo-twit)
 ;;; binjo-twit.el ends here
