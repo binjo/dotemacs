@@ -6,11 +6,6 @@
   '(defun smtpmail-fqdn ()
      "unknown"))
 
-;; epa, gpg related
-(require 'epa-file)
-(epa-file-enable)
-(setq epa-file-cache-passphrase-for-symmetric-encryption t)
-
 (setq user-full-name "Binjo"
       user-mail-address binjo-main-account)
 

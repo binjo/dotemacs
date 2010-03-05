@@ -215,3 +215,12 @@ This is because some levels' updating takes too long time."
 ;; Shut off compiler error pop-up warning about
 ;;    save-excursion defeated by set-buffer
 (setq byte-compile-warnings '(not suspicious))
+
+;; epa, gpg related
+(require 'epa-file)
+(epa-file-enable)
+(setq epa-file-cache-passphrase-for-symmetric-encryption t)
+(setq mml2015-encrypt-to-self t
+      mml2015-cache-passphrase t
+      mml2015-passphrase-cache-expiry 60000
+      mml2015-verbose t)
