@@ -110,5 +110,8 @@
 (require 'magit)
 (global-set-key (kbd "C-c g m") 'magit-status)
 
+(require 'kmacro-ring-list)
+(global-set-key (kbd "C-c m r") 'kmacro-ring-list)
+
 (setq last-kbd-macro
    [?\C-e ?: ?3 ?: ?* ?: ?\C-\M-% ?\[ ?- ?| ?\\ ?  ?| ?\C-q ?\C-j ?\] return return ?! ?\C-x ?\C-s ?\C-a ?\C-k ?\C-z])

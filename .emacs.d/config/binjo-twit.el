@@ -41,7 +41,11 @@
 
 
 (setq twit-filter-tweets-regex "^$"
-      twit-show-user-images nil)
+      twit-show-user-images    nil
+      twit-fill-tweets         nil)
+
+(if binjo-at-company-p
+    (setq twit-proxy           "172.25.25.4:808"))
 
 (global-set-key (kbd "C-c t s") 'twit-show-recent-tweets)
 (global-set-key (kbd "C-c t d") 'twit-show-direct-tweets)
