@@ -140,3 +140,8 @@
 (add-hook 'post-command-hook 'xwl-mmm-refresh)
 
 ))
+
+;; haskell
+(load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file.el")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
