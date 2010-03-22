@@ -143,5 +143,7 @@
 
 ;; haskell
 (load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file.el")
+(setq haskell-program-name
+      (shell-quote-argument "c:/Program Files/Haskell Platform/bin/ghci.exe"))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
