@@ -55,9 +55,21 @@
        erc-encoding-coding-alist '(("#segfault" . gb2312)
                                    ("#ph4nt0m" . gb2312)))
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#emacs" "#metasploit" "#volatility")
+      '(("freenode.net" "#emacs" "#metasploit" "#haskell")
         ("0x557.net" "#segfault")
         ("oftc.net" "#emacs-cn")))
+
+;; trim erc nicks
+(setq erc-format-nick-function 'xwl-erc-format-nick)
+
+(defun xwl-erc-format-nick (&optional user channel-data)
+  "Like `erc-format-nick' but trim nick to a fixed length. "
+  (let ((nick (erc-format-nick user channel-data)))
+    (when (> (length nick) 7)
+      (setq nick (concat (substring nick 0 4)
+                         ".."
+                         (substring (substring nick 7) -1))))
+    nick))
 
 ;; match & track
 (require 'erc-match)
@@ -66,13 +78,19 @@
 (setq erc-keywords '("gnus" "twitter" "0day"))
 (setq erc-pals nil)
 
+;; track
+(require 'erc-track)
+
 (setq erc-track-faces-priority-list
       '(erc-query-buffer-face
         erc-current-nick-face
-	erc-keyword-face
-	erc-pal-face
-	erc-default-face
-	))
+        erc-keyword-face
+        erc-pal-face
+        erc-default-face
+        )
+      erc-track-switch-direction 'importance
+      erc-track-priority-faces-only 'all
+      erc-track-showcount t)
 
 ;; ignore
 (setq erc-ignore-list nil)
