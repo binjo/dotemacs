@@ -23,6 +23,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(erc-timestamp-face ((t (:foreground "brown" :weight bold))))
+ '(highlight-changes ((((min-colors 88) (class color)) (:background "burlywood1"))))
  '(twit-message-face ((default (:height 1.1 :family "ÐÂËÎÌå")) (nil nil))))
 
 ;; Turn off the annoying default backup behaviour
@@ -228,3 +229,15 @@ This is because some levels' updating takes too long time."
 (setq mm-verify-option 'known
       mm-decrypt-option 'known)
 (setq gnus-buttonized-mime-types '("multipart/signed" "multipart/encrypted"))
+
+;; ,----
+;; | Track cahnges for some buffer
+;; `----
+(defadvice switch-to-buffer (before
+                             highlight-changes-for-some-buffer
+                             activate)
+  (when (memq major-mode (list 'erc-mode 'twittering-mode))
+    (let ((buffer-read-only nil)
+          (inhibit-read-only t))
+      (highlight-changes-mode -1)
+      (highlight-changes-mode 1))))
