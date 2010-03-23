@@ -23,7 +23,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(erc-timestamp-face ((t (:foreground "brown" :weight bold))))
- '(highlight-changes ((((min-colors 88) (class color)) (:background "burlywood1"))))
+ '(highlight-changes ((((min-colors 88) (class color)) (:background "cornsilk1"))))
  '(twit-message-face ((default (:height 1.1 :family "ÐÂËÎÌå")) (nil nil))))
 
 ;; Turn off the annoying default backup behaviour
@@ -231,7 +231,7 @@ This is because some levels' updating takes too long time."
 (setq gnus-buttonized-mime-types '("multipart/signed" "multipart/encrypted"))
 
 ;; ,----
-;; | Track cahnges for some buffer
+;; | Track changes for some buffer
 ;; `----
 (defadvice switch-to-buffer (before
                              highlight-changes-for-some-buffer
