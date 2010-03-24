@@ -81,7 +81,7 @@
 ;;;; highlight special keywords, copy from xwl's xwl-programming.el
 (setq binjo-keyword-highlight-modes
       '(java-mode c-mode c++-mode emacs-lisp-mode scheme-mode
-    text-mode outline-mode python-mode perl-mode))
+    text-mode outline-mode python-mode perl-mode haskell-mode))
 
 (make-face 'font-lock-fixme-face)
 (make-face 'font-lock-todo-face)
