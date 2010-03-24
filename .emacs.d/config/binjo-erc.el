@@ -48,7 +48,7 @@
       )
 
 (setq erc-join-buffer 'buffer
-      erc-auto-query 'buffer)
+      erc-auto-query 'bury)
 
 ;(setq erc-default-port "9940")
 (setq  erc-server-coding-system '(utf-8 . utf-8)
