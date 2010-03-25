@@ -71,9 +71,10 @@
 (setq twittering-username twit-user
       twittering-password twit-pass)
 
-(setq twittering-host-url binjo-twitter-host-url
-      twittering-api-url  binjo-twitter-api-url
-      twittering-use-ssl  nil)
+(setq twittering-host-url   binjo-twitter-host-url
+      twittering-api-url    binjo-twitter-api-url
+      twittering-search-url binjo-twitter-search-url
+      twittering-use-ssl    nil)
 
 (setq twittering-time-format "%a %m.%d/%H:%M:%S"
       twittering-status-format
@@ -92,9 +93,11 @@
      (define-key twittering-mode-map "N" 'twittering-goto-next-status-of-user)
      (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
 
+     (global-set-key (kbd "C-c t m") 'twittering-mode)
      (global-set-key (kbd "C-c t i") 'twittering-start)
      (global-set-key (kbd "C-c t o") 'twittering-stop)
      (global-set-key (kbd "C-c t u") 'twittering-update-status-interactive)
+     (global-set-key (kbd "C-c t D") 'twittering-direct-messages-timeline)
      ))
 
 ;; utils
