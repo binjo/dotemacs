@@ -197,6 +197,7 @@ This is because some levels' updating takes too long time."
 (global-set-key (kbd "C-x g") 'gnus)
 
 ;; grep
+(require 'grep)
 (grep-apply-setting 'grep-command "grep -r -nH -i -e ")
 (grep-apply-setting 'grep-use-null-device nil)
 (global-set-key (kbd "C-c m g") 'grep)
