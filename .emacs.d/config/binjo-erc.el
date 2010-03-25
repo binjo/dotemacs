@@ -55,7 +55,7 @@
        erc-encoding-coding-alist '(("#segfault" . gb2312)
                                    ("#ph4nt0m" . gb2312)))
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#emacs" "#metasploit" "#haskell")
+      '(("freenode.net" "#metasploit" "#haskell")
         ("0x557.net" "#segfault")
         ("oftc.net" "#emacs-cn")))
 
@@ -178,6 +178,11 @@
 (defun binjo-erc-select ()
   "Copy of xwl's xwl-erc-select."
   (interactive)
+  ;; freenode
+  (erc-select :server "irc.freenode.net"
+              :port 6667
+              :nick erc-nick
+              :password erc-password)
   ;; #emacs-cn
   (erc-select :server "irc.oftc.net"
               :port 6667
