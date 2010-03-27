@@ -81,7 +81,7 @@
 ;;;; highlight special keywords, copy from xwl's xwl-programming.el
 (setq binjo-keyword-highlight-modes
       '(java-mode c-mode c++-mode emacs-lisp-mode scheme-mode
-    text-mode outline-mode python-mode perl-mode))
+    text-mode outline-mode python-mode perl-mode haskell-mode))
 
 (make-face 'font-lock-fixme-face)
 (make-face 'font-lock-todo-face)
@@ -140,3 +140,11 @@
 (add-hook 'post-command-hook 'xwl-mmm-refresh)
 
 ))
+
+;; haskell
+(load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file.el")
+(setq haskell-program-name
+      (shell-quote-argument "c:/Program Files/Haskell Platform/bin/ghci.exe"))
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-to-list 'auto-mode-alist '("\\.hs" . haskell-mode))

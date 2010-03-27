@@ -56,12 +56,7 @@
                         binjo-org-files))
 
 (setq org-todo-keywords
-      '(
-        (sequence "-" ">" "o")
-        (sequence "TODO" "DONE")
-        (sequence "STARTED" "WAITING" "LATER" "CANCELLED")
-        (sequence "x")
-        ))
+      '((sequence "TODO(t)" "STARTED(s!)" "LATER(l)" "|" "DONE(d!)" "CANCELLED(c!)")))
 
 (setq org-return-follows-link t
       org-blank-before-new-entry '((heading . t)

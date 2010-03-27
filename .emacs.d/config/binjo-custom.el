@@ -23,6 +23,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(erc-timestamp-face ((t (:foreground "brown" :weight bold))))
+ '(highlight-changes ((((min-colors 88) (class color)) (:background "cornsilk1"))))
  '(twit-message-face ((default (:height 1.1 :family "ÐÂËÎÌå")) (nil nil))))
 
 ;; Turn off the annoying default backup behaviour
@@ -189,14 +190,16 @@ This is because some levels' updating takes too long time."
   (if (gnus-alive-p)
       (switch-to-buffer "*Group*")
     ad-do-it
-    ;; idle 5 minutes, then check news every 5 minutes.
-    (gnus-demon-add-handler 'binjo-gnus-group-get-new-news 5 5)))
+    ;; idle 2 minutes, then check news every 3 minutes.
+    (gnus-demon-add-handler 'binjo-gnus-group-get-new-news 3 2)))
 
 (ad-activate 'gnus)
 (global-set-key (kbd "C-x g") 'gnus)
 
 ;; grep
-(setq grep-command "grep -n -e ")
+(require 'grep)
+(grep-apply-setting 'grep-command "grep -r -nH -i -e ")
+(grep-apply-setting 'grep-use-null-device nil)
 (global-set-key (kbd "C-c m g") 'grep)
 
 (require 'binjo-bindings)
@@ -228,3 +231,15 @@ This is because some levels' updating takes too long time."
 (setq mm-verify-option 'known
       mm-decrypt-option 'known)
 (setq gnus-buttonized-mime-types '("multipart/signed" "multipart/encrypted"))
+
+;; ,----
+;; | Track changes for some buffer
+;; `----
+(defadvice switch-to-buffer (before
+                             highlight-changes-for-some-buffer
+                             activate)
+  (when (memq major-mode (list 'erc-mode 'twittering-mode))
+    (let ((buffer-read-only nil)
+          (inhibit-read-only t))
+      (highlight-changes-mode -1)
+      (highlight-changes-mode 1))))

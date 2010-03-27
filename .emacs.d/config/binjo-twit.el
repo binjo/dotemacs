@@ -37,9 +37,11 @@
 (eval-when-compile
   (require 'cl))
 (require 'twit-appspot)
+(require 'twittering-mode)
 
 
 
+;; twit.el related settings
 (setq twit-filter-tweets-regex "^$"
       twit-show-user-images    nil
       twit-fill-tweets         nil)
@@ -53,15 +55,6 @@
 (global-set-key (kbd "C-c t S") 'twit-stop-following-tweets)
 (global-set-key (kbd "C-c t w") 'twit-post)
 
-(defun binjo-twit-jump-recent ()
-  "Follow recent tweets or jump to the buffer."
-  (interactive)
-  (if (buffer-live-p (get-buffer "*Twit-recent*"))
-      (switch-to-buffer "*Twit-recent*")
-    (twit-follow-recent-tweets)))
-
-(global-set-key (kbd "C-c t t") 'binjo-twit-jump-recent)
-
 ;; TODO notify in mode-line
 (defun binjo-twit-hook-notify-new-tweets ()
   "Called by `twit-new-tweet-hook'."
@@ -69,10 +62,58 @@
 
 (add-hook 'twit-new-tweet-hook 'binjo-twit-hook-notify-new-tweets)
 
-(if binjo-at-company-p
-    (progn
-      (run-with-timer "08:30am" (* 24 60 60) 'twit-follow-recent-tweets)
-      (run-with-timer "18:00pm" (* 24 60 60) 'twit-stop-following-tweets)))
+;; (if binjo-at-company-p
+;;     (progn
+;;       (run-with-timer "08:30am" (* 24 60 60) 'twit-follow-recent-tweets)
+;;       (run-with-timer "18:00pm" (* 24 60 60) 'twit-stop-following-tweets)))
+
+;; twittering-mode
+(setq twittering-username twit-user
+      twittering-password twit-pass)
+
+(setq twittering-host-url   binjo-twitter-host-url
+      twittering-api-url    binjo-twitter-api-url
+      twittering-search-url binjo-twitter-search-url
+      twittering-use-ssl    nil)
+
+(setq twittering-time-format "%a %m.%d/%H:%M:%S"
+      twittering-status-format
+      "%i %@ %s, from %f%L%r%R:\n%FILL{%T}\n"
+      twittering-timer-interval 90)
+
+(add-hook 'twittering-mode-hook (lambda ()
+                                  (twittering-icon-mode 1)))
+
+(eval-after-load 'twittering-mode
+  '(progn
+     (define-key twittering-mode-map "c" 'twittering-current-timeline)
+
+     (define-key twittering-mode-map "n" 'twittering-goto-next-status)
+     (define-key twittering-mode-map "p" 'twittering-goto-previous-status)
+     (define-key twittering-mode-map "N" 'twittering-goto-next-status-of-user)
+     (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
+
+     (global-set-key (kbd "C-c t m") 'twittering-mode)
+     (global-set-key (kbd "C-c t i") 'twittering-start)
+     (global-set-key (kbd "C-c t o") 'twittering-stop)
+     (global-set-key (kbd "C-c t u") 'twittering-update-status-interactive)
+     (global-set-key (kbd "C-c t D") 'twittering-direct-messages-timeline)
+     ))
+
+;; utils
+(defun binjo-twit-jump-recent ()
+  "Follow recent tweets or jump to the buffer."
+  (interactive)
+  (let ((buf))
+    (setq buf (or (get-buffer "*Twit-recent*")
+                  (get-buffer "*twittering*")))
+    (if (buffer-live-p buf)
+        (switch-to-buffer buf)
+      ;; (twit-follow-recent-tweets)
+      (message "twit.el or twittering-mode not issued?")
+      )))
+
+(global-set-key (kbd "C-c t t") 'binjo-twit-jump-recent)
 
 (provide 'binjo-twit)
 ;;; binjo-twit.el ends here
