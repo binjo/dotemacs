@@ -92,6 +92,7 @@
      (define-key twittering-mode-map "p" 'twittering-goto-previous-status)
      (define-key twittering-mode-map "N" 'twittering-goto-next-status-of-user)
      (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
+     (define-key twittering-mode-map "q" 'twittering-suspend)
 
      (global-set-key (kbd "C-c t m") 'twittering-mode)
      (global-set-key (kbd "C-c t i") 'twittering-start)
@@ -101,19 +102,14 @@
      ))
 
 ;; utils
-(defun binjo-twit-jump-recent ()
-  "Follow recent tweets or jump to the buffer."
-  (interactive)
-  (let ((buf))
-    (setq buf (or (get-buffer "*Twit-recent*")
-                  (get-buffer "*twittering*")))
-    (if (buffer-live-p buf)
-        (switch-to-buffer buf)
-      ;; (twit-follow-recent-tweets)
-      (message "twit.el or twittering-mode not issued?")
-      )))
+(defun binjo-twittering-jmp (buf)
+  "Switch to twittering buffer with BUF name."
+  (interactive
+   (list (ido-completing-read "Twittering "
+                              (mapcar 'buffer-name (twittering-get-buffer-list)))))
+  (switch-to-buffer buf))
 
-(global-set-key (kbd "C-c t t") 'binjo-twit-jump-recent)
+(global-set-key (kbd "C-c t t") 'binjo-twittering-jmp)
 
 (provide 'binjo-twit)
 ;;; binjo-twit.el ends here
