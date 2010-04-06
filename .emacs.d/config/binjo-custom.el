@@ -238,8 +238,13 @@ This is because some levels' updating takes too long time."
 (defadvice switch-to-buffer (before
                              highlight-changes-for-some-buffer
                              activate)
-  (when (memq major-mode (list 'erc-mode 'twittering-mode))
-    (let ((buffer-read-only nil)
-          (inhibit-read-only t))
-      (highlight-changes-mode -1)
-      (highlight-changes-mode 1))))
+  (cond ((memq major-mode (list ;; 'erc-mode
+                           'twittering-mode))
+         (let ((buffer-read-only nil)
+               (inhibit-read-only t))
+           (highlight-changes-mode -1)
+           (highlight-changes-mode 1)))
+        ((memq major-mode (list 'erc-mode))
+         (when (memq (current-buffer) (erc-buffer-list))
+           (goto-char (point-max))
+           (forward-line -1)))))
