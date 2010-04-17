@@ -71,21 +71,19 @@
 (setq twittering-username twit-user
       twittering-password twit-pass)
 
-(setq twittering-host-url   binjo-twitter-host-url
-      twittering-api-url    binjo-twitter-api-url
-      twittering-search-url binjo-twitter-search-url
-      twittering-use-ssl    nil)
+(setq twittering-api-host        binjo-twitter-api-url
+      twittering-api-search-host binjo-twitter-search-url
+      twittering-use-ssl         nil)
 
-(setq twittering-time-format "%a %m.%d/%H:%M:%S"
-      twittering-status-format
-      "%i %@ %s, from %f%L%r%R:\n%FILL{%T}\n"
-      twittering-timer-interval 90)
+(setq twittering-status-format
+      "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n")
 
 (add-hook 'twittering-mode-hook (lambda ()
                                   (twittering-icon-mode 1)))
 
 (eval-after-load 'twittering-mode
   '(progn
+     (twittering-enable-unread-status-notifier)
      (define-key twittering-mode-map "c" 'twittering-current-timeline)
 
      (define-key twittering-mode-map "n" 'twittering-goto-next-status)
