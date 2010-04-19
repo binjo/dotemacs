@@ -29,6 +29,10 @@
     )
   )
 
+;; settings for gud of pdb
+(setq gud-pdb-command-name "python -i -m pdb")
+(global-set-key (kbd "C-c p d") 'pdb)
+
 ;;; Ruby
 ;; Based on http://infolab.stanford.edu/~manku/dotemacs.html
 (autoload 'ruby-mode "ruby-mode"
