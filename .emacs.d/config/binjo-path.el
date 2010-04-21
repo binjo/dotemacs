@@ -56,7 +56,8 @@
                     "~/.emacs.d/site-lisp/emacs_chrome/servers"
                     "~/.emacs.d/site-lisp/twit"
                     "~/.emacs.d/site-lisp/twittering-mode"
-                    "~/.emacs.d/site-lisp/magit")
+                    "~/.emacs.d/site-lisp/magit"
+                    "~/.emacs.d/site-lisp/ac")
               load-path))
 
 (provide 'binjo-path)

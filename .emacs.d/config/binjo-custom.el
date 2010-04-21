@@ -226,6 +226,7 @@ This is because some levels' updating takes too long time."
 (setq mml2015-encrypt-to-self t
       mml2015-cache-passphrase t
       mml2015-passphrase-cache-expiry 60000
+      mml-secure-passphrase-cache-expiry 600
       mml2015-verbose t)
 
 (setq mm-verify-option 'known
