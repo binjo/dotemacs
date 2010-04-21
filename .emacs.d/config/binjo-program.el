@@ -152,3 +152,9 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-to-list 'auto-mode-alist '("\\.hs" . haskell-mode))
+
+;; auto-complete
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/ac/ac-dict")
+(ac-config-default)
+(setq ac-auto-start 3)
