@@ -79,11 +79,11 @@
       "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n")
 
 (add-hook 'twittering-mode-hook (lambda ()
-                                  (twittering-icon-mode 1)))
+                                  (twittering-icon-mode 1)
+                                  (twittering-enable-unread-status-notifier)))
 
 (eval-after-load 'twittering-mode
   '(progn
-     (twittering-enable-unread-status-notifier)
      (define-key twittering-mode-map "c" 'twittering-current-timeline)
 
      (define-key twittering-mode-map "n" 'twittering-goto-next-status)
