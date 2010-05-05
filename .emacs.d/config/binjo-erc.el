@@ -193,7 +193,6 @@
               :port 6667
               :nick erc-nick
               :password erc-0x557-password))
-(global-set-key (kbd "C-c n e") 'binjo-erc-select)
 
 (provide 'binjo-erc)
 (eval-when-compile

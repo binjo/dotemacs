@@ -46,8 +46,8 @@
 (setq custom-file "~/.emacs.d/config/binjo-custom.el")
 
 ;; load config files
-(load "~/.emacs.d/config/binjo-custom.el")
 (load "~/.emacs.d/config/binjo-util.el")
+(load "~/.emacs.d/config/binjo-custom.el")
 (load "~/.emacs.d/config/binjo-program.el")
 
 ;; awkward hack...

@@ -1,5 +1,14 @@
+;; macro
+(defmacro binjo-m-global-set-key-dynamic (package key func)
+  "Call `global-set-key' to set FUNC with KEY, and `require' PACKAGE dynamically."
+  `(global-set-key (kbd ,key) '(lambda ()
+                                 (interactive)
+                                 (require ,package)
+                                 (call-interactively ,func))))
 ;; eshell
-(require 'binjo-eshell-util)
+(eval-after-load 'eshell
+  '(progn
+     (require 'binjo-eshell-util)))
 
 (defun binjo-unify-line (begin end)
   "wipe out the same line of specified region"
@@ -32,7 +41,7 @@
 (global-set-key (kbd "C-c h") 'binjo-copy-line)
 
 ;;; erc
-(require 'binjo-erc)
+(binjo-m-global-set-key-dynamic 'binjo-erc "C-c n e" 'binjo-erc-select)
 
 ;; auctex
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auctex")
@@ -49,10 +58,9 @@
 ;;       )))
 
 ;; sql-config
-(require 'binjo-sql)
-(global-set-key (kbd "C-c s w") 'sql-webfilter)
-(global-set-key (kbd "C-c s f") 'sql-fips)
-(global-set-key (kbd "C-c s a") 'sql-av-feedback)
+(binjo-m-global-set-key-dynamic 'binjo-sql "C-c s w" 'sql-webfilter)
+(binjo-m-global-set-key-dynamic 'binjo-sql "C-c s f" 'sql-fips)
+(binjo-m-global-set-key-dynamic 'binjo-sql "C-c s a" 'sql-av-feedback)
 
 ;; org-mode
 (require 'binjo-org)
@@ -61,57 +69,54 @@
 (require 'binjo-twit)
 
 ;; smex
-(require 'smex)
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c M-x") 'smex-update-and-run)
+(binjo-m-global-set-key-dynamic 'smex "M-x" 'smex)
+(binjo-m-global-set-key-dynamic 'smex "M-X" 'smex-major-mode-commands)
+(binjo-m-global-set-key-dynamic 'smex "C-c M-x" 'smex-update-and-run)
+(eval-after-load 'smex
+  '(smex-initialize))
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; boxquote
-(require 'boxquote)
-(global-set-key (kbd "C-c b r") 'boxquote-region)
-(global-set-key (kbd "C-c b t") 'boxquote-title)
-(global-set-key (kbd "C-c b f") 'boxquote-describe-function)
-(global-set-key (kbd "C-c b v") 'boxquote-describe-variable)
-(global-set-key (kbd "C-c b k") 'boxquote-describe-key)
-(global-set-key (kbd "C-c b !") 'boxquote-shell-command)
-(global-set-key (kbd "C-c b y") 'boxquote-yank)
+(binjo-m-global-set-key-dynamic 'boxquote "C-c b r" 'boxquote-region)
+(binjo-m-global-set-key-dynamic 'boxquote "C-c b t" 'boxquote-title)
+(binjo-m-global-set-key-dynamic 'boxquote "C-c b f" 'boxquote-describe-function)
+(binjo-m-global-set-key-dynamic 'boxquote "C-c b v" 'boxquote-describe-variable)
+(binjo-m-global-set-key-dynamic 'boxquote "C-c b k" 'boxquote-describe-key)
+(binjo-m-global-set-key-dynamic 'boxquote "C-c b !" 'boxquote-shell-command)
+(binjo-m-global-set-key-dynamic 'boxquote "C-c b y" 'boxquote-yank)
 
 ;; YASnippet
 (require 'yasnippet-bundle)
 
 ;;; anchiva
-(require 'anchiva)
-(global-set-key (kbd "C-c v u") 'anchiva-submit-sample)
-(global-set-key (kbd "C-c v t") 'anchiva-check-mwcs-test)
-(global-set-key (kbd "C-c v m") 'anchiva-submit-sig-mwcs)
-(global-set-key (kbd "C-c v b") 'anchiva-browse-all-urls)
+(binjo-m-global-set-key-dynamic 'anchiva "C-c v u" 'anchiva-submit-sample)
+(binjo-m-global-set-key-dynamic 'anchiva "C-c v t" 'anchiva-check-mwcs-test)
+(binjo-m-global-set-key-dynamic 'anchiva "C-c v m" 'anchiva-submit-sig-mwcs)
+(binjo-m-global-set-key-dynamic 'anchiva "C-c v b" 'anchiva-browse-all-urls)
 
 ;; babel, use online api to translate
-(require 'babel)
-(setq babel-preferred-to-language "Chinese (Simplified)")
-(global-set-key (kbd "C-c t r") 'babel-region)
-(global-set-key (kbd "C-c t b") 'babel)
+(binjo-m-global-set-key-dynamic 'babel "C-c t r" 'babel-region)
+(binjo-m-global-set-key-dynamic 'babel "C-c t b" 'babel)
+(eval-after-load 'babel
+  '(setq babel-preferred-to-language "Chinese (Simplified)"))
 
 ;; emms
 (require 'binjo-emms)
 
 ;; douban
 (require 'douban-emacs)
-(global-set-key (kbd "C-c d n") 'douban-create-note)
+(binjo-m-global-set-key-dynamic 'douban-emacs "C-c d n" 'douban-create-note)
 
 (if binjo-at-company-p
     (progn
       (require 'edit-server)
       (edit-server-start)))
 
-(require 'magit)
-(global-set-key (kbd "C-c g m") 'magit-status)
+(binjo-m-global-set-key-dynamic 'magit "C-c g m" 'magit-status)
 
 (require 'kmacro-ring-list)
-(global-set-key (kbd "C-c m r") 'kmacro-ring-list)
+(binjo-m-global-set-key-dynamic 'kmacro-ring-list "C-c m r" 'kmacro-ring-list)
 
 (setq last-kbd-macro
    [?\C-e ?: ?3 ?: ?* ?: ?\C-\M-% ?\[ ?- ?| ?\\ ?  ?| ?\C-q ?\C-j ?\] return return ?! ?\C-x ?\C-s ?\C-a ?\C-k ?\C-z])
