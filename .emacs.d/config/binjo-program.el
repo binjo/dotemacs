@@ -67,11 +67,11 @@
 (eval-after-load 'js2-mode
   '(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
 (binjo-m-global-set-key-dynamic 'js-console
-                                (("C-c j s" . 'js-console)))
+                                ((kbd "C-c j s") . 'js-console))
 
 (binjo-m-global-set-key-dynamic 'js-comint
-                                (("C-c j c" . 'run-js)
-                                 ("C-c j r" . 'js-send-region-and-go)))
+                                ((kbd "C-c j c") . 'run-js)
+                                ((kbd "C-c j r") . 'js-send-region-and-go))
 (eval-after-load 'js-comint
   '(setq inferior-js-program-command "java -jar d:\\Datas\\source\\rhino1_7R2\\js.jar"))
 

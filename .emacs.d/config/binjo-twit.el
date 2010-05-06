@@ -49,11 +49,11 @@
     (setq twit-proxy           "172.25.25.4:808"))
 
 (binjo-m-global-set-key-dynamic 'twit-appspot
-                                (("C-c t s" . 'twit-show-recent-tweets)
-                                 ("C-c t d" . 'twit-show-direct-tweets)
-                                 ("C-c t l" . 'twit-follow-recent-tweets)
-                                 ("C-c t S" . 'twit-stop-following-tweets)
-                                 ("C-c t w" . 'twit-post)))
+                                ((kbd "C-c t s") . 'twit-show-recent-tweets)
+                                ((kbd "C-c t d") . 'twit-show-direct-tweets)
+                                ((kbd "C-c t l") . 'twit-follow-recent-tweets)
+                                ((kbd "C-c t S") . 'twit-stop-following-tweets)
+                                ((kbd "C-c t w") . 'twit-post))
 
 ;; TODO notify in mode-line
 (defun binjo-twit-hook-notify-new-tweets ()
@@ -69,11 +69,11 @@
 ;;       (run-with-timer "18:00pm" (* 24 60 60) 'twit-stop-following-tweets)))
 
 (binjo-m-global-set-key-dynamic 'twittering-mode
-                                (("C-c t m" . 'twittering-mode)
-                                 ("C-c t i" . 'twittering-start)
-                                 ("C-c t o" . 'twittering-stop)
-                                 ("C-c t u" . 'twittering-update-status-interactive)
-                                 ("C-c t D" . 'twittering-direct-messages-timeline)))
+                                ((kbd "C-c t m") . 'twittering-mode)
+                                ((kbd "C-c t i") . 'twittering-start)
+                                ((kbd "C-c t o") . 'twittering-stop)
+                                ((kbd "C-c t u") . 'twittering-update-status-interactive)
+                                ((kbd "C-c t D") . 'twittering-direct-messages-timeline))
 
 ;; utils
 (defun binjo-twittering-jmp (buf)

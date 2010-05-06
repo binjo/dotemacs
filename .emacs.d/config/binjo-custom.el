@@ -94,8 +94,8 @@
 
 ;; etags-select
 (binjo-m-global-set-key-dynamic 'etags-select
-                                (("M-?" . 'etags-select-find-tag-at-point)
-                                 ("M-." . 'etags-select-find-tag)))
+                                ((kbd "M-?") . 'etags-select-find-tag-at-point)
+                                ((kbd "M-.") . 'etags-select-find-tag))
 
 ;; Color theme related
 (add-hook 'window-setup-hook '(lambda ()
@@ -125,7 +125,7 @@
 
 ;; browser-kill-ring
 (binjo-m-global-set-key-dynamic 'browse-kill-ring
-                                (("C-c k" . 'browse-kill-ring)))
+                                ((kbd "C-c k") . 'browse-kill-ring))
 (eval-after-load 'browse-kill-ring
   '(browse-kill-ring-default-keybindings))
 
@@ -196,7 +196,7 @@ This is because some levels' updating takes too long time."
 
 ;; grep
 (binjo-m-global-set-key-dynamic 'grep
-                                (("C-c m g" . 'grep)))
+                                ((kbd "C-c m g") . 'grep))
 (eval-after-load 'grep
   '(progn
      (grep-apply-setting 'grep-command "grep -r -nH -i -e ")
