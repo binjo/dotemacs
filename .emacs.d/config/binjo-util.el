@@ -1,10 +1,16 @@
 ;; macro
-(defmacro binjo-m-global-set-key-dynamic (package key func)
-  "Call `global-set-key' to set FUNC with KEY, and `require' PACKAGE dynamically."
-  `(global-set-key (kbd ,key) '(lambda ()
-                                 (interactive)
-                                 (require ,package)
-                                 (call-interactively ,func))))
+(defmacro binjo-m-global-set-key-dynamic (package key-funcs)
+  "Call `global-set-key' to set key and functions with KEY-FUNCS,
+and `require' PACKAGE dynamically."
+  `(,@(mapc '(lambda (key-func)
+               (let* ((key (car key-func))
+                      (func (cdr key-func)))
+                 (global-set-key (kbd ,key) '(lambda ()
+                                               (interactive)
+                                               (require ,package)
+                                               (call-interactively ,func)))))
+            key-funcs)))
+
 ;; eshell
 (eval-after-load 'eshell
   '(progn
@@ -41,12 +47,14 @@
 (global-set-key (kbd "C-c h") 'binjo-copy-line)
 
 ;;; erc
-(binjo-m-global-set-key-dynamic 'binjo-erc "C-c n e" 'binjo-erc-select)
+(binjo-m-global-set-key-dynamic 'binjo-erc
+                                (("C-c n e" . 'binjo-erc-select)))
 
 ;; sql-config
-(binjo-m-global-set-key-dynamic 'binjo-sql "C-c s w" 'sql-webfilter)
-(binjo-m-global-set-key-dynamic 'binjo-sql "C-c s f" 'sql-fips)
-(binjo-m-global-set-key-dynamic 'binjo-sql "C-c s a" 'sql-av-feedback)
+(binjo-m-global-set-key-dynamic 'binjo-sql
+                                (("C-c s w" . 'sql-webfilter)
+                                 ("C-c s f" . 'sql-fips)
+                                 ("C-c s a" . 'sql-av-feedback)))
 
 ;; org-mode
 (require 'binjo-org)
@@ -55,36 +63,40 @@
 (require 'binjo-twit)
 
 ;; smex
-(binjo-m-global-set-key-dynamic 'smex "M-x" 'smex)
-(binjo-m-global-set-key-dynamic 'smex "M-X" 'smex-major-mode-commands)
-(binjo-m-global-set-key-dynamic 'smex "C-c M-x" 'smex-update-and-run)
+(binjo-m-global-set-key-dynamic 'smex
+                                (("M-x" . 'smex)
+                                 ("M-X" . 'smex-major-mode-commands)
+                                 ("C-c M-x" . 'smex-update-and-run)))
 (eval-after-load 'smex
   '(smex-initialize))
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; boxquote
-(binjo-m-global-set-key-dynamic 'boxquote "C-c b r" 'boxquote-region)
-(binjo-m-global-set-key-dynamic 'boxquote "C-c b t" 'boxquote-title)
-(binjo-m-global-set-key-dynamic 'boxquote "C-c b f" 'boxquote-describe-function)
-(binjo-m-global-set-key-dynamic 'boxquote "C-c b v" 'boxquote-describe-variable)
-(binjo-m-global-set-key-dynamic 'boxquote "C-c b k" 'boxquote-describe-key)
-(binjo-m-global-set-key-dynamic 'boxquote "C-c b !" 'boxquote-shell-command)
-(binjo-m-global-set-key-dynamic 'boxquote "C-c b y" 'boxquote-yank)
+(binjo-m-global-set-key-dynamic 'boxquote
+                                (("C-c b r" . 'boxquote-region)
+                                 ("C-c b t" . 'boxquote-title)
+                                 ("C-c b f" . 'boxquote-describe-function)
+                                 ("C-c b v" . 'boxquote-describe-variable)
+                                 ("C-c b k" . 'boxquote-describe-key)
+                                 ("C-c b !" . 'boxquote-shell-command)
+                                 ("C-c b y" . 'boxquote-yank)))
 
 ;; YASnippet
 (add-hook 'window-setup-hook '(lambda ()
                                 (require 'yasnippet-bundle)))
 
 ;;; anchiva
-(binjo-m-global-set-key-dynamic 'anchiva "C-c v u" 'anchiva-submit-sample)
-(binjo-m-global-set-key-dynamic 'anchiva "C-c v t" 'anchiva-check-mwcs-test)
-(binjo-m-global-set-key-dynamic 'anchiva "C-c v m" 'anchiva-submit-sig-mwcs)
-(binjo-m-global-set-key-dynamic 'anchiva "C-c v b" 'anchiva-browse-all-urls)
+(binjo-m-global-set-key-dynamic 'anchiva
+                                (("C-c v u" . 'anchiva-submit-sample)
+                                 ("C-c v t" . 'anchiva-check-mwcs-test)
+                                 ("C-c v m" . 'anchiva-submit-sig-mwcs)
+                                 ("C-c v b" . 'anchiva-browse-all-urls)))
 
 ;; babel, use online api to translate
-(binjo-m-global-set-key-dynamic 'babel "C-c t r" 'babel-region)
-(binjo-m-global-set-key-dynamic 'babel "C-c t b" 'babel)
+(binjo-m-global-set-key-dynamic 'babel
+                                (("C-c t r" . 'babel-region)
+                                 ("C-c t b" . 'babel)))
 (eval-after-load 'babel
   '(setq babel-preferred-to-language "Chinese (Simplified)"))
 
@@ -93,17 +105,20 @@
 
 ;; douban
 (require 'douban-emacs)
-(binjo-m-global-set-key-dynamic 'douban-emacs "C-c d n" 'douban-create-note)
+(binjo-m-global-set-key-dynamic 'douban-emacs
+                                (("C-c d n" . 'douban-create-note)))
 
 (if binjo-at-company-p
     (progn
       (require 'edit-server)
       (edit-server-start)))
 
-(binjo-m-global-set-key-dynamic 'magit "C-c g m" 'magit-status)
+(binjo-m-global-set-key-dynamic 'magit
+                                (("C-c g m" . 'magit-status)))
 
 (require 'kmacro-ring-list)
-(binjo-m-global-set-key-dynamic 'kmacro-ring-list "C-c m r" 'kmacro-ring-list)
+(binjo-m-global-set-key-dynamic 'kmacro-ring-list
+                                (("C-c m r" . 'kmacro-ring-list)))
 
 (setq last-kbd-macro
    [?\C-e ?: ?3 ?: ?* ?: ?\C-\M-% ?\[ ?- ?| ?\\ ?  ?| ?\C-q ?\C-j ?\] return return ?! ?\C-x ?\C-s ?\C-a ?\C-k ?\C-z])
