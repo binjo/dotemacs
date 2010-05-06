@@ -43,20 +43,6 @@
 ;;; erc
 (binjo-m-global-set-key-dynamic 'binjo-erc "C-c n e" 'binjo-erc-select)
 
-;; auctex
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auctex")
-;; (load "auctex.el" nil t t)
-;; (load "preview-latex.el" nil t t)
-;; (setq TeX-auto-save t)
-;; (setq TeX-parse-self t)
-;; (setq-default TeX-master nil)
-;; (eval-after-load "tex"
-;;   '(progn
-;;      (setq TeX-output-view-style
-;;            (cons '("^pdf$" "." "start \"title\" %o") TeX-output-view-style)
-;;            ;(cons '("^pdf$" "." "cmdproxy /C %o ") TeX-output-view-style)
-;;       )))
-
 ;; sql-config
 (binjo-m-global-set-key-dynamic 'binjo-sql "C-c s w" 'sql-webfilter)
 (binjo-m-global-set-key-dynamic 'binjo-sql "C-c s f" 'sql-fips)
@@ -87,7 +73,8 @@
 (binjo-m-global-set-key-dynamic 'boxquote "C-c b y" 'boxquote-yank)
 
 ;; YASnippet
-(require 'yasnippet-bundle)
+(add-hook 'window-setup-hook '(lambda ()
+                                (require 'yasnippet-bundle)))
 
 ;;; anchiva
 (binjo-m-global-set-key-dynamic 'anchiva "C-c v u" 'anchiva-submit-sample)

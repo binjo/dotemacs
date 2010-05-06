@@ -132,18 +132,21 @@
 (ido-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wubi FIXME twice C-\??
+;; wubi
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defadvice toggle-input-method (before load-wubi activate)
-  (require 'wubi)
-  (register-input-method
-   "chinese-wubi" "Chinese-GB" 'quail-use-package
-   "WuBi" "WuBi"
-   "wubi")
+(register-input-method
+ "chinese-wubi" "Chinese-GB" 'quail-use-package
+ "WuBi" "WuBi"
+ "wubi")
 
-  (setq default-input-method "chinese-wubi"))
+(setq default-input-method "chinese-wubi")
+(defadvice toggle-input-method (before load-wubi activate)
+  (require 'wubi))
+
 (eval-after-load 'wubi
-  '(ignore-errors (wubi-load-local-phrases)))
+  '(progn
+     (setq wubi-phrases-file "~/.wubi-phrases.el")
+     (ignore-errors (wubi-load-local-phrases))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; template
