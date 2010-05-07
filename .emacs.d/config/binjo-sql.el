@@ -30,6 +30,7 @@
 
 ;;; Code:
 
+(require 'sql)
 (eval-when-compile
   (require 'cl))
 

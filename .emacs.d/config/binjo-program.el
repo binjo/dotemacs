@@ -1,22 +1,22 @@
 ;;; Python
-(setq auto-mode-alist
-      (cons '("\\.py$" . python-mode) auto-mode-alist))
-(setq interpreter-mode-alist
-      (cons '("python" . python-mode) interpreter-mode-alist))
-
 (autoload 'python-mode "python-mode" "Python editing mode." t)
+(eval-after-load 'python
+  '(progn
+     (setq auto-mode-alist
+           (cons '("\\.py$" . python-mode) auto-mode-alist))
+     (setq interpreter-mode-alist
+           (cons '("python" . python-mode) interpreter-mode-alist))
 
-(global-font-lock-mode t)
-(setq font-lock-maximum-decoration t)
+      (global-font-lock-mode t)
+     (setq font-lock-maximum-decoration t)
 
-(add-hook 'python-mode-hook #'(lambda ()
-                                (local-set-key "\C-x\t"
-                                               #'(lambda ()
-                                                   (interactive)
-                                                   (insert "    ")))))
+     (add-hook 'python-mode-hook #'(lambda ()
+                                     (local-set-key "\C-x\t"
+                                                    #'(lambda ()
+                                                        (interactive)
+                                                        (insert "    ")))))))
 
 ;; python in eshell
-(add-hook 'eshell-named-command-hook 'n-eshell-exec-python)
 (defun n-eshell-exec-python (command args)
   "to make eshell understand python scripts."
   (if (string-match "^.+\.py[ \t]*" command)
@@ -28,59 +28,57 @@
         )
     )
   )
+(eval-after-load 'eshell
+  '(add-hook 'eshell-named-command-hook 'n-eshell-exec-python))
 
 ;; settings for gud of pdb
-(setq gud-pdb-command-name "python -i -m pdb")
+(eval-after-load 'gud
+  '(setq gud-pdb-command-name "python -i -m pdb"))
 (global-set-key (kbd "C-c p d") 'pdb)
 
 ;;; Ruby
 ;; Based on http://infolab.stanford.edu/~manku/dotemacs.html
 (autoload 'ruby-mode "ruby-mode"
     "Mode for editing ruby source files")
-(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
-(add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
-(autoload 'run-ruby "inf-ruby"
-    "Run an inferior Ruby process")
-(autoload 'inf-ruby-keys "inf-ruby"
-    "Set local key defs for inf-ruby in ruby-mode")
-(add-hook 'ruby-mode-hook
-    '(lambda ()
-        (inf-ruby-keys)))
-;; If you have Emacs 19.2x or older, use rubydb2x
-(autoload 'rubydb "rubydb3x" "Ruby debugger" t)
-;; uncomment the next line if you want syntax highlighting
-(add-hook 'ruby-mode-hook 'turn-on-font-lock)
+(eval-after-load 'ruby-mode
+  '(progn
+     (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+     (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
+     (autoload 'run-ruby "inf-ruby"
+       "Run an inferior Ruby process")
+     (autoload 'inf-ruby-keys "inf-ruby"
+       "Set local key defs for inf-ruby in ruby-mode")
+     (add-hook 'ruby-mode-hook
+               '(lambda ()
+                  (inf-ruby-keys)))
+     ;; If you have Emacs 19.2x or older, use rubydb2x
+     (autoload 'rubydb "rubydb3x" "Ruby debugger" t)
+     ;; uncomment the next line if you want syntax highlighting
+     (add-hook 'ruby-mode-hook 'turn-on-font-lock)))
 
 ;; Php
-(setq auto-mode-alist
-      (cons '("\\.php$" . php-mode) auto-mode-alist))
-(setq interpreter-mode-alist
-      (cons '("php" . php-mode) interpreter-mode-alist))
-
 (autoload 'php-mode "php-mode" "Php editing mode." t)
-
-;; (add-hook 'eshell-mode-hook
-;;   '(lambda nil
-;;      (let ((path))
-;; ;;;       (setq path ".")
-;;        (setenv "PATH" path))
-;;      (local-set-key "\C-u" 'eshell-kill-input))
-;; )
+(eval-after-load 'php-mode
+  '(setq auto-mode-alist     (cons '("\\.php$" . php-mode) auto-mode-alist)
+      interpreter-mode-alist (cons '("php" . php-mode) interpreter-mode-alist)))
 
 ;; Js related setting
-(autoload 'js-console "js-console" nil t)
 (autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(global-set-key (kbd "C-c j s") 'js-console)
+(eval-after-load 'js2-mode
+  '(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
+(binjo-m-global-set-key-dynamic 'js-console
+                                ((kbd "C-c j s") . 'js-console))
 
-(require 'js-comint)
-(setq inferior-js-program-command "java -jar d:\\Datas\\source\\rhino1_7R2\\js.jar")
-(global-set-key (kbd "C-c j c") 'run-js)
-(global-set-key (kbd "C-c j r") 'js-send-region-and-go)
+(binjo-m-global-set-key-dynamic 'js-comint
+                                ((kbd "C-c j c") . 'run-js)
+                                ((kbd "C-c j r") . 'js-send-region-and-go))
+(eval-after-load 'js-comint
+  '(setq inferior-js-program-command "java -jar d:\\Datas\\source\\rhino1_7R2\\js.jar"))
 
 ;;; c# highlighting
 (autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
-(add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
+(eval-after-load 'csharp-mode
+  '(add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode)))
 
 ;;;; highlight special keywords, copy from xwl's xwl-programming.el
 (setq binjo-keyword-highlight-modes
@@ -105,7 +103,8 @@
 
 ;; asp highlight
 (autoload 'asp-mode "asp-mode")
-(add-to-list 'auto-mode-alist '("\\.aspx?" . asp-mode))
+(eval-after-load 'asp-mode
+  '(add-to-list 'auto-mode-alist '("\\.aspx?" . asp-mode)))
 
 (ignore-errors
   (progn
@@ -147,8 +146,10 @@
 
 ;; haskell
 (load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file.el")
-(setq haskell-program-name
-      (shell-quote-argument "c:/Program Files/Haskell Platform/bin/ghci.exe"))
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-to-list 'auto-mode-alist '("\\.hs" . haskell-mode))
+(eval-after-load 'haskell-mode
+  '(progn
+     (setq haskell-program-name
+           (shell-quote-argument "c:/Program Files/Haskell Platform/bin/ghci.exe"))
+     (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+     (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+     (add-to-list 'auto-mode-alist '("\\.hs" . haskell-mode))))
