@@ -92,14 +92,16 @@
   (view-mode t))
 (add-hook 'find-tag-hook 'set-view-find-tag-hook)
 
-(require 'etags-select)
-(global-set-key "\M-?" 'etags-select-find-tag-at-point)
-(global-set-key "\M-." 'etags-select-find-tag)
+;; etags-select
+(binjo-m-global-set-key-dynamic 'etags-select
+                                ((kbd "M-?") . 'etags-select-find-tag-at-point)
+                                ((kbd "M-.") . 'etags-select-find-tag))
 
 ;; Color theme related
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-bharadwaj)
+(add-hook 'window-setup-hook '(lambda ()
+                                (require 'color-theme)
+                                (color-theme-initialize)
+                                (color-theme-bharadwaj)))
 
 ;; stop calling `vc-working-revision' and `vc-state' to slow down the startup.
 (eval-after-load 'vc-hooks
@@ -108,8 +110,9 @@
                                 (add-hook 'find-file-hook 'vc-find-file-hook)))
 
 ;; session
-(require 'session)
-(add-hook 'after-init-hook 'session-initialize)
+(add-hook 'after-init-hook '(lambda ()
+                              (require 'session)
+                              (session-initialize)))
 ;; desktop
 ;;(load "desktop")
 (setq desktop-dirname "~/"
@@ -118,52 +121,47 @@
 (add-hook 'kill-emacs-hook '(lambda ()
                               (desktop-save-mode 1)))
 ;; ibuffer
-(require 'ibuffer)
+;; (require 'ibuffer)
 
 ;; browser-kill-ring
-(require 'browse-kill-ring)
-(global-set-key [(control c)(k)] 'browse-kill-ring)
-(browse-kill-ring-default-keybindings)
-;; ;; tab bar
-;; (require 'tabbar)
-;; (tabbar-mode)
-;; (global-set-key (kbd "") 'tabbar-backward-group)
-;; (global-set-key (kbd "") 'tabbar-forward-group)
-;; (global-set-key (kbd "") 'tabbar-backward)
-;; (global-set-key (kbd "") 'tabbar-forward)
+(binjo-m-global-set-key-dynamic 'browse-kill-ring
+                                ((kbd "C-c k") . 'browse-kill-ring))
+(eval-after-load 'browse-kill-ring
+  '(browse-kill-ring-default-keybindings))
 
 ;;; ido
 (require 'ido)
 (ido-mode t)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; show line number
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (require 'linum)
-;; (add-hook 'find-file-hook (lambda () (linum-mode 1)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wubi
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'wubi)
-(wubi-load-local-phrases) ; add user's Wubi phrases
-
 (register-input-method
  "chinese-wubi" "Chinese-GB" 'quail-use-package
  "WuBi" "WuBi"
  "wubi")
 
 (setq default-input-method "chinese-wubi")
+(defadvice toggle-input-method (before load-wubi activate)
+  (require 'wubi))
+
+(eval-after-load 'wubi
+  '(progn
+     (setq wubi-phrases-file "~/.wubi-phrases.el")
+     (ignore-errors (wubi-load-local-phrases))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; template
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'template)
-(template-initialize)
+(add-hook 'window-setup-hook '(lambda ()
+                                (require 'template)
+                                (template-initialize)))
 
 ;; saveplace - emacs-fu
-(setq save-place-file "~/.emacs.d/saveplace")
-(require 'saveplace)
-(setq-default save-place t)                   ;; activate it for all buffers
+(add-hook 'window-setup-hook '(lambda ()
+                                (require 'saveplace)
+                                (setq save-place-file "~/.emacs.d/saveplace")
+                                (setq-default save-place t)))
 
 ;; custom info
 (setq Info-directory-list
@@ -172,8 +170,8 @@
 ;; Emacs-fu: making buffer names unique
 (require 'uniquify)
 (setq
-  uniquify-buffer-name-style 'post-forward
-  uniquify-separator ":")
+ uniquify-buffer-name-style 'post-forward
+ uniquify-separator ":")
 
 ;;; for GNUS
 ;; can't put this in .gnus.el, since that's t000 late...
@@ -197,10 +195,12 @@ This is because some levels' updating takes too long time."
 (global-set-key (kbd "C-x g") 'gnus)
 
 ;; grep
-(require 'grep)
-(grep-apply-setting 'grep-command "grep -r -nH -i -e ")
-(grep-apply-setting 'grep-use-null-device nil)
-(global-set-key (kbd "C-c m g") 'grep)
+(binjo-m-global-set-key-dynamic 'grep
+                                ((kbd "C-c m g") . 'grep))
+(eval-after-load 'grep
+  '(progn
+     (grep-apply-setting 'grep-command "grep -r -nH -i -e ")
+     (grep-apply-setting 'grep-use-null-device nil)))
 
 (require 'binjo-bindings)
 
@@ -219,19 +219,20 @@ This is because some levels' updating takes too long time."
 ;;    save-excursion defeated by set-buffer
 (setq byte-compile-warnings '(not suspicious))
 
-;; epa, gpg related
-(require 'epa-file)
-(epa-file-enable)
-(setq epa-file-cache-passphrase-for-symmetric-encryption t)
-(setq mml2015-encrypt-to-self t
-      mml2015-cache-passphrase t
-      mml2015-passphrase-cache-expiry 60000
-      mml-secure-passphrase-cache-expiry 600
-      mml2015-verbose t)
+;; ;; epa, gpg related
+;; (require 'epa-file)
+;; (epa-file-enable)
+;; (setq epa-file-cache-passphrase-for-symmetric-encryption t)
+;; (setq mml2015-encrypt-to-self t
+;;       mml2015-cache-passphrase t
+;;       mml2015-passphrase-cache-expiry 60000
+;;       mml2015-verbose t)
 
-(setq mm-verify-option 'known
-      mm-decrypt-option 'known)
-(setq gnus-buttonized-mime-types '("multipart/signed" "multipart/encrypted"))
+(eval-after-load 'gnus
+  '(progn
+     (setq mm-verify-option 'known
+           mm-decrypt-option 'known)
+     (setq gnus-buttonized-mime-types '("multipart/signed" "multipart/encrypted"))))
 
 ;; ,----
 ;; | Track changes for some buffer

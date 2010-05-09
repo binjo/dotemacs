@@ -36,68 +36,44 @@
 
 (eval-when-compile
   (require 'cl))
-(require 'twit-appspot)
-(require 'twittering-mode)
 
 
 
 ;; twit.el related settings
-(setq twit-filter-tweets-regex "^$"
-      twit-show-user-images    nil
-      twit-fill-tweets         nil)
+(eval-after-load 'twit-appspot
+  '(setq twit-filter-tweets-regex "^$"
+         twit-show-user-images    nil
+         twit-fill-tweets         nil))
 
 (if binjo-at-company-p
     (setq twit-proxy           "172.25.25.4:808"))
 
-(global-set-key (kbd "C-c t s") 'twit-show-recent-tweets)
-(global-set-key (kbd "C-c t d") 'twit-show-direct-tweets)
-(global-set-key (kbd "C-c t l") 'twit-follow-recent-tweets)
-(global-set-key (kbd "C-c t S") 'twit-stop-following-tweets)
-(global-set-key (kbd "C-c t w") 'twit-post)
+(binjo-m-global-set-key-dynamic 'twit-appspot
+                                ((kbd "C-c t s") . 'twit-show-recent-tweets)
+                                ((kbd "C-c t d") . 'twit-show-direct-tweets)
+                                ((kbd "C-c t l") . 'twit-follow-recent-tweets)
+                                ((kbd "C-c t S") . 'twit-stop-following-tweets)
+                                ((kbd "C-c t w") . 'twit-post))
 
 ;; TODO notify in mode-line
 (defun binjo-twit-hook-notify-new-tweets ()
   "Called by `twit-new-tweet-hook'."
   (message "New tweets from %s" (cadr twit-last-tweet)))
 
-(add-hook 'twit-new-tweet-hook 'binjo-twit-hook-notify-new-tweets)
+(eval-after-load 'twit-appspot
+  '(add-hook 'twit-new-tweet-hook 'binjo-twit-hook-notify-new-tweets))
 
 ;; (if binjo-at-company-p
 ;;     (progn
 ;;       (run-with-timer "08:30am" (* 24 60 60) 'twit-follow-recent-tweets)
 ;;       (run-with-timer "18:00pm" (* 24 60 60) 'twit-stop-following-tweets)))
 
-;; twittering-mode
-(setq twittering-username twit-user
-      twittering-password twit-pass)
-
-(setq twittering-api-host        binjo-twitter-api-url
-      twittering-api-search-host binjo-twitter-search-url
-      twittering-use-ssl         nil)
-
-(setq twittering-status-format
-      "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n")
-
-(add-hook 'twittering-mode-hook (lambda ()
-                                  (twittering-icon-mode 1)
-                                  (twittering-enable-unread-status-notifier)))
-
-(eval-after-load 'twittering-mode
-  '(progn
-     (define-key twittering-mode-map "c" 'twittering-current-timeline)
-
-     (define-key twittering-mode-map "n" 'twittering-goto-next-status)
-     (define-key twittering-mode-map "p" 'twittering-goto-previous-status)
-     (define-key twittering-mode-map "N" 'twittering-goto-next-status-of-user)
-     (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
-     (define-key twittering-mode-map "q" 'twittering-suspend)
-
-     (global-set-key (kbd "C-c t m") 'twittering-mode)
-     (global-set-key (kbd "C-c t i") 'twittering-start)
-     (global-set-key (kbd "C-c t o") 'twittering-stop)
-     (global-set-key (kbd "C-c t u") 'twittering-update-status-interactive)
-     (global-set-key (kbd "C-c t D") 'twittering-direct-messages-timeline)
-     ))
+(binjo-m-global-set-key-dynamic 'twittering-mode
+                                ((kbd "C-c t m") . 'twittering-mode)
+                                ((kbd "C-c t i") . 'twittering-start)
+                                ((kbd "C-c t o") . 'twittering-stop)
+                                ((kbd "C-c t u") . 'twittering-update-status-interactive)
+                                ((kbd "C-c t D") . 'twittering-direct-messages-timeline))
 
 ;; utils
 (defun binjo-twittering-jmp (buf)
@@ -107,7 +83,34 @@
                               (mapcar 'buffer-name (twittering-get-buffer-list)))))
   (switch-to-buffer buf))
 
-(global-set-key (kbd "C-c t t") 'binjo-twittering-jmp)
+;; twittering-mode
+(eval-after-load 'twittering-mode
+  '(progn
+     (setq twittering-username twit-user
+           twittering-password twit-pass)
+
+     (setq twittering-api-host        binjo-twitter-api-url
+           twittering-api-search-host binjo-twitter-search-url
+           twittering-use-ssl         nil)
+
+     (setq twittering-status-format
+           "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n")
+
+     (add-hook 'twittering-mode-hook (lambda ()
+                                       (twittering-icon-mode 1)
+                                       (twittering-enable-unread-status-notifier)))
+
+     (define-key twittering-mode-map "c" 'twittering-current-timeline)
+
+     (define-key twittering-mode-map "n" 'twittering-goto-next-status)
+     (define-key twittering-mode-map "p" 'twittering-goto-previous-status)
+     (define-key twittering-mode-map "N" 'twittering-goto-next-status-of-user)
+     (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
+     (define-key twittering-mode-map "q" 'twittering-suspend)
+
+     (global-set-key (kbd "C-c t t") 'binjo-twittering-jmp)
+
+     ))
 
 (provide 'binjo-twit)
 ;;; binjo-twit.el ends here
