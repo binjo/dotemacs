@@ -92,6 +92,12 @@
 ;;; org archive
 (setq org-archive-location "~/.emacs.d/org/archive.org::From %s")
 
+(eval-after-load 'org
+  '(defun org-dblock-write:image (params)
+     (let ((file (plist-get params :file)))
+       (clear-image-cache file)
+       (insert-image (create-image file) ))))
+
 ;;; org-remember
 (org-remember-insinuate)
 (setq org-default-notes-file (concat org-directory "notes.org"))
