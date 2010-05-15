@@ -84,8 +84,19 @@
                       ("reading"   . ?r)
                       ("twitter"   . ?t)))
 
+(setq org-agenda-custom-commands
+      '(("w" tags-todo "work")
+        ("d" tags "adobe")
+        ("r" tags "reading")))
+
 ;;; org archive
 (setq org-archive-location "~/.emacs.d/org/archive.org::From %s")
+
+(eval-after-load 'org
+  '(defun org-dblock-write:image (params)
+     (let ((file (plist-get params :file)))
+       (clear-image-cache file)
+       (insert-image (create-image file) ))))
 
 ;;; org-remember
 (org-remember-insinuate)
