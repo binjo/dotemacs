@@ -91,7 +91,8 @@ and `require' PACKAGE dynamically."
                                 ((kbd "C-c v u") . 'anchiva-submit-sample)
                                 ((kbd "C-c v t") . 'anchiva-check-mwcs-test)
                                 ((kbd "C-c v m") . 'anchiva-submit-sig-mwcs)
-                                ((kbd "C-c v b") . 'anchiva-browse-all-urls))
+                                ((kbd "C-c v b") . 'anchiva-browse-all-urls)
+                                ((kbd "C-c v s") . 'anchiva-pop-sig-buffer))
 
 ;; babel, use online api to translate
 (binjo-m-global-set-key-dynamic 'babel
@@ -119,6 +120,3 @@ and `require' PACKAGE dynamically."
 (require 'kmacro-ring-list)
 (binjo-m-global-set-key-dynamic 'kmacro-ring-list
                                 ((kbd "C-c m r") . 'kmacro-ring-list))
-
-(setq last-kbd-macro
-   [?\C-e ?: ?3 ?: ?* ?: ?\C-\M-% ?\[ ?- ?| ?\\ ?  ?| ?\C-q ?\C-j ?\] return return ?! ?\C-x ?\C-s ?\C-a ?\C-k ?\C-z])
