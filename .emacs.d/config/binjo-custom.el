@@ -189,7 +189,10 @@ This is because some levels' updating takes too long time."
       (switch-to-buffer "*Group*")
     ad-do-it
     ;; idle 2 minutes, then check news every 3 minutes.
-    (gnus-demon-add-handler 'binjo-gnus-group-get-new-news 3 2)))
+    (gnus-demon-add-handler 'binjo-gnus-group-get-new-news 3 2)
+    ;; for gnus notify
+    (require 'binjo-gnus-notify)
+    (binjo-gnus-enable-unread-notify)))
 
 (ad-activate 'gnus)
 (global-set-key (kbd "C-x g") 'gnus)
