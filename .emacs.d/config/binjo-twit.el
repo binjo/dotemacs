@@ -107,6 +107,8 @@
      (define-key twittering-mode-map "N" 'twittering-goto-next-status-of-user)
      (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
      (define-key twittering-mode-map "q" 'twittering-suspend)
+     (define-key twittering-mode-map "F" 'twittering-follow)
+     (define-key twittering-mode-map "K" 'twittering-unfollow)
 
      (global-set-key (kbd "C-c t t") 'binjo-twittering-jmp)
 
