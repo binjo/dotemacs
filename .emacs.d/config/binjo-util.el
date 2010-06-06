@@ -57,10 +57,12 @@ and `require' PACKAGE dynamically."
                                 ((kbd "C-c s a") . 'sql-av-feedback))
 
 ;; org-mode
-(require 'binjo-org)
+(add-hook 'window-setup-hook '(lambda ()
+                                (require 'binjo-org)))
 
 ;; twit.el
-(require 'binjo-twit)
+(add-hook 'window-setup-hook '(lambda ()
+                                (require 'binjo-twit)))
 
 ;; smex
 (binjo-m-global-set-key-dynamic 'smex
@@ -102,10 +104,10 @@ and `require' PACKAGE dynamically."
   '(setq babel-preferred-to-language "Chinese (Simplified)"))
 
 ;; emms
-(require 'binjo-emms)
+(add-hook 'window-setup-hook '(lambda ()
+                                (require 'binjo-emms)))
 
 ;; douban
-(require 'douban-emacs)
 (binjo-m-global-set-key-dynamic 'douban-emacs
                                 ((kbd "C-c d n") . 'douban-create-note))
 
@@ -117,6 +119,5 @@ and `require' PACKAGE dynamically."
 (binjo-m-global-set-key-dynamic 'magit
                                 ((kbd "C-c g m") . 'magit-status))
 
-(require 'kmacro-ring-list)
 (binjo-m-global-set-key-dynamic 'kmacro-ring-list
                                 ((kbd "C-c m r") . 'kmacro-ring-list))

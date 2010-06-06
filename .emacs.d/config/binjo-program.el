@@ -99,7 +99,7 @@
              ("\\<\\(TODO\\)"  1 'font-lock-todo-face  t))))
         binjo-keyword-highlight-modes))
 
-(xwl-highlight-special-keywords)
+(add-hook 'window-setup-hook 'xwl-highlight-special-keywords)
 
 ;; asp highlight
 (autoload 'asp-mode "asp-mode")
