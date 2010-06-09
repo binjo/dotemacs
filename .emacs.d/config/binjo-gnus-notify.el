@@ -28,6 +28,7 @@
 ;;; History:
 
 ;; 2010/05/21, init
+;; 2010/06/09, add image logo, thanks wd.
 
 ;; Put this file into your load-path and the following into your ~/.emacs:
 ;;   (require 'binjo-gnus-notify)
@@ -45,11 +46,53 @@
 (defvar binjo-gnus-notify-groups '()
   "A list of groups name.")
 
+(defconst mail-logo-image
+  (when (image-type-available-p 'xpm)
+    '(image :type xpm
+            :ascent center
+            :data
+            "/* XPM */
+static char * gmail_xpm[] = {
+\"16 16 8 1\",
+\"   c None\",
+\".  c #DA3838\",
+\"+  c #E95A5A\",
+\"@  c #F28181\",
+\"#  c #F9A7A7\",
+\"$  c #FFB6B6\",
+\"%  c #FFE2E2\",
+\"&  c #FFFFFF\",
+\"                \",
+\"                \",
+\"                \",
+\"...@########@...\",
+\"....$&&&&&&$....\",
+\"..@+.$&&&&$.+@..\",
+\"..&@+.$&&$.+@&..\",
+\"..&&@+.$$.+@&&..\",
+\"..&&$@+..+@$&&..\",
+\"..&%#$@++@$#%&..\",
+\"..%#%&&@@&&%#%..\",
+\"..#%&&&&&&&&%#..\",
+\"..%&&&&&&&&&&%..\",
+\"..############..\",
+\"                \",
+\"                \"};
+"))
+  "Image for mail logo.")
+
+(defconst mail-logo
+  (if mail-logo-image
+      (apply 'propertize " "
+             `(display ,mail-logo-image))
+    "M"))
+
 (defun binjo-gnus-notify-string ()
   (let ((sum (apply '+ (mapcar 'cdr binjo-gnus-unread-group-info))))
     (if (= 0 sum)
         ""
-      (format " M(%d)" sum))))
+      (concat mail-logo
+              (format "(%d)" sum)))))
 
 (defun gnus-mst-notify-shorten-group-name (group)
   "shorten the group name to make it better fit on the modeline"
