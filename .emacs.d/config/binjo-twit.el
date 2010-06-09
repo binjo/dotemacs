@@ -97,6 +97,7 @@
            "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n")
 
      (add-hook 'twittering-mode-hook (lambda ()
+                                       (setq twittering-convert-program (executable-find "imconvert"))
                                        (twittering-icon-mode 1)
                                        (twittering-enable-unread-status-notifier)))
 
