@@ -12,7 +12,7 @@ and `require' PACKAGE dynamically."
               key-funcs)))
 
 ;; eshell
-(eval-after-load 'eshell
+(eval-after-load 'esh-mode
   '(progn
      (require 'binjo-eshell-util)))
 
@@ -105,7 +105,6 @@ and `require' PACKAGE dynamically."
 (require 'binjo-emms)
 
 ;; douban
-(require 'douban-emacs)
 (binjo-m-global-set-key-dynamic 'douban-emacs
                                 ((kbd "C-c d n") . 'douban-create-note))
 
@@ -117,6 +116,5 @@ and `require' PACKAGE dynamically."
 (binjo-m-global-set-key-dynamic 'magit
                                 ((kbd "C-c g m") . 'magit-status))
 
-(require 'kmacro-ring-list)
 (binjo-m-global-set-key-dynamic 'kmacro-ring-list
                                 ((kbd "C-c m r") . 'kmacro-ring-list))
