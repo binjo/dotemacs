@@ -12,7 +12,7 @@ and `require' PACKAGE dynamically."
               key-funcs)))
 
 ;; eshell
-(eval-after-load 'eshell
+(eval-after-load 'esh-mode
   '(progn
      (require 'binjo-eshell-util)))
 

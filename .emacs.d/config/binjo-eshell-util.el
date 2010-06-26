@@ -164,4 +164,13 @@
   "Start STUD_PE with parameter set as FILE-NAME."
   (m-w32-shell-execute program-stud-pe file-name)
   "")
+
+(defun eshell/url-hex-filter (string)
+  "Remove %XX embedded spaces, etc in a URL."
+  (if (string-match "unescape" string)
+      (url-unhex-string string)
+    string))
+
+(add-hook 'eshell-preoutput-filter-functions
+          'eshell/url-hex-filter)
 ;;; binjo-eshell-util.el ends here

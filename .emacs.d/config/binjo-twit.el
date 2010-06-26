@@ -97,7 +97,12 @@
            "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n")
 
      (add-hook 'twittering-mode-hook (lambda ()
+                                       (setq twittering-convert-program (executable-find "imconvert"))
                                        (twittering-icon-mode 1)
+                                       (if binjo-at-company-p
+                                           (twittering-toggle-proxy))
+                                       (setq twittering-update-status-function
+                                             'twittering-update-status-from-pop-up-buffer)
                                        (twittering-enable-unread-status-notifier)))
 
      (define-key twittering-mode-map "c" 'twittering-current-timeline)
