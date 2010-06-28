@@ -54,7 +54,8 @@ and `require' PACKAGE dynamically."
 (binjo-m-global-set-key-dynamic 'binjo-sql
                                 ((kbd "C-c s w") . 'sql-webfilter)
                                 ((kbd "C-c s f") . 'sql-fips)
-                                ((kbd "C-c s a") . 'sql-av-feedback))
+                                ((kbd "C-c s a") . 'sql-av-feedback)
+                                ((kbd "C-c s m") . 'sql-av-webmon))
 
 ;; org-mode
 (require 'binjo-org)

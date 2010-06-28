@@ -48,6 +48,12 @@
          (sql-user ,webfilter-user)
          (sql-password ,webfilter-password)
          (sql-database ,webfilter-database))
+        (webmon
+         (sql-product 'mysql)
+         (sql-server ,webmon-server)
+         (sql-user ,webmon-user)
+         (sql-password ,webmon-password)
+         (sql-database ,webmon-database))
         (fips
          (sql-product 'mysql)
          (sql-server ,fips-server)
@@ -96,6 +102,10 @@ This is used to set `sql-alternate-buffer-name' within
 (defun sql-av-feedback ()
   (interactive)
   (sql-connect-preset 'avfeedback))
+
+(defun sql-av-webmon ()
+  (interactive)
+  (sql-connect-preset 'webmon))
 
 (provide 'binjo-sql)
 ;;; binjo-sql.el ends here
