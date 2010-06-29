@@ -59,5 +59,16 @@
                     "~/.emacs.d/site-lisp/magit")
               load-path))
 
+(when (file-readable-p "~/.emacs.d/config/mypath")
+  (with-temp-buffer
+    (insert-file-contents "~/.emacs.d/config/mypath")
+    (goto-char (point-min))
+    (while (not (eobp))
+      (setq exec-path (append
+                       (list (buffer-substring
+                              (line-beginning-position) (line-end-position)))
+                       exec-path))
+      (forward-line))))
+
 (provide 'binjo-path)
 ;;; binjo-path.el ends here
