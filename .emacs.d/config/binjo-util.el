@@ -23,7 +23,7 @@ and `require' PACKAGE dynamically."
   (let ((line "")
         (unified ()))
     (save-excursion
-      (while (< (line-end-position) end)
+      (while (not (eobp))
         (setq line (downcase (buffer-substring-no-properties
                               (line-beginning-position) (line-end-position))))
         (unless (assoc-string line unified)
