@@ -91,18 +91,26 @@
 
      (setq twittering-api-host        binjo-twitter-api-url
            twittering-api-search-host binjo-twitter-search-url
+           twittering-auth-method     'basic
            twittering-use-ssl         nil)
 
      (setq twittering-status-format
-           "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n")
+           "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL[       ]{%T}\n"
+           twittering-retweet-format "RT @%s: %t")
+
+     (setq twittering-convert-program (executable-find "imconvert"))
+
+     (setq twittering-url-show-status nil
+           twittering-notify-successful-http-get nil)
+
+     (if binjo-at-company-p
+         (twittering-toggle-proxy))
+
+     (setq twittering-update-status-function
+           'twittering-update-status-from-pop-up-buffer)
 
      (add-hook 'twittering-mode-hook (lambda ()
-                                       (setq twittering-convert-program (executable-find "imconvert"))
                                        (twittering-icon-mode 1)
-                                       (if binjo-at-company-p
-                                           (twittering-toggle-proxy))
-                                       (setq twittering-update-status-function
-                                             'twittering-update-status-from-pop-up-buffer)
                                        (twittering-enable-unread-status-notifier)))
 
      (define-key twittering-mode-map "c" 'twittering-current-timeline)

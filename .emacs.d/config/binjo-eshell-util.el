@@ -46,22 +46,22 @@
 ;;;;##########################################################################
 
 (defconst program-hiew
-  "d:/Tools/avtools/hiew327/hiew32.exe")
+  (executable-find "hiew32.exe"))
 
 (defconst program-ida
-  "C:/Program Files/IDA/idag.exe")
+  (executable-find "idag.exe"))
 
 (defconst program-bintext
-  "D:/Tools/avtools/BinText/BinText.exe")
+  (executable-find "BinText.exe"))
 
 (defconst program-ollydbg
-  "D:/Tools/OD/odbg110/OLLYDBG.EXE")
+  (executable-find "OLLYDBG.EXE"))
 
 (defconst program-peid
-  "D:/Tools/avtools/PEiD/PEiD.exe")
+  (executable-find "PEiD.exe"))
 
 (defconst program-stud-pe
-  "D:/Tools/avtools/stdupe/Stud_PE.2.301_hh/Stud_PE_hh.exe")
+  (executable-find "Stud_PE_hh.exe"))
 
 (defun eshell/cls()
   "Clearing EShell Buffer."
@@ -169,7 +169,9 @@
   "Remove %XX embedded spaces, etc in a URL."
   (if (string-match "unescape" string)
       (url-unhex-string string)
-    string))
+    (if (string-match "write(" string)
+        (replace-in-string string "\\\\" "")
+      string)))
 
 (add-hook 'eshell-preoutput-filter-functions
           'eshell/url-hex-filter)
