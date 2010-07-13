@@ -149,6 +149,17 @@
         (goto-char (point-max)))
     (message "not in &bitlbee buffer")))
 
+(defun binjo-erc-bitlbee-set-charset ()
+  "Run `set charset gb2312'."
+  (when (string= "&bitlbee" (buffer-name))
+    (let ((inhibit-read-only t))
+      (goto-char (point-max))
+      (insert "set charset gb2312")
+      (erc-send-current-line)
+      (goto-char (point-max)))))
+
+(add-hook 'erc-join-hook 'binjo-erc-bitlbee-set-charset)
+
 (defun binjo-erc-switch-buffer ()
   "Move cursor to the last line, then call `ido-switch-buffer'."
   (interactive)
