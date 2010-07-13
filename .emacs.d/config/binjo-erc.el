@@ -38,6 +38,7 @@
 
 (setq erc-server-history-list '("irc.0x557.net"
                                 "irc.freenode.net"
+                                "im.bitlbee.org"
                                 "127.0.0.1" ; stunnel to irc.0x557.net
                                 "irc.oftc.net"))
 
@@ -53,7 +54,8 @@
 ;(setq erc-default-port "9940")
 (setq  erc-server-coding-system '(utf-8 . utf-8)
        erc-encoding-coding-alist '(("#segfault" . gb2312)
-                                   ("#ph4nt0m" . gb2312)))
+                                   ("#ph4nt0m" . gb2312)
+                                   ("&bitlbee" . gb2312)))
 (setq erc-autojoin-channels-alist
       '(("freenode.net" "#metasploit" "#emacs")
         ("0x557.net" "#segfault")
@@ -192,7 +194,12 @@
   (erc-select :server "localhost"
               :port 6667
               :nick erc-nick
-              :password erc-0x557-password))
+              :password erc-0x557-password)
+  ;; bitlbee
+  (erc-select :server "im.bitlbee.org"
+              :port 6667
+              :nick erc-nick
+              :password erc-bitlbee-pwd))
 
 (provide 'binjo-erc)
 (eval-when-compile
