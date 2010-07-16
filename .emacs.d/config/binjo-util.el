@@ -118,7 +118,7 @@ and `require' PACKAGE dynamically."
                                 ((kbd "C-c g m") . 'magit-status))
 (eval-after-load 'magit
   '(progn
-     (setq magit-repo-dirs '("~/.emacs.d/site-lisp"
+     (setq magit-repo-dirs '("~/.emacs.d/"
                              "d:/repos"))))
 
 (binjo-m-global-set-key-dynamic 'kmacro-ring-list
