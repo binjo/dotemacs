@@ -98,8 +98,6 @@
            "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL[       ]{%T}\n"
            twittering-retweet-format "RT @%s: %t")
 
-     (setq twittering-convert-program (executable-find "imconvert"))
-
      (setq twittering-url-show-status nil
            twittering-notify-successful-http-get nil)
 
@@ -110,6 +108,13 @@
            'twittering-update-status-from-pop-up-buffer)
 
      (add-hook 'twittering-mode-hook (lambda ()
+                                       (if (string-match "c:" twittering-convert-program 0)
+                                           (setq twittering-convert-program
+                                                 (expand-file-name
+                                                  "convert.exe"
+                                                  (expand-file-name
+                                                   "w32"
+                                                   (file-name-directory (symbol-file 'twit))))))
                                        (twittering-icon-mode 1)
                                        (twittering-enable-unread-status-notifier)))
 
