@@ -57,7 +57,7 @@
                     "~/.emacs.d/site-lisp/twit"
                     "~/.emacs.d/site-lisp/twittering-mode"
                     "~/.emacs.d/site-lisp/magit"
-                    "~/.emacs.d/site-lisp/ac")
+                    "~/.emacs.d/site-lisp/org")
               load-path))
 
 (when (file-readable-p "~/.emacs.d/config/mypath")

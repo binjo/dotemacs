@@ -39,6 +39,8 @@
 (eval-when-compile
   (require 'cl))
 
+(require 'org-install)
+
 (defvar binjo-org-files
   '("works.org" "todo.org" "exploits.org" "remember.org" "archive.org"))
 
