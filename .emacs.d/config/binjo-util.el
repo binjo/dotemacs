@@ -23,7 +23,7 @@ and `require' PACKAGE dynamically."
   (let ((line "")
         (unified ()))
     (save-excursion
-      (while (< (line-end-position) end)
+      (while (not (eobp))
         (setq line (downcase (buffer-substring-no-properties
                               (line-beginning-position) (line-end-position))))
         (unless (assoc-string line unified)
@@ -54,7 +54,8 @@ and `require' PACKAGE dynamically."
 (binjo-m-global-set-key-dynamic 'binjo-sql
                                 ((kbd "C-c s w") . 'sql-webfilter)
                                 ((kbd "C-c s f") . 'sql-fips)
-                                ((kbd "C-c s a") . 'sql-av-feedback))
+                                ((kbd "C-c s a") . 'sql-av-feedback)
+                                ((kbd "C-c s m") . 'sql-av-webmon))
 
 ;; org-mode
 (require 'binjo-org)
@@ -115,6 +116,10 @@ and `require' PACKAGE dynamically."
 
 (binjo-m-global-set-key-dynamic 'magit
                                 ((kbd "C-c g m") . 'magit-status))
+(eval-after-load 'magit
+  '(progn
+     (setq magit-repo-dirs '("~/.emacs.d/"
+                             "d:/repos"))))
 
 (binjo-m-global-set-key-dynamic 'kmacro-ring-list
                                 ((kbd "C-c m r") . 'kmacro-ring-list))

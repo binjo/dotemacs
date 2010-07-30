@@ -1,4 +1,4 @@
-;;; binjo-twit.el --- config for twit.el
+;;; binjo-twit.el --- config for twittering-mode.el
 
 ;; Copyright 2010 Binjo
 ;;
@@ -23,7 +23,7 @@
 
 ;;; Commentary:
 
-;; Configs for twit.el
+;; Configs for twittering-mode.el
 
 ;;; History:
 
@@ -38,35 +38,6 @@
   (require 'cl))
 
 
-
-;; twit.el related settings
-(eval-after-load 'twit-appspot
-  '(setq twit-filter-tweets-regex "^$"
-         twit-show-user-images    nil
-         twit-fill-tweets         nil))
-
-(if binjo-at-company-p
-    (setq twit-proxy           "172.25.25.4:808"))
-
-(binjo-m-global-set-key-dynamic 'twit-appspot
-                                ((kbd "C-c t s") . 'twit-show-recent-tweets)
-                                ((kbd "C-c t d") . 'twit-show-direct-tweets)
-                                ((kbd "C-c t l") . 'twit-follow-recent-tweets)
-                                ((kbd "C-c t S") . 'twit-stop-following-tweets)
-                                ((kbd "C-c t w") . 'twit-post))
-
-;; TODO notify in mode-line
-(defun binjo-twit-hook-notify-new-tweets ()
-  "Called by `twit-new-tweet-hook'."
-  (message "New tweets from %s" (cadr twit-last-tweet)))
-
-(eval-after-load 'twit-appspot
-  '(add-hook 'twit-new-tweet-hook 'binjo-twit-hook-notify-new-tweets))
-
-;; (if binjo-at-company-p
-;;     (progn
-;;       (run-with-timer "08:30am" (* 24 60 60) 'twit-follow-recent-tweets)
-;;       (run-with-timer "18:00pm" (* 24 60 60) 'twit-stop-following-tweets)))
 
 (binjo-m-global-set-key-dynamic 'twittering-mode
                                 ((kbd "C-c t m") . 'twittering-mode)
@@ -91,18 +62,31 @@
 
      (setq twittering-api-host        binjo-twitter-api-url
            twittering-api-search-host binjo-twitter-search-url
+           twittering-auth-method     'basic
            twittering-use-ssl         nil)
 
      (setq twittering-status-format
-           "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n")
+           "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL[       ]{%T}\n"
+           twittering-retweet-format "RT @%s: %t")
+
+     (setq twittering-url-show-status nil
+           twittering-notify-successful-http-get nil)
+
+     (if binjo-at-company-p
+         (twittering-toggle-proxy))
+
+     (setq twittering-update-status-function
+           'twittering-update-status-from-pop-up-buffer)
 
      (add-hook 'twittering-mode-hook (lambda ()
-                                       (setq twittering-convert-program (executable-find "imconvert"))
+                                       (if (string-match "c:" twittering-convert-program 0)
+                                           (setq twittering-convert-program
+                                                 (expand-file-name
+                                                  "convert.exe"
+                                                  (expand-file-name
+                                                   "w32"
+                                                   (file-name-directory (symbol-file 'twit))))))
                                        (twittering-icon-mode 1)
-                                       (if binjo-at-company-p
-                                           (twittering-toggle-proxy))
-                                       (setq twittering-update-status-function
-                                             'twittering-update-status-from-pop-up-buffer)
                                        (twittering-enable-unread-status-notifier)))
 
      (define-key twittering-mode-map "c" 'twittering-current-timeline)
