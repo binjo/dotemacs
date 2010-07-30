@@ -77,11 +77,18 @@
 ;;                                        dired-directory
 ;;                                        (revert-buffer-function " %b"
 ;;                                                                ("%b - Dir:  " default-directory)))))))
+(defun binjo-modeline-proper-full-path ()
+  (let ((cur-dir default-directory))
+    (if (> (length cur-dir) 48)
+        (concat (substring cur-dir 0 3) "..."
+                (substring (substring cur-dir 3) -42))
+      cur-dir)))
+
 (defun add-mode-line-fullpath ()
   "When editing a file, show the full path in the mode line."
   (add-to-list 'mode-line-buffer-identification
-               '(:eval (substring default-directory
-                                  0 nil))))
+               '(:eval (binjo-modeline-proper-full-path))))
+
 (add-hook 'find-file-hook 'add-mode-line-fullpath)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
