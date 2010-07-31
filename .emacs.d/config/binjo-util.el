@@ -126,3 +126,17 @@ and `require' PACKAGE dynamically."
 
 (binjo-m-global-set-key-dynamic 'kmacro-ring-list
                                 ((kbd "C-c m r") . 'kmacro-ring-list))
+
+(binjo-m-global-set-key-dynamic 'binjo-calendar
+  ((kbd "<f11>") . (lambda ()
+                     (interactive)
+                     (let ((cal "*Calendar*"))
+                       (if (get-buffer cal)
+                           (progn
+                             (split-window-vertically -9)
+                             (other-window 1))
+                         ;; ½ûÓÃ´¹Ö±·Ö¸î¡£
+                         (let ((split-width-threshold 9999))
+                           (calendar)))
+                       (switch-to-buffer cal)
+                       (calendar-cursor-holidays)))))
