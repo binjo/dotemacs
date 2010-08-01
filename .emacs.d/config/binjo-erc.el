@@ -45,6 +45,7 @@
 (setq erc-mode-line-format "%t %a"
       erc-timestamp-format-right "[%Y-%m-%d %T]"
       erc-fill-column 100
+      erc-nick-uniquifier "_"
       ;; erc-insert-timestamp-function 'erc-insert-timestamp-left
       )
 
