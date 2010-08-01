@@ -80,8 +80,8 @@
 (defun binjo-modeline-proper-full-path ()
   (let ((cur-dir default-directory))
     (if (> (length cur-dir) 48)
-        (concat (substring cur-dir 0 3) "..."
-                (substring (substring cur-dir 3) -42))
+        (concat (substring cur-dir 0 24) "..."
+                (substring (substring cur-dir 24) -21))
       cur-dir)))
 
 (defun add-mode-line-fullpath ()
