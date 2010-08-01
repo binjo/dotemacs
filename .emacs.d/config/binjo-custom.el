@@ -260,3 +260,28 @@ This is because some levels' updating takes too long time."
          (when (memq (current-buffer) (erc-buffer-list))
            (goto-char (point-max))
            (forward-line -1)))))
+
+;; c, c++ settings
+(defcustom binjo-cpp-style
+  '((c-tab-always-indent . t)
+    (c-comment-only-line-offset . 0)
+    (c-hanging-braces-alist . ((substatement-open after)
+                               (brace-list-open)))
+    (c-cleanup-list . (comment-close-slash compact-empty-funcall))
+    (c-offsets-alist . ((substatement-open . 0)
+                        (innamespace . 0)
+                        (case-label . +)
+                        (access-label . -)
+                        (inline-open . 0)
+                        (block-open . 0)))
+    (setq comment-start "/*"
+          comment-end "*/")
+    (setq indent-tabs-mode nil))
+  "my cpp coding style.")
+(c-add-style "binjo-cpp-style" binjo-cpp-style)
+
+(defun binjo-set-c-c++-style ()
+  (c-set-style "binjo-cpp-style"))
+
+(add-hook 'c++-mode-hook 'binjo-set-c-c++-style)
+(add-hook 'c-mode-hook 'binjo-set-c-c++-style)
