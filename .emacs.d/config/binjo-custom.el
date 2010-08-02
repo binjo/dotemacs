@@ -77,11 +77,18 @@
 ;;                                        dired-directory
 ;;                                        (revert-buffer-function " %b"
 ;;                                                                ("%b - Dir:  " default-directory)))))))
+(defun binjo-modeline-proper-full-path ()
+  (let ((cur-dir default-directory))
+    (if (> (length cur-dir) 48)
+        (concat (substring cur-dir 0 24) "..."
+                (substring (substring cur-dir 24) -21))
+      cur-dir)))
+
 (defun add-mode-line-fullpath ()
   "When editing a file, show the full path in the mode line."
   (add-to-list 'mode-line-buffer-identification
-               '(:eval (substring default-directory
-                                  0 nil))))
+               '(:eval (binjo-modeline-proper-full-path))))
+
 (add-hook 'find-file-hook 'add-mode-line-fullpath)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -254,3 +261,28 @@ This is because some levels' updating takes too long time."
          (when (memq (current-buffer) (erc-buffer-list))
            (goto-char (point-max))
            (forward-line -1)))))
+
+;; c, c++ settings
+(defcustom binjo-cpp-style
+  '((c-tab-always-indent . t)
+    (c-comment-only-line-offset . 0)
+    (c-hanging-braces-alist . ((substatement-open after)
+                               (brace-list-open)))
+    (c-cleanup-list . (comment-close-slash compact-empty-funcall))
+    (c-offsets-alist . ((substatement-open . 0)
+                        (innamespace . 0)
+                        (case-label . +)
+                        (access-label . -)
+                        (inline-open . 0)
+                        (block-open . 0)))
+    (setq comment-start "/*"
+          comment-end "*/")
+    (setq indent-tabs-mode nil))
+  "my cpp coding style.")
+(c-add-style "binjo-cpp-style" binjo-cpp-style)
+
+(defun binjo-set-c-c++-style ()
+  (c-set-style "binjo-cpp-style"))
+
+(add-hook 'c++-mode-hook 'binjo-set-c-c++-style)
+(add-hook 'c-mode-hook 'binjo-set-c-c++-style)

@@ -58,10 +58,12 @@ and `require' PACKAGE dynamically."
                                 ((kbd "C-c s m") . 'sql-av-webmon))
 
 ;; org-mode
-(require 'binjo-org)
+(add-hook 'window-setup-hook '(lambda ()
+                                (require 'binjo-org)))
 
 ;; twit.el
-(require 'binjo-twit)
+(add-hook 'window-setup-hook '(lambda ()
+                                (require 'binjo-twit)))
 
 ;; smex
 (binjo-m-global-set-key-dynamic 'smex
@@ -103,7 +105,8 @@ and `require' PACKAGE dynamically."
   '(setq babel-preferred-to-language "Chinese (Simplified)"))
 
 ;; emms
-(require 'binjo-emms)
+(add-hook 'window-setup-hook '(lambda ()
+                                (require 'binjo-emms)))
 
 ;; douban
 (binjo-m-global-set-key-dynamic 'douban-emacs
@@ -123,3 +126,17 @@ and `require' PACKAGE dynamically."
 
 (binjo-m-global-set-key-dynamic 'kmacro-ring-list
                                 ((kbd "C-c m r") . 'kmacro-ring-list))
+
+(binjo-m-global-set-key-dynamic 'binjo-calendar
+  ((kbd "<f11>") . (lambda ()
+                     (interactive)
+                     (let ((cal "*Calendar*"))
+                       (if (get-buffer cal)
+                           (progn
+                             (split-window-vertically -9)
+                             (other-window 1))
+                         ;; ½ûÓÃ´¹Ö±·Ö¸î¡£
+                         (let ((split-width-threshold 9999))
+                           (calendar)))
+                       (switch-to-buffer cal)
+                       (calendar-cursor-holidays)))))
