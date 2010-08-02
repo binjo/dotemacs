@@ -128,6 +128,8 @@ static char * gmail_xpm[] = {
             'binjo-gnus-update-unread-group-info t)
   (add-hook 'gnus-after-exiting-gnus-hook
             'binjo-gnus-update-unread-group-info t)
+  (add-hook 'gnus-group-catchup-group-hook
+            'binjo-gnus-update-unread-group-info t)
   (add-to-list 'global-mode-string
                '(:eval (binjo-gnus-notify-string)) t))
 
@@ -141,6 +143,8 @@ static char * gmail_xpm[] = {
   (remove-hook 'gnus-topic-mode-hook
                'binjo-gnus-update-unread-group-info)
   (remove-hook 'gnus-after-exiting-gnus-hook
+               'binjo-gnus-update-unread-group-info)
+  (remove-hook 'gnus-group-catchup-group-hook
                'binjo-gnus-update-unread-group-info)
   (setq global-mode-string
         (remove '(:eval (binjo-gnus-notify-string))
