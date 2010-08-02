@@ -100,7 +100,7 @@ PORT smtp service."
          (name ,binjo-comp-name)
          (address ,binjo-comp-account)
          (From (format "\"%s\" <%s>" ,binjo-comp-name ,binjo-comp-account))
-         (signature "Genwei")
+         (signature ,binjo-private-mail-sig)
          (organization "Anchiva System Inc.")
          (eval
           (binjo-sendmail-with-account ,binjo-comp-account
