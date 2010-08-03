@@ -206,10 +206,15 @@ This is because some levels' updating takes too long time."
 
 ;; grep
 (binjo-m-global-set-key-dynamic 'grep
-                                ((kbd "C-c m g") . 'grep))
+                                ((kbd "C-c m g") . 'grep)
+                                ((kbd "C-c m G") . 'grep-find))
 (eval-after-load 'grep
   '(progn
      (grep-apply-setting 'grep-command "grep -r -nH -i -e ")
+     (grep-apply-setting 'grep-find-command
+                         (cons (concat
+                                (shell-quote-argument "c:/Program Files/Git/bin/find.exe")
+                                " . -type f -exec grep -r -nH -i -e  {} NUL \";\"") 71))
      (grep-apply-setting 'grep-use-null-device nil)))
 
 (require 'binjo-bindings)
