@@ -3,6 +3,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(ansi-color-for-comint-mode nil)
  '(canlock-password "31f72e77a9331e61ce98a230d1fbff79785c568a")
  '(column-number-mode t)
  '(default-tab-width 4 t)
@@ -10,9 +11,9 @@
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(menu-bar-mode nil)
+ '(message-log-max 2000)
  '(parens-require-spaces nil)
  '(safe-local-variable-values (quote ((insert-tabs-mode) (encoding . utf-8) (TeX-master . t))))
- '(message-log-max 2000)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-stop-list nil)
@@ -23,8 +24,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(erc-timestamp-face ((t (:foreground "brown" :weight bold))))
- '(highlight-changes ((((min-colors 88) (class color)) (:background "cornsilk1"))))
- '(twit-message-face ((default (:height 1.1 :family "ÐÂËÎÌå")) (nil nil))))
+ '(highlight-changes ((((min-colors 88) (class color)) (:background "cornsilk1")))))
 
 ;; Turn off the annoying default backup behaviour
 (if (file-directory-p "~/.emacs.d/backup")

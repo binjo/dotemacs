@@ -153,3 +153,6 @@
      (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
      (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
      (add-to-list 'auto-mode-alist '("\\.hs" . haskell-mode))))
+
+;; pintool's header
+(add-to-list 'auto-mode-alist  '("\\.PH" . c++-mode))
