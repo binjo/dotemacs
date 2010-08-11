@@ -58,9 +58,9 @@
 
 ;; Php
 (autoload 'php-mode "php-mode" "Php editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 (eval-after-load 'php-mode
-  '(setq auto-mode-alist     (cons '("\\.php$" . php-mode) auto-mode-alist)
-      interpreter-mode-alist (cons '("php" . php-mode) interpreter-mode-alist)))
+  '(add-to-list 'interpreter-mode-alist '("php" . php-mode)))
 
 ;; Js related setting
 (autoload 'js2-mode "js2-mode" nil t)
@@ -155,4 +155,4 @@
      (add-to-list 'auto-mode-alist '("\\.hs" . haskell-mode))))
 
 ;; pintool's header
-(add-to-list 'auto-mode-alist  '("\\.PH" . c++-mode))
+(add-to-list 'auto-mode-alist  '("\\.PH$" . c++-mode))
