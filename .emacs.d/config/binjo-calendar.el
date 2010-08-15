@@ -39,14 +39,17 @@
       view-calendar-holidays-initially t
       cal-china-x-important-holidays
       `(,@cal-china-x-chinese-holidays
-        `(mapc (lambda (x)
-                 (let ((p (car x))
-                       (d (cdr x)))
-                   (if (= 1 p)
-                       (holiday-lunar (nth 0 ,d) (nth 1 ,d) (nth 2 ,d))
-                     (holiday-fixed (nth 0 ,d) (nth 1 ,d) (nth 2 ,d)))))
-               binjo-calendar-important-days)
-        ))
+        ,@(mapcar '(lambda (x)
+                     (let ((lunar-or-fixed (car x)))
+                       (if (= 1 lunar-or-fixed)
+                           `(holiday-lunar ,(nth 1 x)
+                                           ,(nth 2 x)
+                                           ,(nth 3 x))
+                         `(holiday-fixed ,(nth 1 x)
+                                         ,(nth 2 x)
+                                         ,(nth 3 x)))))
+                  binjo-calendar-important-days))
+      )
 
 (setq calendar-holidays
       cal-china-x-important-holidays)
