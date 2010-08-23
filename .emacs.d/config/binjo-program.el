@@ -1,20 +1,4 @@
 ;;; Python
-(autoload 'python-mode "python-mode" "Python editing mode." t)
-(eval-after-load 'python
-  '(progn
-     (setq auto-mode-alist
-           (cons '("\\.py$" . python-mode) auto-mode-alist))
-     (setq interpreter-mode-alist
-           (cons '("python" . python-mode) interpreter-mode-alist))
-
-      (global-font-lock-mode t)
-     (setq font-lock-maximum-decoration t)
-
-     (add-hook 'python-mode-hook #'(lambda ()
-                                     (local-set-key "\C-x\t"
-                                                    #'(lambda ()
-                                                        (interactive)
-                                                        (insert "    ")))))))
 
 ;; python in eshell
 (defun n-eshell-exec-python (command args)
