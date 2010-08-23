@@ -117,12 +117,9 @@ and `require' PACKAGE dynamically."
       (require 'edit-server)
       (edit-server-start)))
 
-(binjo-m-global-set-key-dynamic 'magit
-                                ((kbd "C-c g m") . 'magit-status))
-(eval-after-load 'magit
-  '(progn
-     (setq magit-repo-dirs '("~/.emacs.d/"
-                             "d:/repos"))))
+(binjo-m-global-set-key-dynamic 'binjo-magit
+                                ((kbd "C-c g m") . 'magit-status)
+                                ((kbd "C-c m c") . 'magit-clone))
 
 (binjo-m-global-set-key-dynamic 'kmacro-ring-list
                                 ((kbd "C-c m r") . 'kmacro-ring-list))
