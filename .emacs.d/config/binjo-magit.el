@@ -37,6 +37,8 @@
 (eval-when-compile
   (require 'cl))
 (require 'magit)
+(require 'magit-svn)
+(require 'magithub)
 
 
 (eval-after-load 'magit

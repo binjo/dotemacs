@@ -57,6 +57,7 @@
                     "~/.emacs.d/site-lisp/twit"
                     "~/.emacs.d/site-lisp/twittering-mode"
                     "~/.emacs.d/site-lisp/magit"
+                    "~/.emacs.d/site-lisp/magithub"
                     "~/.emacs.d/site-lisp/org")
               load-path))
 
