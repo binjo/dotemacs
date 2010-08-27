@@ -46,6 +46,22 @@ and `require' PACKAGE dynamically."
   (message "%d line%scopied" arg (if (= 1 arg) " " "s ")))
 (global-set-key (kbd "C-c h") 'binjo-copy-line)
 
+;; http://emacs-fu.blogspot.com/2009/11/copying-lines-without-selecting-them.html
+(defadvice kill-ring-save (before slick-copy activate compile)
+  "When called interactively with no active region, copy a single line instead."
+  (interactive
+   (if mark-active
+       (list (region-beginning) (region-end))
+     (message "Copied line")
+     (list (line-beginning-position) (line-beginning-position 2)))))
+
+(defadvice kill-region (before slick-cut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
+
 ;;; erc
 (binjo-m-global-set-key-dynamic 'binjo-erc
                                 ((kbd "C-c n e") . 'binjo-erc-select))
