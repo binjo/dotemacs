@@ -54,11 +54,10 @@ If SVNP is non-nil, clone it as svn repo."
          (read-string "Repo's Name: ")
          (read-directory-name "Parent directory: ")
          current-prefix-arg))
-  (let ((dir (concat (directory-file-name (expand-file-name dir)) "/" repo "/"))
-        magit-args)
-    (setq magit-args (if svnp
-                    `("svn" "clone" ,url ,dir)
-                  `("clone" ,url ,dir)))
+  (let* ((dir (concat (directory-file-name (expand-file-name dir)) "/" repo "/"))
+         (magit-args (if svnp
+                         `("svn" "clone" ,url ,dir)
+                       `("clone" ,url ,dir))))
     (apply 'magit-run-git magit-args)
     (magit-status dir)))
 
