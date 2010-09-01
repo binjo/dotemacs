@@ -139,6 +139,9 @@
 ;;; ido
 (require 'ido)
 (ido-mode t)
+(setq ido-enable-flex-matching t
+      ido-create-new-buffer 'always
+      ido-auto-merge-work-directories-length -1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wubi
