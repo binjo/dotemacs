@@ -155,3 +155,16 @@ and `require' PACKAGE dynamically."
                            (calendar)))
                        (switch-to-buffer cal)
                        (calendar-cursor-holidays)))))
+
+;; ioccur
+(binjo-m-global-set-key-dynamic 'ioccur
+  ((kbd "C-c o c") . 'ioccur))
+(eval-after-load 'ioccur
+  '(progn
+     (set-face-background 'ioccur-match-overlay-face "SkyBlue")
+     (set-face-background 'ioccur-title-face "MediumOrchid")
+
+     (define-key ioccur-mode-map (kbd "j") 'ioccur-scroll-down)
+     (define-key ioccur-mode-map (kbd "k") 'ioccur-scroll-)
+
+     (add-to-list 'desktop-globals-to-save 'ioccur-history)))
