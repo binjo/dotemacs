@@ -135,8 +135,7 @@
      (setq haskell-program-name
            (shell-quote-argument "c:/Program Files/Haskell Platform/bin/ghci.exe"))
      (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-     (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-     (add-to-list 'auto-mode-alist '("\\.hs" . haskell-mode))))
+     (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)))
 
 ;; pintool's header
 (add-to-list 'auto-mode-alist  '("\\.PH$" . c++-mode))
