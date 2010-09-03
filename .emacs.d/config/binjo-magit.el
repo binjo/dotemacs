@@ -38,7 +38,7 @@
   (require 'cl))
 (require 'magit)
 (require 'magit-svn)
-(require 'magithub)
+;; (require 'magithub)
 
 
 (eval-after-load 'magit
