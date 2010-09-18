@@ -165,6 +165,6 @@ and `require' PACKAGE dynamically."
      (set-face-background 'ioccur-title-face "MediumOrchid")
 
      (define-key ioccur-mode-map (kbd "j") 'ioccur-scroll-down)
-     (define-key ioccur-mode-map (kbd "k") 'ioccur-scroll-)
+     (define-key ioccur-mode-map (kbd "k") 'ioccur-scroll-up)
 
      (add-to-list 'desktop-globals-to-save 'ioccur-history)))
