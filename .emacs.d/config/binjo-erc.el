@@ -43,11 +43,26 @@
                                 "irc.oftc.net"))
 
 (setq erc-mode-line-format "%t %a"
-      erc-timestamp-format-right "[%Y-%m-%d %T]"
+      erc-timestamp-format "%H:%M "
       erc-fill-column 100
       erc-nick-uniquifier "_"
-      ;; erc-insert-timestamp-function 'erc-insert-timestamp-left
+      erc-insert-timestamp-function 'erc-insert-timestamp-left
       )
+
+(setq xwl-erc-datestamp-format " === [%a(%V) %Y/%m/%d] ===\n")
+
+(defvar xwl-erc-last-datestamp nil)
+(make-variable-buffer-local 'xwl-erc-last-datestamp)
+
+(defadvice erc-insert-timestamp-left (around insert-datestamp activate)
+  ad-do-it
+  (let ((datestamp (erc-format-timestamp (current-time)
+                                         xwl-erc-datestamp-format)))
+    (unless (string= datestamp xwl-erc-last-datestamp)
+      (ad-set-arg 0 datestamp)
+      ad-do-it
+      (setq xwl-erc-last-datestamp datestamp))))
+
 
 (setq erc-join-buffer 'buffer
       erc-auto-query 'bury)
