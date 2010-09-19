@@ -139,3 +139,6 @@
 
 ;; pintool's header
 (add-to-list 'auto-mode-alist  '("\\.PH$" . c++-mode))
+
+(binjo-m-global-set-key-dynamic 'cdb-gud
+  ((kbd "C-c d b") . 'cdb))
