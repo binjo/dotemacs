@@ -40,6 +40,7 @@
   (require 'cl))
 
 (require 'org-install)
+(require 'org-google-weather)
 
 (defvar binjo-org-files
   '("works.org" "todo.org" "exploits.org" "remember.org" "archive.org"))
@@ -134,6 +135,9 @@
   (select-frame-by-name "*Remember*")
   (org-remember))
 
+;; org-google-weather
+(setq org-google-weather-icon-directory
+      "~/w32/GNOME_Weather_Icons_by_DarKobra/48x48/status")
 
 (provide 'binjo-org)
 ;;; binjo-org.el ends here
