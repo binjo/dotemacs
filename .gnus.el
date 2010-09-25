@@ -171,19 +171,17 @@ PORT smtp service."
 
 (setq nnmail-split-fancy
       `(|
-        (from ,(regexp-opt
-                '("no-reply@anchiva.com"
-                  "customer@anchiva.com"
-                  "wanwan.wu@anchiva.com"
-                  "aiyu.guo@anchiva.com"))
+        (from ,(regexp-opt binjo-private-avlab-group)
               "mail.avlab")
-        (from ,(regexp-opt
-                '("yanglin@anchiva.com"
-                  "qingchun.zeng@anchiva.com"))
+        (from ,(regexp-opt binjo-private-staff-group)
               "mail.staff")
         (from ,(regexp-opt
                 '("bugzilla-daemon@"))
               "mail.bugzilla")
+        (to ,binjo-private-avlab-account
+            (| ("from" ,(regexp-opt binjo-private-not-spam-group)
+                "mail.avlab")
+               "mail.spam"))
         "mail.misc"))
 
 (setq nnmail-split-methods 'nnmail-split-fancy)
