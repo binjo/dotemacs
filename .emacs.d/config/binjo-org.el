@@ -47,6 +47,8 @@
 
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+
 (setq org-log-done t)
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 (add-hook 'org-mode-hook 'toggle-truncate-lines)
@@ -101,7 +103,22 @@
        (clear-image-cache file)
        (insert-image (create-image file) ))))
 
-;;; org-remember
+;; org-capture
+(setq org-capture-templates
+      '(("c" "Things from clipboard" entry
+         (file+headline "remember.org" "Interesting")
+         "* %T %^{Description}\n %x"
+         :empty-lines 1)
+        ("t" "ToDo" entry
+         (file+headline "todo.org" "Todo")
+         "* TODO %T %^{Summary}"
+         :empty-lines 1)
+        ("e" "Exploit" entry
+         (file+headline "exploits.org" "Exploits")
+         "* %T %^{Description}\n %x"
+         :empty-lines 1)))
+
+;;; TODO substitue org-remember with org-capture
 (org-remember-insinuate)
 (setq org-default-notes-file (concat org-directory "notes.org"))
 (global-set-key (kbd "C-c r") 'org-remember)
