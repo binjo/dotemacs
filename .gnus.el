@@ -1,4 +1,8 @@
 ;; gnus
+(when (eq 0
+        (string-match "No" (gnus-version)))
+    (require 'gnus-load))
+
 (require 'gnushush)
 (setq gnushush-fqdn "unknown")
 
@@ -15,12 +19,12 @@
                                       (nnimap ,binjo-imap-label1
                                               (nnimap-address "127.0.0.1")
                                               (nnimap-server-port 9939)
-                                              (nnimap-authinfo-file "~/.authinfox.gpg")
+                                              (nnimap-stream network)
                                               )
                                       (nnimap ,binjo-imap-label2
                                               (nnimap-address "127.0.0.1")
                                               (nnimap-server-port 9940)
-                                              (nnimap-authinfo-file "~/.authinfox.gpg")
+                                              (nnimap-stream network)
                                               )
                                       (nnml ,binjo-comp-server)
 ))
@@ -117,16 +121,6 @@ PORT smtp service."
 ;; don't quote the signature
 (setq message-cite-function 'message-cite-original-without-signature)
 
-(setq sc-auto-fill-region-p nil
-      sc-citation-delimiter-regexp "[>]+\\|\\(: \\)+"
-      sc-confirm-always-p nil
-      sc-fixup-whitespace-p t
-      sc-nested-citation-p t
-      sc-citation-leader ""
-      sc-reference-tag-string ""
-      sc-preferred-header-style 1
-      )
-
 ;; framework
 (gnus-add-configuration '(article
                           (vertical 1.0
@@ -139,7 +133,6 @@ PORT smtp service."
 (setq gnus-use-adaptive-scoring t
       gnus-save-score t)
 
-(add-hook 'mail-citation-hook 'sc-cite-original)
 (add-hook 'message-sent-hook 'gnus-score-followup-article)
 (add-hook 'message-sent-hook 'gnus-score-followup-thread)
 (add-hook 'gnus-startup-hook
@@ -269,6 +262,7 @@ PORT smtp service."
           (directory-files dir-name))
     n))
 
+;; TODO stick to the latest pop3-movemail, 20101015
 (eval-after-load "pop3"
   '(defun pop3-movemail (&optional crashbox)
      "Transfer contents of a maildrop to the specified CRASHBOX.
