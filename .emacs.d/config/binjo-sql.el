@@ -89,7 +89,7 @@ This is used to set `sql-alternate-buffer-name' within
   "Connect to a predefined SQL connection listed in `sql-connection-alist'"
   (eval `(let ,(cdr (assoc name sql-connection-alist))
            (flet ((sql-get-login (&rest what)))
-             (sql-product-interactive sql-product)))))
+             (sql-product-interactive sql-product t)))))
 
 (defun sql-webfilter ()
   (interactive)
