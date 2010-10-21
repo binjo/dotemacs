@@ -20,6 +20,10 @@
   '(setq gud-pdb-command-name "python -i -m pdb"))
 (global-set-key (kbd "C-c p d") 'pdb)
 
+(eval-after-load 'python
+  '(add-hook 'python-mode-hook (lambda ()
+                                 (setq tab-width 4))))
+
 ;;; Ruby
 ;; Based on http://infolab.stanford.edu/~manku/dotemacs.html
 (autoload 'ruby-mode "ruby-mode"
