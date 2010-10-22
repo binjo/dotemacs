@@ -98,6 +98,7 @@
      (define-key twittering-mode-map "q" 'twittering-suspend)
      (define-key twittering-mode-map "F" 'twittering-follow)
      (define-key twittering-mode-map "K" 'twittering-unfollow)
+     (define-key twittering-mode-map "R" 'twittering-reply-to-user)
 
      (global-set-key (kbd "C-c t t") 'binjo-twittering-jmp)
 
