@@ -36,7 +36,7 @@ and `require' PACKAGE dynamically."
       (mapc (lambda (x)
               (insert (car x))
               (insert "\n")) (reverse unified)))))
-(global-set-key (kbd "C-x r u") 'binjo-unify-line)
+(global-set-key (kbd "C-c r u") 'binjo-unify-line)
 
 (defun binjo-copy-line (&optional arg)
   "copy lines (as many as prefix argument) in the kill ring"
@@ -168,3 +168,8 @@ and `require' PACKAGE dynamically."
      (define-key ioccur-mode-map (kbd "k") 'ioccur-scroll-up)
 
      (add-to-list 'desktop-globals-to-save 'ioccur-history)))
+
+;; undo-tree
+(add-hook 'window-setup-hook '(lambda ()
+                                (require 'undo-tree)
+                                (global-undo-tree-mode)))
