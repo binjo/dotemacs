@@ -170,7 +170,7 @@
   (if (string-match "unescape" string)
       (url-unhex-string string)
     (if (string-match "write(" string)
-        (replace-in-string string "\\\\" "")
+        (replace-regexp-in-string "\\\\" "" string)
       string)))
 
 (add-hook 'eshell-preoutput-filter-functions
