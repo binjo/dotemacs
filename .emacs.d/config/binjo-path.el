@@ -60,7 +60,8 @@
                     "~/.emacs.d/site-lisp/magithub"
                     "~/.emacs.d/site-lisp/org/lisp"
                     "~/.emacs.d/site-lisp/ioccur"
-                    "~/.emacs.d/site-lisp/undo-tree")
+                    "~/.emacs.d/site-lisp/undo-tree"
+                    "~/.emacs.d/site-lisp/emacs-jabber")
               load-path))
 
 (when (file-readable-p "~/.emacs.d/config/mypath")

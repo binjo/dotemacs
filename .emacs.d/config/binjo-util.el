@@ -173,3 +173,9 @@ and `require' PACKAGE dynamically."
 (add-hook 'window-setup-hook '(lambda ()
                                 (require 'undo-tree)
                                 (global-undo-tree-mode)))
+
+;; jabber
+(binjo-m-global-set-key-dynamic 'binjo-jabber
+  ((kbd "C-c j j") . 'jabber)
+  ;; C-x C-j C-l is tedious
+  ((kbd "C-c j x") . 'jabber-activity-switch-to))
