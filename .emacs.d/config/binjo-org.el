@@ -89,10 +89,12 @@
                       ("reading"   . ?r)
                       ("twitter"   . ?t)))
 
+;; Agenda
 (setq org-agenda-custom-commands
       '(("w" tags-todo "work")
         ("d" tags "adobe")
-        ("r" tags "reading")))
+        ("r" tags "reading"))
+      org-agenda-restore-windows-after-quit t)
 
 ;;; org archive
 (setq org-archive-location "~/.emacs.d/org/archive.org::From %s")
@@ -107,15 +109,15 @@
 (setq org-capture-templates
       '(("c" "Things from clipboard" entry
          (file+headline "remember.org" "Interesting")
-         "* %T %^{Description}\n %x"
+         "* %^{Description}\n  :TIMESTAMP: %T\n  %x"
          :empty-lines 1)
         ("t" "ToDo" entry
          (file+headline "todo.org" "Todo")
-         "* TODO %T %^{Summary}"
+         "* TODO %^{Summary}\n  :TIMESTAMP: %T\n"
          :empty-lines 1)
         ("e" "Exploit" entry
          (file+headline "exploits.org" "Exploits")
-         "* %T %^{Description}\n %x"
+         "* %^{Description}\n  :TIMESTAMP: %T\n  %x"
          :empty-lines 1)))
 
 (setq org-default-notes-file (concat org-directory "notes.org"))
