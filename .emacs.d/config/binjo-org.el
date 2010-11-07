@@ -69,14 +69,15 @@
 
 (setq org-completion-use-ido t
       org-outline-path-complete-in-steps nil
-      org-fast-tag-selection-single-key t)
+      org-fast-tag-selection-single-key t
+      org-tags-column -80)
 (setq org-tag-alist '((:startgroup . nil)
                       ("work"      . ?w)
                       ("phish"     . ?p)
                       (:endgroup   . nil)
                       (:startgroup . nil)
                       ("0day"      . ?0)
-                      ("M$"        . ?M)
+                      ("Ms"        . ?M)
                       ("adobe"     . ?a)
                       ("security"  . ?s)
                       (:endgroup   . nil)
