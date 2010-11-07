@@ -74,7 +74,7 @@
                                    ("&bitlbee" . gb2312)))
 (setq erc-autojoin-channels-alist
       '(("freenode.net" "#metasploit" "#corelan")
-        ("0x557.net" "#segfault")
+        ("0x557.net" "#segfault" "#darpa")
         ("oftc.net" "#emacs-cn")))
 
 ;; trim erc nicks
