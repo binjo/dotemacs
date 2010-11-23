@@ -78,6 +78,8 @@
      (setq twittering-update-status-function
            'twittering-update-status-from-pop-up-buffer)
 
+     (setq twittering-new-tweets-count-excluding-me t)
+
      (add-hook 'twittering-mode-hook (lambda ()
                                        (if (string-match "c:" twittering-convert-program 0)
                                            (setq twittering-convert-program
