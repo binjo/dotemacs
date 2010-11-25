@@ -44,6 +44,7 @@
                                 ((kbd "C-c t i") . 'twittering-start)
                                 ((kbd "C-c t o") . 'twittering-stop)
                                 ((kbd "C-c t u") . 'twittering-update-status-interactive)
+                                ((kbd "C-c t d") . 'twittering-direct-message)
                                 ((kbd "C-c t D") . 'twittering-direct-messages-timeline))
 
 ;; utils
