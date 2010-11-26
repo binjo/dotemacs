@@ -106,5 +106,9 @@
 (global-set-key (kbd "C-c f l") 'flush-lines)
 (global-set-key (kbd "C-c e b") 'erase-buffer)
 
+(global-set-key (kbd "C-c r b") '(lambda (b e)
+                                   (interactive "r")
+                                   (base64-decode-region b e)))
+
 (provide 'binjo-bindings)
 ;;; binjo-bindings.el ends here
