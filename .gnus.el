@@ -140,7 +140,7 @@ PORT smtp service."
              (setq gnus-visible-headers
                    (concat "^User-Agent:\\|^Content-Type:\\|"
                            "Content-Transfer-Encoding:\\|"
-                           "^X-mailer:\\|^X-Newsreader:\\|^X-Sender:\\|"
+                           "^X-mailer:\\|^X-Newsreader:\\|^X-Sender:\\|^Archived-At:\\|"
                            gnus-visible-headers))))
 
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)

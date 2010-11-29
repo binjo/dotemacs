@@ -73,7 +73,7 @@
                                    ("#ph4nt0m" . gb2312)
                                    ("&bitlbee" . gb2312)))
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#metasploit" "#corelan")
+      '(("freenode.net" "#metasploit" "#corelan" "##re")
         ("0x557.net" "#segfault" "#darpa")
         ("oftc.net" "#emacs-cn")))
 
