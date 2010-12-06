@@ -14,7 +14,9 @@
       user-mail-address binjo-main-account)
 
 (setq gnus-select-method '(nntp "news.cn99.com"))
-(setq gnus-secondary-select-methods `((nntp "news.gmane.org")
+(setq gnus-secondary-select-methods `((nntp "news.gmane.org"
+                                            (nntp-address "news.gmane.org")
+                                            (nnir-search-engine gmane))
 ;;                                      (nnfolder "")
                                       (nnimap ,binjo-imap-label1
                                               (nnimap-address "127.0.0.1")
@@ -26,7 +28,10 @@
                                               (nnimap-server-port 9940)
                                               (nnimap-stream network)
                                               )
-                                      (nnml ,binjo-comp-server)
+                                      (nnml ,binjo-comp-server
+                                            ;; (nnml-directory "~/Mail")
+                                            ;; (nnir-search-engine find-grep)
+                                            )
 ))
 
 (setq mail-sources
