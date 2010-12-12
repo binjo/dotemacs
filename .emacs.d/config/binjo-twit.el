@@ -74,7 +74,14 @@
            twittering-notify-successful-http-get nil)
 
      (if binjo-at-company-p
-         (twittering-toggle-proxy))
+         (twittering-toggle-proxy)
+       ;; fuck gfw
+       (defadvice start-process (before binjo-ad-proxy-on-appspot activate)
+         "Set proxy for appspot.com"
+         (let ((name (ad-get-arg 0))
+               (call-args (ad-get-args 3)))
+           (if (string= name "*twmode-curl*")
+               (ad-set-args 3 `(,@call-args "-x" "www.google.cn:80"))))))
 
      (setq twittering-update-status-function
            'twittering-update-status-from-pop-up-buffer)
