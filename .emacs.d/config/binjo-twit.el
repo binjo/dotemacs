@@ -40,7 +40,7 @@
 
 
 (binjo-m-global-set-key-dynamic 'twittering-mode
-                                ((kbd "C-c t m") . 'twittering-mode)
+                                ((kbd "C-c t m") . 'twit)
                                 ((kbd "C-c t i") . 'twittering-start)
                                 ((kbd "C-c t o") . 'twittering-stop)
                                 ((kbd "C-c t u") . 'twittering-update-status-interactive)
@@ -61,13 +61,41 @@
      (setq twittering-username twit-user
            twittering-password twit-pass)
 
-     (setq twittering-api-host        binjo-twitter-api-url
-           twittering-api-search-host binjo-twitter-search-url
-           twittering-auth-method     'basic
+     (setq twittering-service-method-table
+           `((twitter (api ,binjo-twitter-api-url)
+                      (search ,binjo-twitter-search-url)
+                      (web ,binjo-twitter-api-url)
+                      (api-prefix "1/")
+                      (search-method "search")
+                      (status-url twittering-get-status-url-twitter)
+                      (search-url twittering-get-search-url-twitter))
+             (sina (api "api.t.sina.com.cn")
+                   (web "t.sina.com.cn")
+                   (oauth-request-token-url-without-scheme "://api.t.sina.com.cn/oauth/request_token")
+                   (oauth-authorization-url-base-without-scheme "://api.t.sina.com.cn/oauth/authorize?oauth_token=")
+                   (oauth-access-token-url-without-scheme "://api.t.sina.com.cn/oauth/access_token")
+                   (oauth-consumer-key ,binjo-private-sina-app-key)
+                   (oauth-consumer-secret ,binjo-private-sina-app-secret)
+                   (status-url twittering-get-status-url-sina)
+                   (search-url twittering-get-search-url-twitter))
+             (statusnet
+              (status-url twittering-get-status-url-statusnet)
+              (search-url twittering-get-search-url-statusnet))))
+
+     (setq twittering-accounts
+           `((twitter (username ,twittering-username)
+                      (password ,twittering-password)
+                      (auth     basic))
+             (sina (username ,binjo-private-sina-username)
+                   (auth oauth))))
+
+     (setq twittering-enabled-services '(twitter sina))
+
+     (setq twittering-oauth-use-ssl   nil
            twittering-use-ssl         nil)
 
      (setq twittering-status-format
-           "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL[       ]{%T}\n"
+           "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FOLD[       ]{%t%T}\n"
            twittering-retweet-format "RT @%s: %t")
 
      (setq twittering-url-show-status nil
