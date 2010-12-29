@@ -58,9 +58,7 @@
 ;; twittering-mode
 (eval-after-load 'twittering-mode
   '(progn
-     (setq twittering-username twit-user
-           twittering-password twit-pass)
-
+     ;; redefine service method table
      (setq twittering-service-method-table
            `((twitter (api ,binjo-twitter-api-url)
                       (search ,binjo-twitter-search-url)
@@ -83,8 +81,8 @@
               (search-url twittering-get-search-url-statusnet))))
 
      (setq twittering-accounts
-           `((twitter (username ,twittering-username)
-                      (password ,twittering-password)
+           `((twitter (username ,twit-user)
+                      (password ,twit-pass)
                       (auth     basic))
              (sina (username ,binjo-private-sina-username)
                    (auth oauth))))
@@ -116,14 +114,19 @@
 
      (setq twittering-new-tweets-count-excluding-me t)
 
+     (defadvice twittering-initialize-global-variables-if-necessary
+       (before binjo-ad-set-convert-var activate)
+       "Set proper convert before calling `twittering-initialize-global-variables-if-necessary',
+enable icon mode and unread status notifier."
+       (if (string-match "c:" twittering-convert-program 0)
+           (setq twittering-convert-program
+                 (expand-file-name
+                  "convert.exe"
+                  (expand-file-name
+                   "w32"
+                   (file-name-directory (symbol-file 'twit)))))))
+
      (add-hook 'twittering-mode-hook (lambda ()
-                                       (if (string-match "c:" twittering-convert-program 0)
-                                           (setq twittering-convert-program
-                                                 (expand-file-name
-                                                  "convert.exe"
-                                                  (expand-file-name
-                                                   "w32"
-                                                   (file-name-directory (symbol-file 'twit))))))
                                        (twittering-icon-mode 1)
                                        (twittering-enable-unread-status-notifier)))
 
