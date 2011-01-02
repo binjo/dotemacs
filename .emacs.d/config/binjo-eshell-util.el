@@ -122,7 +122,7 @@
   "Change current directory to `today', create it if does not exist."
   (interactive)
   (let ((cur_day (format-time-string "%m%d"))
-        (main_dir "d:/xxx/2010/"))
+        (main_dir binjo-private-work-dir))
     (setq target_dir (concat main_dir cur_day))
     (condition-case nil
         (make-directory target_dir)
