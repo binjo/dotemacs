@@ -103,10 +103,11 @@
          (twittering-toggle-proxy)
        ;; fuck gfw
        (defadvice start-process (before binjo-ad-proxy-on-appspot activate)
-         "Set proxy for appspot.com"
-         (let ((name (ad-get-arg 0))
-               (call-args (ad-get-args 3)))
-           (if (string= name "*twmode-curl*")
+         "Set proxy for appspot.com, uri in call-args should be the last one."
+         (let* ((name (ad-get-arg 0))
+                (call-args (ad-get-args 3))
+                (appspot-p (string-match binjo-twitter-host-url (car (reverse call-args)))))
+           (when appspot-p
                (ad-set-args 3 `(,@call-args "-x" "www.google.cn:80"))))))
 
      (setq twittering-update-status-function
@@ -114,17 +115,19 @@
 
      (setq twittering-new-tweets-count-excluding-me t)
 
-     (defadvice twittering-initialize-global-variables-if-necessary
-       (before binjo-ad-set-convert-var activate)
-       "Set proper convert before calling `twittering-initialize-global-variables-if-necessary',
-enable icon mode and unread status notifier."
-       (if (string-match "c:" twittering-convert-program 0)
-           (setq twittering-convert-program
-                 (expand-file-name
-                  "convert.exe"
-                  (expand-file-name
-                   "w32"
-                   (file-name-directory (symbol-file 'twit)))))))
+     (setq twittering-convert-fix-size nil
+           twittering-use-convert nil)
+;;      (defadvice twittering-initialize-global-variables-if-necessary
+;;        (before binjo-ad-set-convert-var activate)
+;;        "Set proper convert before calling `twittering-initialize-global-variables-if-necessary',
+;; enable icon mode and unread status notifier."
+;;        (if (string-match "c:" twittering-convert-program 0)
+;;            (setq twittering-convert-program
+;;                  (expand-file-name
+;;                   "convert.exe"
+;;                   (expand-file-name
+;;                    "w32"
+;;                    (file-name-directory (symbol-file 'twit)))))))
 
      (add-hook 'twittering-mode-hook (lambda ()
                                        (twittering-icon-mode 1)

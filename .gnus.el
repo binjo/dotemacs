@@ -13,7 +13,7 @@
 (setq user-full-name "Binjo"
       user-mail-address binjo-main-account)
 
-(setq gnus-select-method '(nntp "news.cn99.com"))
+(setq gnus-select-method '(nntp "nntp.aioe.org"))
 (setq gnus-secondary-select-methods `((nntp "news.gmane.org"
                                             (nntp-address "news.gmane.org")
                                             (nnir-search-engine gmane))
