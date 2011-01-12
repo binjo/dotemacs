@@ -77,7 +77,8 @@ switch back to the last non-twittering-mode buffer visited."
               (buffer-live-p binjo-twittering-last-non-twmode-buffer))
          (switch-to-buffer binjo-twittering-last-non-twmode-buffer)
          (set-window-configuration binjo-twittering-last-window-config)
-         (setq binjo-twittering-last-window-config nil))))
+         (setq binjo-twittering-last-window-config nil
+               binjo-twittering-last-non-twmode-buffer nil))))
 
 ;; twittering-mode
 (eval-after-load 'twittering-mode
