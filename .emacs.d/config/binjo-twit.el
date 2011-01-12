@@ -67,12 +67,11 @@ switch back to the last non-twittering-mode buffer visited."
   (interactive)
   (cond (twittering-unread-status-info
          (unless (eq major-mode 'twittering-mode)
-           (setq binjo-twittering-last-non-twmode-buffer (current-buffer)))
-         ;; FIXME
-         (let ((buf (caar twittering-unread-status-info)))
+           (setq binjo-twittering-last-non-twmode-buffer (current-buffer))
            (setq binjo-twittering-last-window-config
-                 (current-window-configuration))
-           (switch-to-buffer buf)))
+                 (current-window-configuration)))
+         ;; FIXME
+         (switch-to-buffer (caar twittering-unread-status-info)))
         ((and binjo-twittering-last-non-twmode-buffer
               (buffer-live-p binjo-twittering-last-non-twmode-buffer)
               (not (eq binjo-twittering-last-non-twmode-buffer (current-buffer))))
