@@ -55,6 +55,30 @@
                               (mapcar 'buffer-name (twittering-get-buffer-list)))))
   (switch-to-buffer buf))
 
+(defvar binjo-twittering-last-non-twmode-buffer nil
+  "Last non `twittering-mode' buffer.")
+
+(defvar binjo-twittering-last-window-config nil
+  "Last window configuration before switch buffer.")
+
+(defun binjo-twittering-track-switch-buffer ()
+  "Switch to the next activate `twittering-mode' buffer, or if there are no active buffers,
+switch back to the last non-twittering-mode buffer visited."
+  (interactive)
+  (cond (twittering-unread-status-info
+         (unless (eq major-mode 'twittering-mode)
+           (setq binjo-twittering-last-non-twmode-buffer (current-buffer)))
+         ;; FIXME
+         (let ((buf (caar twittering-unread-status-info)))
+           (setq binjo-twittering-last-window-config
+                 (current-window-configuration))
+           (switch-to-buffer buf)))
+        ((and binjo-twittering-last-non-twmode-buffer
+              (buffer-live-p binjo-twittering-last-non-twmode-buffer))
+         (switch-to-buffer binjo-twittering-last-non-twmode-buffer)
+         (set-window-configuration binjo-twittering-last-window-config)
+         (setq binjo-twittering-last-window-config nil))))
+
 ;; twittering-mode
 (eval-after-load 'twittering-mode
   '(progn
@@ -145,6 +169,7 @@
      (define-key twittering-mode-map "R" 'twittering-reply-to-user)
 
      (global-set-key (kbd "C-c t t") 'binjo-twittering-jmp)
+     (global-set-key (kbd "C-c t j") 'binjo-twittering-track-switch-buffer)
 
      ))
 
