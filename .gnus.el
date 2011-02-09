@@ -10,6 +10,11 @@
   '(defun smtpmail-fqdn ()
      "unknown"))
 
+;; stop annoying header update of article
+(eval-after-load "gnus-art"
+  (progn
+    (setq gnus-article-update-date-headers nil)))
+
 (setq user-full-name "Binjo"
       user-mail-address binjo-main-account)
 
