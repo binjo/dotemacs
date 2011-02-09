@@ -112,9 +112,10 @@
 
 ;; stop calling `vc-working-revision' and `vc-state' to slow down the startup.
 (eval-after-load 'vc-hooks
-  '(remove-hook 'find-file-hook 'vc-find-file-hook))
+  (progn
+    (setq vc-handled-backends nil)))
 (add-hook 'window-setup-hook '(lambda ()
-                                (add-hook 'find-file-hook 'vc-find-file-hook)))
+                                (setq vc-handled-backends '(SVN Git Hg))))
 
 ;; session
 (add-hook 'after-init-hook '(lambda ()
