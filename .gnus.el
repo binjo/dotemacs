@@ -185,6 +185,8 @@ PORT smtp service."
             (| ("from" ,(regexp-opt binjo-private-not-spam-group)
                 "mail.avlab")
                "mail.spam"))
+        (to ,binjo-private-psm-group
+            "mail.psm")
         "mail.misc"))
 
 (setq nnmail-split-methods 'nnmail-split-fancy)
