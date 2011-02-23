@@ -217,7 +217,9 @@ This is because some levels' updating takes too long time."
      (grep-apply-setting 'grep-command "grep -r -nH -i -e ")
      (grep-apply-setting 'grep-find-command
                          (cons (concat
-                                (shell-quote-argument "c:/Program Files/Git/bin/find.exe")
+                                (shell-quote-argument
+                                 (expand-file-name "find.exe"
+                                                   (file-name-directory (executable-find "git"))))
                                 " . -type f -exec grep -r -nH -i -e  {} NUL \";\"") 71))
      (grep-apply-setting 'grep-use-null-device nil)))
 

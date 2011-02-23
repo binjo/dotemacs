@@ -113,6 +113,7 @@ switch back to the last non-twittering-mode buffer visited."
                    (auth oauth))))
 
      (setq twittering-enabled-services '(twitter sina))
+     (setq twittering-initial-timeline-spec-string '(":home@twitter" ":home@sina"))
 
      (setq twittering-oauth-use-ssl   nil
            twittering-use-ssl         nil)
