@@ -175,4 +175,12 @@
 
 (add-hook 'eshell-preoutput-filter-functions
           'eshell/url-hex-filter)
+
+(defun eshell/.md5 (file-name)
+  "Calculate md5 of specified file."
+  (if (file-exists-p file-name)
+    (let ((coding-system-for-read 'raw-text-unix))
+      (with-temp-buffer
+        (insert-file-contents-literally file-name)
+        (md5 (current-buffer))))))
 ;;; binjo-eshell-util.el ends here
