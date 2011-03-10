@@ -179,8 +179,11 @@
 (defun eshell/.md5 (file-name)
   "Calculate md5 of specified file."
   (if (file-exists-p file-name)
-    (let ((coding-system-for-read 'raw-text-unix))
+    (let ((coding-system-for-read 'raw-text-unix)
+          the-md5)
       (with-temp-buffer
         (insert-file-contents-literally file-name)
-        (md5 (current-buffer))))))
+        (setq the-md5 (md5 (current-buffer)))
+        (kill-new the-md5 t)
+        the-md5))))
 ;;; binjo-eshell-util.el ends here
