@@ -1,11 +1,13 @@
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(ansi-color-for-comint-mode nil)
  '(canlock-password "31f72e77a9331e61ce98a230d1fbff79785c568a")
  '(column-number-mode t)
+ '(custom-enabled-themes (quote (jschaf)))
+ '(custom-safe-themes (quote ("9bfadc3257f16106c57a3511e85d26db32555528" default)))
  '(default-tab-width 4 t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -19,12 +21,13 @@
  '(tab-stop-list nil)
  '(tool-bar-mode nil))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(erc-timestamp-face ((t (:foreground "brown" :weight bold))))
- '(highlight-changes ((((min-colors 88) (class color)) (:background "cornsilk1")))))
+ '(highlight-changes ((((min-colors 88) (class color)) (:background "cornsilk1"))))
+ )
 
 ;; Turn off the annoying default backup behaviour
 (if (file-directory-p "~/.emacs.d/backup")
@@ -105,10 +108,10 @@
                                 ((kbd "M-.") . 'etags-select-find-tag))
 
 ;; Color theme related
-(add-hook 'window-setup-hook '(lambda ()
-                                (require 'color-theme)
-                                (color-theme-initialize)
-                                (color-theme-bharadwaj)))
+;; (add-hook 'window-setup-hook '(lambda ()
+;;                                 (require 'color-theme)
+;;                                 (color-theme-initialize)
+;;                                 (color-theme-bharadwaj)))
 
 ;; stop calling `vc-working-revision' and `vc-state' to slow down the startup.
 (eval-after-load 'vc-hooks
