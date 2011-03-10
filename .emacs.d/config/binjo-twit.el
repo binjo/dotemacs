@@ -115,8 +115,12 @@ switch back to the last non-twittering-mode buffer visited."
      (setq twittering-enabled-services '(twitter sina))
      (setq twittering-initial-timeline-spec-string '(":home@twitter" ":home@sina"))
 
-     (setq twittering-oauth-use-ssl   nil
-           twittering-use-ssl         nil)
+     (setq twittering-oauth-use-ssl       nil
+           twittering-use-ssl             nil
+           twittering-use-master-password t)
+
+     (set-face-background twittering-zebra-1-face "gray24")
+     (set-face-background twittering-zebra-2-face "gray22")
 
      (setq twittering-status-format
            "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FOLD[       ]{%t %T}}\n"

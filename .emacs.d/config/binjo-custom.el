@@ -26,7 +26,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(erc-timestamp-face ((t (:foreground "brown" :weight bold))))
- '(highlight-changes ((((min-colors 88) (class color)) (:background "cornsilk1"))))
+ '(highlight-changes ((((min-colors 88) (class color)) (:background "purple1"))))
  )
 
 ;; Turn off the annoying default backup behaviour
