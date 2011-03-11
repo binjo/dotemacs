@@ -81,6 +81,7 @@
                 (unless (string= (substring x 0 2) "00")
                   (setq a (concat a (format "%c" (string-to-number (substring x 0 2) 16)))))))
           a_url)
+    (kill-new a t)
     a))
 
 (defun eshell/unhex (hex-string)
@@ -92,6 +93,7 @@
     (while (< i len)
       (setq a (concat a (format "%c" (string-to-number (substring hex-string i (+ i 2)) 16))))
       (setq i (+ i 2)))
+    (kill-new a t)
     a))
 
 (defun eshell/hex (string)
@@ -103,6 +105,7 @@
             (setq hexlified (concat hexlified
                                     (format "%02x" x))))
           a_s)
+    (kill-new hexlified t)
     hexlified))
 
 (defun eshell/h2b (file-name hex)
