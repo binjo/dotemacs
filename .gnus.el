@@ -15,12 +15,6 @@
   (progn
     (setq gnus-article-update-date-headers nil)))
 
-;; stop annoying gpg and auth-source-debug thing...
-(eval-after-load "auth-source"
-  (progn
-    (setq auth-sources '("~/.authinfo")
-          auth-source-debug nil)))
-
 (setq user-full-name "Binjo"
       user-mail-address binjo-main-account)
 
