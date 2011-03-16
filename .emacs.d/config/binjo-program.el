@@ -94,44 +94,6 @@
 (eval-after-load 'asp-mode
   '(add-to-list 'auto-mode-alist '("\\.aspx?" . asp-mode)))
 
-(ignore-errors
-  (progn
-
-(require 'mmm-auto)
-(require 'mmm-sample)
-(setq mmm-global-mode 'maybe)
-(setq mmm-classes-alist
-      (append '((text-html :submode html-mode
-                           :front "<html>"
-                           :front-offset (beginning-of-line 0)
-                           :back "</html>"
-                           :back-offset (end-of-line 1)
-                           :face mmm-code-submode-face)
-                )
-              mmm-classes-alist))
-
-;; (setq mmm-mode-ext-classes-alist
-;;       '((message-mode nil text-html)
-;;         (gnus-article-edit-mode nil text-html)
-;;         (text-mode nil text-html)
-;;         ;; (scheme-mode nil c-in-scheme)
-;;         ))
-
-;; (setq mmm-global-classes
-;;       (append '(text-html)
-;;               mmm-global-classes))
-
-(mmm-add-to-major-mode-preferences 'javascript 'js2-mode)
-
-(defun xwl-mmm-refresh ()
-  "Re-apply mmm-mode when buffer contents have been modified."
-  (when (and mmm-mode (buffer-modified-p))
-    (mmm-apply-all)))
-
-(add-hook 'post-command-hook 'xwl-mmm-refresh)
-
-))
-
 ;; haskell
 (load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file.el")
 (eval-after-load 'haskell-mode

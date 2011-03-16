@@ -37,3 +37,6 @@
 [submodule ".emacs.d/site-lisp/emms"]
 	path = .emacs.d/site-lisp/emms
 	url = git://git.savannah.gnu.org/emms.git
+[submodule ".emacs.d/site-lisp/ejacs"]
+	path = .emacs.d/site-lisp/ejacs
+	url = git://github.com/emacsmirror/ejacs.git

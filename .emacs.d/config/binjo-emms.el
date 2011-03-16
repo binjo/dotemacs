@@ -38,7 +38,7 @@
   (require 'cl))
 
 (require 'emms-setup)
-(emms-devel)
+(emms-standard)
 
 
 (setq emms-player-mpg321-command-name "mpg123"
