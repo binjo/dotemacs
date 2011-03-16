@@ -1,6 +1,39 @@
-[submodule ".emacs.d/site-lisp/twittering-mode"]
-	path = .emacs.d/site-lisp/twittering-mode
-	url = http://github.com/xwl/twittering-mode.git
 [submodule ".emacs.d/site-lisp/haskell-mode"]
 	path = .emacs.d/site-lisp/haskell-mode
 	url = git://github.com/pheaver/haskell-mode.git
+[submodule ".emacs.d/site-lisp/twittering-mode"]
+	path = .emacs.d/site-lisp/twittering-mode
+	url = git://github.com/xwl/twittering-mode.git
+[submodule ".emacs.d/site-lisp/magit"]
+	path = .emacs.d/site-lisp/magit
+	url = git://github.com/philjackson/magit.git
+[submodule ".emacs.d/site-lisp/undo-tree"]
+	path = .emacs.d/site-lisp/undo-tree
+	url = http://www.dr-qubit.org/git/undo-tree.git
+[submodule ".emacs.d/site-lisp/ioccur"]
+	path = .emacs.d/site-lisp/ioccur
+	url = git://github.com/emacsmirror/ioccur.git
+[submodule ".emacs.d/site-lisp/emacs-jabber"]
+	path = .emacs.d/site-lisp/emacs-jabber
+	url = git://github.com/demyanrogozhin/emacs-jabber.git
+[submodule ".emacs.d/site-lisp/yasnippet"]
+	path = .emacs.d/site-lisp/yasnippet
+	url = git://github.com/emacsmirror/yasnippet.git
+[submodule ".emacs.d/site-lisp/ruby-mode"]
+	path = .emacs.d/site-lisp/ruby-mode
+	url = git://github.com/jwiegley/ruby-mode.git
+[submodule ".emacs.d/site-lisp/smex"]
+	path = .emacs.d/site-lisp/smex
+	url = git://github.com/nonsequitur/smex.git
+[submodule ".emacs.d/site-lisp/magithub"]
+	path = .emacs.d/site-lisp/magithub
+	url = git://github.com/nex3/magithub.git
+[submodule ".emacs.d/site-lisp/douban"]
+	path = .emacs.d/site-lisp/douban
+	url = git@github.com:binjo/douban.git
+[submodule ".emacs.d/site-lisp/emacs_chrome"]
+	path = .emacs.d/site-lisp/emacs_chrome
+	url = git://github.com/stsquad/emacs_chrome.git
+[submodule ".emacs.d/site-lisp/emms"]
+	path = .emacs.d/site-lisp/emms
+	url = git://git.savannah.gnu.org/emms.git
