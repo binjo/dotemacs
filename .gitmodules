@@ -1,3 +1,6 @@
 [submodule ".emacs.d/site-lisp/twittering-mode"]
 	path = .emacs.d/site-lisp/twittering-mode
 	url = http://github.com/xwl/twittering-mode.git
+[submodule ".emacs.d/site-lisp/haskell-mode"]
+	path = .emacs.d/site-lisp/haskell-mode
+	url = git://github.com/pheaver/haskell-mode.git
