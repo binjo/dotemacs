@@ -1,3 +1,3 @@
-[submodule "\\repos\\emacs\\.emacs.d\\site-lisp\\twittering-mode"]
-	path = \\repos\\emacs\\.emacs.d\\site-lisp\\twittering-mode
-	url = d:\\repos\\emacs\\.emacs.d\\site-lisp\\twittering-mode
+[submodule ".emacs.d/site-lisp/twittering-mode"]
+	path = .emacs.d/site-lisp/twittering-mode
+	url = http://github.com/xwl/twittering-mode.git
