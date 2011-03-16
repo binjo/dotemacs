@@ -42,7 +42,6 @@
 (setq load-path
       (append (list "~/.emacs.d/site-lisp"
                     "~/.emacs.d/config"
-                    "~/.emacs.d/site-lisp/color-theme-6.6.0"
                     "~/.emacs.d/site-lisp/wubi"
                     "~/.emacs.d/site-lisp/template/lisp"
                     "~/.emacs.d/site-lisp/ruby-mode"
@@ -60,7 +59,9 @@
                     "~/.emacs.d/site-lisp/org/lisp"
                     "~/.emacs.d/site-lisp/ioccur"
                     "~/.emacs.d/site-lisp/undo-tree"
-                    "~/.emacs.d/site-lisp/emacs-jabber")
+                    "~/.emacs.d/site-lisp/emacs-jabber"
+                    "~/.emacs.d/site-lisp/google-weather-el"
+                    )
               load-path))
 
 (when (file-readable-p "~/.emacs.d/config/mypath")
