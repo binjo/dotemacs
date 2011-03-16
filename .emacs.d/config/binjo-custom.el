@@ -43,31 +43,32 @@
        (prefer-coding-system 'utf-8-emacs)))
 
 ;; font set
-(setq w32-charset-info-alist
-    (cons '("gbk" w32-charset-gb2312 . 936) w32-charset-info-alist))
+(when (eq system-type 'windows-nt)
+  (setq w32-charset-info-alist
+        (cons '("gbk" w32-charset-gb2312 . 936) w32-charset-info-alist))
 
-(setq default-frame-alist
-      (append
-       '((font . "fontset-gbk")) default-frame-alist))
+  (setq default-frame-alist
+        (append
+         '((font . "fontset-gbk")) default-frame-alist))
 
-(create-fontset-from-fontset-spec
-  "-outline-新宋体-normal-r-normal-normal-16-*-96-96-c-*-fontset-gbk")
-(set-fontset-font
- "fontset-default" nil
- "-outline-新宋体-normal-r-normal-*-16-*-96-96-c-*-iso10646-1" nil 'prepend)
-(set-fontset-font
- "fontset-gbk" 'kana
- "-outline-新宋体-normal-r-normal-*-18-*-96-96-c-*-iso10646-1" nil 'prepend)
-(set-fontset-font
- "fontset-gbk" 'han
- "-outline-新宋体-normal-r-normal-*-16-*-96-96-c-*-iso10646-1" nil 'prepend)
-(set-fontset-font
- "fontset-gbk" 'cjk-misc
- "-outline-新宋体-normal-r-normal-*-16-*-96-96-c-*-iso10646-1" nil 'prepend)
-(set-fontset-font
- "fontset-gbk" 'symbol
- "-outline-新宋体-normal-r-normal-*-16-*-96-96-c-*-iso10646-1" nil 'prepend)
-(set-frame-font "fontset-gbk")
+  (create-fontset-from-fontset-spec
+   "-outline-新宋体-normal-r-normal-normal-16-*-96-96-c-*-fontset-gbk")
+  (set-fontset-font
+   "fontset-default" nil
+   "-outline-新宋体-normal-r-normal-*-16-*-96-96-c-*-iso10646-1" nil 'prepend)
+  (set-fontset-font
+   "fontset-gbk" 'kana
+   "-outline-新宋体-normal-r-normal-*-18-*-96-96-c-*-iso10646-1" nil 'prepend)
+  (set-fontset-font
+   "fontset-gbk" 'han
+   "-outline-新宋体-normal-r-normal-*-16-*-96-96-c-*-iso10646-1" nil 'prepend)
+  (set-fontset-font
+   "fontset-gbk" 'cjk-misc
+   "-outline-新宋体-normal-r-normal-*-16-*-96-96-c-*-iso10646-1" nil 'prepend)
+  (set-fontset-font
+   "fontset-gbk" 'symbol
+   "-outline-新宋体-normal-r-normal-*-16-*-96-96-c-*-iso10646-1" nil 'prepend)
+  (set-frame-font "fontset-gbk"))
 
 (setq scroll-margin 3
       scroll-conservatively 10000)
