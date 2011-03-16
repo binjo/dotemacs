@@ -43,3 +43,6 @@
 [submodule ".emacs.d/site-lisp/google-weather-el"]
 	path = .emacs.d/site-lisp/google-weather-el
 	url = git://git.naquadah.org/google-weather-el.git
+[submodule ".emacs.d/site-lisp/template"]
+	path = .emacs.d/site-lisp/template
+	url = git://github.com/binjo/template.git
