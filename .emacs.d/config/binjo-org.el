@@ -126,6 +126,10 @@
 ;; org-google-weather
 (setq org-google-weather-icon-directory
       "~/w32/GNOME_Weather_Icons_by_DarKobra/48x48/status")
+
+;; fuck gfw...
+(setq google-weather-use-https nil)
+
 
 (provide 'binjo-org)
 ;;; binjo-org.el ends here
