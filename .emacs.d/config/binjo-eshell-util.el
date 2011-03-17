@@ -121,6 +121,21 @@
             a_h))
     "[*] Done...Check it out..."))
 
+(defun eshell/a2b (file-name asciis)
+  "Convert encoded ASCIIS to binary, save as FILE-NAME."
+  (interactive)
+  (let ((len (length asciis))
+        (coding-system-for-write 'raw-text-unix)
+        (i 0))
+    (if (eq 0 (% len 2))
+        (progn
+         (with-temp-file file-name
+           (while (< i len)
+             (insert-byte (string-to-number (substring asciis i (+ i 2)) 16) 1)
+             (setq i (+ i 2))))
+         "[+] Done, check it out...")
+    "[-] shit, length even? ...")))
+
 (defun eshell/td ()
   "Change current directory to `today', create it if does not exist."
   (interactive)
