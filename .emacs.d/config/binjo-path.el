@@ -61,6 +61,7 @@
                     "~/.emacs.d/site-lisp/undo-tree"
                     "~/.emacs.d/site-lisp/emacs-jabber"
                     "~/.emacs.d/site-lisp/google-weather-el"
+                    "~/.emacs.d/site-lisp/php-mode"
                     )
               load-path))
 
