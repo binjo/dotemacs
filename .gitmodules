@@ -13,9 +13,6 @@
 [submodule ".emacs.d/site-lisp/ioccur"]
 	path = .emacs.d/site-lisp/ioccur
 	url = git://github.com/emacsmirror/ioccur.git
-[submodule ".emacs.d/site-lisp/emacs-jabber"]
-	path = .emacs.d/site-lisp/emacs-jabber
-	url = git://github.com/demyanrogozhin/emacs-jabber.git
 [submodule ".emacs.d/site-lisp/yasnippet"]
 	path = .emacs.d/site-lisp/yasnippet
 	url = git://github.com/emacsmirror/yasnippet.git
