@@ -43,3 +43,6 @@
 [submodule ".emacs.d/site-lisp/template"]
 	path = .emacs.d/site-lisp/template
 	url = git://github.com/binjo/template.git
+[submodule ".emacs.d/site-lisp/php-mode"]
+	path = .emacs.d/site-lisp/php-mode
+	url = git://github.com/ieure/php-mode-el.git
