@@ -41,6 +41,7 @@
 
 (require 'org-install)
 (require 'org-google-weather)
+(require 'org-contacts)
 
 (defvar binjo-org-files
   '("works.org" "todo.org" "exploits.org" "remember.org" "archive.org"))
@@ -119,7 +120,10 @@
         ("e" "Exploit" entry
          (file+headline "exploits.org" "Exploits")
          "* %^{Description}\n  :TIMESTAMP: %T\n  %x"
-         :empty-lines 1)))
+         :empty-lines 1)
+        ("C" "Contacts" entry
+         (file+headline "contacts.org" "Contacts")
+         "* %(org-contacts-template-name)\n  :PROPERTIES:\n  :EMAIL: %(org-contacts-template-email)\n  :END:")))
 
 (setq org-default-notes-file (concat org-directory "notes.org"))
 
@@ -129,6 +133,9 @@
 
 ;; fuck gfw...
 (setq google-weather-use-https nil)
+
+;; org contacts
+(setq org-contacts-files `(,(concat org-directory "contacts.org")))
 
 
 (provide 'binjo-org)

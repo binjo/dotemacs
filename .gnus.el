@@ -166,7 +166,7 @@ PORT smtp service."
         (gnus-dormant-mark (from 5))))
 
 (setq  gnus-score-find-score-files-function
-       '(gnus-score-find-hierarchical gnus-score-find-bnews bbdb/gnus-score)
+       '(gnus-score-find-hierarchical gnus-score-find-bnews)
        gnus-use-adaptive-scoring t)
 
 ;; split
@@ -236,22 +236,6 @@ PORT smtp service."
 ;; - `B c': copy article to some group
 ;; - `*': put it in the cache, and use `Y c' to show it later
 (setq gnus-use-cache 'passive)
-
-;; bbdb
-(require 'bbdb)
-(bbdb-initialize 'gnus 'message)
-
-(setq bbdb-north-american-phone-numbers-p nil)
-
-(setq bbdb-user-mail-names
-      (regexp-opt `(,binjo-main-account
-                    ,binjo-fake-account
-                    ,binjo-comp-account)))
-(setq bbdb-complete-name-allow-cycling t         ;; cycle
-      bbdb-use-pop-up nil                        ;; No popup-buffers
-      bbdb-dwim-net-address-allow-redundancy t)  ;; include name
-(eval-after-load "message"
-  '(define-key message-mode-map (kbd "<backtab>" ) 'bbdb-complete-name))
 
 ;;; fuck pop3-movemail
 ;;; FIXME or get the latest index from "~/Mail/active"  ??
