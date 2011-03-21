@@ -32,7 +32,7 @@
 ;; Turn off the annoying default backup behaviour
 (if (file-directory-p "~/.emacs.d/backup")
     (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
-    (message "Directory does not exist: ~/.emacs.d/backup"))
+  (message "Directory does not exist: ~/.emacs.d/backup"))
 
 ;; ,----
 ;; | coding system, xwl
