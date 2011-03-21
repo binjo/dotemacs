@@ -45,7 +45,7 @@
 ;; font set
 (when (eq system-type 'windows-nt)
   (require 'fontset-win)
-  (huangq-fontset-consolas0 14))
+  (huangq-fontset-consolas0 12))
 
 (setq scroll-margin 3
       scroll-conservatively 10000)
