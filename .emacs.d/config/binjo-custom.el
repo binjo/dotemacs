@@ -44,8 +44,32 @@
 
 ;; font set
 (when (eq system-type 'windows-nt)
-  (require 'fontset-win)
-  (huangq-fontset-consolas0 12))
+  ;; copy from xwl's xwl-window.el
+  (let* ((all-fonts
+          `(;; (mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
+            ;; (ns  . ("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN"))
+            (w32 . ("Consolas-10" "ÐÂËÎÌå" "NSimSun"
+                    ;; "ºº¶¦·±ÖÐ±ä" "ºº¶¦·±ÖÐ±ä" "ºº¶¦·±ÖÐ±ä"
+                    ;; "Î¢ÈíÑÅºÚ" "Î¢ÈíÑÅºÚ"
+                    ))
+            ;; (x   . ,(if (string= system-name "debian..xwl")
+            ;;             '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")
+            ;;           '("DejaVu LGC Sans Mono-13" "SimSun" "SimSun")))
+            ))
+         (fonts (cdr (assoc window-system all-fonts)))
+         (default-font (nth 0 fonts))
+         (cn-font (nth 1 fonts))
+         (jp-font (nth 2 fonts))
+         (charset-fonts `((chinese-gb2312    . ,cn-font)
+                          (chinese-gbk       . ,cn-font)
+                          (gb18030           . ,cn-font)
+                          )))
+    (set-default-font default-font)       ; this will decide font size.
+    (mapc (lambda (cf)
+            (set-fontset-font (frame-parameter nil 'font)
+                              (car cf)
+                              (font-spec :family (cdr cf) :size 14)))
+          charset-fonts)))
 
 (setq scroll-margin 3
       scroll-conservatively 10000)
