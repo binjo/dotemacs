@@ -101,6 +101,24 @@ switch back to the last non-twittering-mode buffer visited."
                    (oauth-consumer-secret ,binjo-private-sina-app-secret)
                    (status-url twittering-get-status-url-sina)
                    (search-url twittering-get-search-url-twitter))
+
+             (douban (api "api.douban.com")
+                     (web "www.douban.com")
+
+                     ,@(mapcar
+                        (lambda (i)
+                          `(,(car i) ,(concat "://www.douban.com/service/auth/" (cadr i))))
+                        '((oauth-request-token-url-without-scheme "request_token")
+                          (oauth-authorization-url-base-without-scheme "authorize?oauth_token=")
+                          (oauth-access-token-url-without-scheme "access_token")))
+
+                     (oauth-consumer-key ,douban-api-public-key)
+                     (oauth-consumer-secret ,douban-api-secret-key)
+
+                     (status-url twittering-get-status-url-douban)
+                     (search-url twittering-get-search-url-twitter))
+
+
              (statusnet
               (status-url twittering-get-status-url-statusnet)
               (search-url twittering-get-search-url-statusnet))))
@@ -110,10 +128,12 @@ switch back to the last non-twittering-mode buffer visited."
                       (password ,twit-pass)
                       (auth     basic))
              (sina (username ,binjo-private-sina-username)
-                   (auth oauth))))
+                   (auth oauth))
+             (douban (username ,twit-user)
+                     (auth oauth))))
 
-     (setq twittering-enabled-services '(twitter sina))
-     (setq twittering-initial-timeline-spec-string '(":home@twitter" ":home@sina"))
+     (setq twittering-enabled-services '(twitter sina douban))
+     (setq twittering-initial-timeline-spec-string '(":home@twitter" ":home@sina" ":home@douban"))
 
      (setq twittering-oauth-use-ssl       nil
            twittering-use-ssl             nil
