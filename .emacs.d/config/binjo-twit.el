@@ -143,7 +143,7 @@ switch back to the last non-twittering-mode buffer visited."
      (set-face-background twittering-zebra-2-face "gray22")
 
      (setq twittering-status-format
-           "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FOLD[       ]{%t }}\n"
+           "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FOLD[       ]{%t} %FOLD[       ]{%T}}\n"
            twittering-retweet-format "RT @%s: %t")
 
      (setq twittering-url-show-status nil
@@ -165,19 +165,17 @@ switch back to the last non-twittering-mode buffer visited."
 
      (setq twittering-new-tweets-count-excluding-me t)
 
-     (setq twittering-convert-fix-size nil
-           twittering-use-convert nil)
-;;      (defadvice twittering-initialize-global-variables-if-necessary
-;;        (before binjo-ad-set-convert-var activate)
-;;        "Set proper convert before calling `twittering-initialize-global-variables-if-necessary',
-;; enable icon mode and unread status notifier."
-;;        (if (string-match "c:" twittering-convert-program 0)
-;;            (setq twittering-convert-program
-;;                  (expand-file-name
-;;                   "convert.exe"
-;;                   (expand-file-name
-;;                    "w32"
-;;                    (file-name-directory (symbol-file 'twit)))))))
+     (defadvice twittering-initialize-global-variables-if-necessary
+       (before binjo-ad-set-convert-var activate)
+       "Set proper convert before calling `twittering-initialize-global-variables-if-necessary',
+enable icon mode and unread status notifier."
+       (if (string-match "c:" twittering-convert-program 0)
+           (setq twittering-convert-program
+                 (expand-file-name
+                  "convert.exe"
+                  (expand-file-name
+                   "w32"
+                   (file-name-directory (symbol-file 'twit)))))))
 
      (add-hook 'twittering-mode-hook (lambda ()
                                        (twittering-icon-mode 1)
