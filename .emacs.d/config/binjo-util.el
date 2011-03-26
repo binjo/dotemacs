@@ -105,7 +105,11 @@ and `require' PACKAGE dynamically."
 (add-hook 'window-setup-hook '(lambda ()
                                 (require 'yasnippet)
                                 (yas/initialize)
-                                (yas/load-directory "~/.emacs.d/snippets")))
+                                (setq yas/snippet-dirs "~/.emacs.d/snippets")
+                                (set-default 'yas/dont-activate
+                                             #'(lambda ()
+                                                 (and yas/root-directory
+                                                      (null (yas/get-snippet-tables)))))))
 
 ;;; anchiva
 (binjo-m-global-set-key-dynamic 'anchiva
