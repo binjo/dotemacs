@@ -18,20 +18,22 @@
 (setq user-full-name "Binjo"
       user-mail-address binjo-main-account)
 
-(setq gnus-select-method '(nntp "nntp.aioe.org"))
+(setq gnus-select-method '(nntp "nntp.aioe.org"
+                                (nntp-open-connection-function network-only)))
 (setq gnus-secondary-select-methods `((nntp "news.gmane.org"
                                             (nntp-address "news.gmane.org")
-                                            (nnir-search-engine gmane))
+                                            (nnir-search-engine gmane)
+                                            (nntp-open-connection-function network-only))
 ;;                                      (nnfolder "")
                                       (nnimap ,binjo-imap-label1
                                               (nnimap-address "127.0.0.1")
                                               (nnimap-server-port 9939)
-                                              (nnimap-stream network)
+                                              (nnimap-stream try-starttls)
                                               )
                                       (nnimap ,binjo-imap-label2
                                               (nnimap-address "127.0.0.1")
                                               (nnimap-server-port 9940)
-                                              (nnimap-stream network)
+                                              (nnimap-stream try-starttls)
                                               )
                                       (nnml ,binjo-comp-server
                                             ;; (nnml-directory "~/Mail")
