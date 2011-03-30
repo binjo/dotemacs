@@ -191,6 +191,7 @@ enable icon mode and unread status notifier."
      (define-key twittering-mode-map "F" 'twittering-follow)
      (define-key twittering-mode-map "K" 'twittering-unfollow)
      (define-key twittering-mode-map "R" 'twittering-reply-to-user)
+     (define-key twittering-mode-map "f" 'binjo-twittering-track-switch-buffer)
 
      (global-set-key (kbd "C-c t t") 'binjo-twittering-jmp)
      (global-set-key (kbd "C-c t j") 'binjo-twittering-track-switch-buffer)
