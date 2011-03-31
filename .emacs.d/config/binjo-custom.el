@@ -48,7 +48,7 @@
   (let* ((all-fonts
           `(;; (mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
             ;; (ns  . ("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN"))
-            (w32 . ("Consolas-10" "新宋体" "NSimSun"
+            (w32 . ("文泉驿等宽微米黑-10" "文泉驿等宽微米黑" "NSimSun"
                     ;; "汉鼎繁中变" "汉鼎繁中变" "汉鼎繁中变"
                     ;; "微软雅黑" "微软雅黑"
                     ))
@@ -68,7 +68,7 @@
     (mapc (lambda (cf)
             (set-fontset-font (frame-parameter nil 'font)
                               (car cf)
-                              (font-spec :family (cdr cf) :size 14)))
+                              (font-spec :family (cdr cf) :size 16)))
           charset-fonts)))
 
 (setq scroll-margin 3
