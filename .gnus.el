@@ -28,12 +28,12 @@
                                       (nnimap ,binjo-imap-label1
                                               (nnimap-address "127.0.0.1")
                                               (nnimap-server-port 9939)
-                                              (nnimap-stream try-starttls)
+                                              (nnimap-stream network)
                                               )
                                       (nnimap ,binjo-imap-label2
                                               (nnimap-address "127.0.0.1")
                                               (nnimap-server-port 9940)
-                                              (nnimap-stream try-starttls)
+                                              (nnimap-stream network)
                                               )
                                       (nnml ,binjo-comp-server
                                             ;; (nnml-directory "~/Mail")
