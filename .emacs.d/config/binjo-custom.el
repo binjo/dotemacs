@@ -149,6 +149,16 @@
       ido-create-new-buffer 'always
       ido-auto-merge-work-directories-length -1)
 
+(when (eq window-system 'w32)
+  (defun dired-custom-execute-file (&optional arg)
+    (interactive "P")
+    (mapcar #'(lambda (file)
+                (w32-shell-execute "open" (convert-standard-filename file)))
+            (dired-get-marked-files nil arg)))
+  (defun dired-custom-dired-mode-hook ()
+    (define-key dired-mode-map "X" 'dired-custom-execute-file))
+  (add-hook 'dired-mode-hook 'dired-custom-dired-mode-hook))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wubi
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
