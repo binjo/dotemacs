@@ -104,8 +104,8 @@ and `require' PACKAGE dynamically."
 ;; YASnippet
 (add-hook 'window-setup-hook '(lambda ()
                                 (require 'yasnippet)
-                                (yas/initialize)
                                 (setq yas/snippet-dirs "~/.emacs.d/snippets")
+                                (yas/initialize)
                                 (set-default 'yas/dont-activate
                                              #'(lambda ()
                                                  (and yas/root-directory
