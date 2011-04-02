@@ -39,42 +39,43 @@
 
 
 
-(setq load-path
-      (append (list "~/.emacs.d/site-lisp"
-                    "~/.emacs.d/config"
-                    "~/.emacs.d/site-lisp/wubi"
-                    "~/.emacs.d/site-lisp/template/lisp"
-                    "~/.emacs.d/site-lisp/ruby-mode"
-                    "~/.emacs.d/site-lisp/ejacs"
-                    "~/.emacs.d/site-lisp/bbdb-2.35/lisp"
-                    "~/.emacs.d/site-lisp/smex"
-                    "~/.emacs.d/site-lisp/yasnippet"
-                    "~/.emacs.d/site-lisp/emms/lisp"
-                    "~/.emacs.d/site-lisp/douban"
-                    "~/.emacs.d/site-lisp/emacs_chrome/servers"
-                    "~/.emacs.d/site-lisp/twit"
-                    "~/.emacs.d/site-lisp/twittering-mode"
-                    "~/.emacs.d/site-lisp/magit"
-                    "~/.emacs.d/site-lisp/magithub"
-                    "~/.emacs.d/site-lisp/org/lisp"
-                    "~/.emacs.d/site-lisp/org/contrib/lisp"
-                    "~/.emacs.d/site-lisp/ioccur"
-                    "~/.emacs.d/site-lisp/undo-tree"
-                    "~/.emacs.d/site-lisp/emacs-jabber"
-                    "~/.emacs.d/site-lisp/google-weather-el"
-                    "~/.emacs.d/site-lisp/php-mode"
-                    )
-              load-path))
+(setq binjo-my-load-pathes
+      (list "~/.emacs.d/site-lisp"
+            "~/.emacs.d/config"
+            "~/.emacs.d/site-lisp/wubi"
+            "~/.emacs.d/site-lisp/template/lisp"
+            "~/.emacs.d/site-lisp/ruby-mode"
+            "~/.emacs.d/site-lisp/ejacs"
+            "~/.emacs.d/site-lisp/bbdb-2.35/lisp"
+            "~/.emacs.d/site-lisp/smex"
+            "~/.emacs.d/site-lisp/yasnippet"
+            "~/.emacs.d/site-lisp/emms/lisp"
+            "~/.emacs.d/site-lisp/douban"
+            "~/.emacs.d/site-lisp/emacs_chrome/servers"
+            "~/.emacs.d/site-lisp/twit"
+            "~/.emacs.d/site-lisp/twittering-mode"
+            "~/.emacs.d/site-lisp/magit"
+            "~/.emacs.d/site-lisp/magithub"
+            "~/.emacs.d/site-lisp/org/lisp"
+            "~/.emacs.d/site-lisp/org/contrib/lisp"
+            "~/.emacs.d/site-lisp/ioccur"
+            "~/.emacs.d/site-lisp/undo-tree"
+            "~/.emacs.d/site-lisp/emacs-jabber"
+            "~/.emacs.d/site-lisp/google-weather-el"
+            "~/.emacs.d/site-lisp/php-mode"
+            "~/.emacs.d/site-lisp/haskell-mode"
+            ))
+(dolist (path binjo-my-load-pathes)
+  (add-to-list 'load-path path))
 
 (when (file-readable-p "~/.emacs.d/config/mypath")
   (with-temp-buffer
     (insert-file-contents "~/.emacs.d/config/mypath")
     (goto-char (point-min))
     (while (not (eobp))
-      (setq exec-path (append
-                       (list (buffer-substring
-                              (line-beginning-position) (line-end-position)))
-                       exec-path))
+      (add-to-list 'exec-path
+                   (buffer-substring
+                    (line-beginning-position) (line-end-position)))
       (forward-line))))
 
 (provide 'binjo-path)
