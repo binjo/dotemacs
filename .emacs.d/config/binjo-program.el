@@ -95,9 +95,15 @@
   '(add-to-list 'auto-mode-alist '("\\.aspx?" . asp-mode)))
 
 ;; haskell
-(load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file.el")
+(autoload 'haskell-mode "haskell-mode")
+(add-to-list 'auto-mode-alist        '("\\.\\(?:[gh]s\\|hi\\)\\'" . haskell-mode))
+(add-to-list 'auto-mode-alist        '("\\.l[gh]s\\'" . literate-haskell-mode))
+(add-to-list 'interpreter-mode-alist '("runghc" . haskell-mode))
+(add-to-list 'interpreter-mode-alist '("runhaskell" . haskell-mode))
+
 (eval-after-load 'haskell-mode
   '(progn
+     (load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file.el")
      (setq haskell-program-name
            (shell-quote-argument "c:/Program Files/Haskell Platform/bin/ghci.exe"))
      (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
