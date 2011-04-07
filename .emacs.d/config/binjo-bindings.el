@@ -110,5 +110,7 @@
                                    (interactive "r")
                                    (base64-decode-region b e)))
 
+(global-set-key (kbd "C-x a i") 'align-regexp)
+
 (provide 'binjo-bindings)
 ;;; binjo-bindings.el ends here

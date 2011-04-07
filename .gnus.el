@@ -35,6 +35,11 @@
                                               (nnimap-server-port 9940)
                                               (nnimap-stream network)
                                               )
+                                      (nnimap ,binjo-imap-label3
+                                              (nnimap-address "127.0.0.1")
+                                              (nnimap-server-port 9557)
+                                              (nnimap-stream network)
+                                              )
                                       (nnml ,binjo-comp-server
                                             ;; (nnml-directory "~/Mail")
                                             ;; (nnir-search-engine find-grep)
@@ -109,6 +114,16 @@ PORT smtp service."
          (From (format "\"%s\" <%s>" ,binjo-fake-name ,binjo-fake-account))
          (eval
           (binjo-sendmail-with-account ,binjo-fake-account
+                                       nil
+                                       "127.0.0.1"
+                                       4659)))
+
+        (,binjo-label3-filter
+         (name "Binjo")
+         (address ,binjo-0x557-account)
+         (From (format "\"%s\" <%s>" "Binjo" ,binjo-0x557-account))
+         (eval
+          (binjo-sendmail-with-account ,binjo-0x557-account
                                        nil
                                        "127.0.0.1"
                                        4659)))
