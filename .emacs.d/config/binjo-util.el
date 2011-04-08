@@ -183,3 +183,7 @@ and `require' PACKAGE dynamically."
   ((kbd "C-c j j") . 'jabber)
   ;; C-x C-j C-l is tedious
   ((kbd "C-c j x") . 'jabber-activity-switch-to))
+
+;; putty
+(binjo-m-global-set-key-dynamic 'binjo-putty
+  ((kbd "C-c t p") . 'binjo-start-putty))
