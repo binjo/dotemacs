@@ -127,9 +127,12 @@
                               (require 'session)
                               (session-initialize)))
 ;; desktop
-;;(load "desktop")
+;; http://permalink.gmane.org/gmane.emacs.devel/138373
+(require 'slothful)
 (setq desktop-dirname "~/"
-      desktop-buffers-not-to-save "\\.wubi-phrases.*\\|\\.bbdb")
+      desktop-buffers-not-to-save "\\.wubi-phrases.*\\|\\.bbdb"
+      desktop-restore-eager 50
+      desktop-lazy-verbose nil)
 (desktop-read)
 (add-hook 'kill-emacs-hook '(lambda ()
                               (desktop-save-mode 1)))
