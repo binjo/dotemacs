@@ -136,6 +136,15 @@
          "[+] Done, check it out...")
     "[-] shit, length even? ...")))
 
+(defun eshell/b642f (file-name b64stream)
+  "Decode base64 encoded stream."
+  (interactive)
+  (let ((dec (base64-decode-string b64stream))
+        (coding-system-for-write 'raw-text-unix))
+    (with-temp-file file-name
+      (insert dec))
+    "[+] done, check it out..."))
+
 (defun eshell/td ()
   "Change current directory to `today', create it if does not exist."
   (interactive)
