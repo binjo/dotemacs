@@ -89,17 +89,34 @@ PORT smtp service."
 ;; to let gnus show group name like "[Gmail]" in server buffer
 (setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. 	]+\\( \\|$\\)")
 
+(defun binjo-mk-message-cite-style (&optional below-p)
+  "Message citation style, if `BELOW-P' set as below."
+  (interactive)
+  `((message-cite-function  'message-cite-original-without-signature)
+    (message-citation-line-function  'message-insert-formatted-citation-line)
+    ,(if below-p
+         `(message-cite-reply-position 'below)
+       `(message-cite-reply-position 'above))
+    (message-yank-prefix  ">")
+    (message-yank-cited-prefix  ">")
+    (message-yank-empty-prefix  ">")
+    (message-citation-line-format "On %m/%d/%Y, at %R, %N wrote:\n")))
+
 ;; posting-style
 (setq gnus-posting-styles
       `((".*"
          (name user-full-name)
          (address user-mail-address)
          (signature "Life is like a prison, can you break it?")
-         (organization "Wh0 CaR3s"))
+         (organization "Wh0 CaR3s")
+         (eval
+          ;; default cite style - bottom post
+          (set (make-local-variable 'message-cite-style)
+               (binjo-mk-message-cite-style t))))
 
         ("^cn\\.bbs\\.comp"
-         (eval (setq mm-coding-system-priorities
-                     '(gb2312 utf-8))))
+         (eval (set (make-local-variable 'mm-coding-system-priorities)
+                    '(gb2312 utf-8))))
 
         (,binjo-label1-filter
          (eval
@@ -127,6 +144,7 @@ PORT smtp service."
                                        nil
                                        "127.0.0.1"
                                        4659)))
+
         ("nnml.*"
          (name ,binjo-comp-name)
          (address ,binjo-comp-account)
@@ -134,19 +152,20 @@ PORT smtp service."
          (signature ,binjo-private-mail-sig)
          (organization "Anchiva System Inc.")
          (eval
-          (binjo-sendmail-with-account ,binjo-comp-account
-                                       ,binjo-comp-pass
-                                       ,binjo-comp-server
-                                       25)))))
+          (progn
+            (binjo-sendmail-with-account ,binjo-comp-account
+                                         ,binjo-comp-pass
+                                         ,binjo-comp-server
+                                         25)
+            ;; top post
+            (set (make-local-variable 'message-cite-style)
+                 (binjo-mk-message-cite-style)))))))
 
 ;; auto fill
 (add-hook 'message-mode-hook
    (lambda ()
      (setq fill-column 80)
      (turn-on-auto-fill)))
-
-;; don't quote the signature
-(setq message-cite-function 'message-cite-original-without-signature)
 
 ;; framework
 (gnus-add-configuration '(article
