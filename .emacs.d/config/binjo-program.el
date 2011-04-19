@@ -22,7 +22,8 @@
 
 (eval-after-load 'python
   '(add-hook 'python-mode-hook (lambda ()
-                                 (setq tab-width 4))))
+                                 (setq tab-width 4)
+                                 (local-set-key (kbd "RET") 'newline-and-indent))))
 
 ;;; Ruby
 ;; Based on http://infolab.stanford.edu/~manku/dotemacs.html

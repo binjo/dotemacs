@@ -161,6 +161,12 @@
   `(interactive)
   `(w32-shell-execute "open" ,program (shell-quote-argument ,arg) 1))
 
+(defun eshell/.o (file-name)
+  "Open specific file."
+  (interactive)
+  (w32-shell-execute "open" file-name)
+  "")
+
 (defun eshell/.hiew (file-name)
   "Start HIEW with parameter set as FILE-NAME."
   (interactive)
