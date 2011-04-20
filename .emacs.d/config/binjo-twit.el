@@ -88,8 +88,9 @@ switch back to the last non-twittering-mode buffer visited."
            `((twitter (api ,binjo-twitter-api-url)
                       (search ,binjo-twitter-search-url)
                       (web ,binjo-twitter-api-url)
+                      (stream ,binjo-twitter-stream-url)
+                      (userstream ,binjo-twitter-userstream-url)
                       (api-prefix "1/")
-                      (search-method "search")
                       (status-url twittering-get-status-url-twitter)
                       (search-url twittering-get-search-url-twitter))
              (sina (api "api.t.sina.com.cn")
@@ -126,24 +127,21 @@ switch back to the last non-twittering-mode buffer visited."
      (setq twittering-accounts
            `((twitter (username ,twit-user)
                       (password ,twit-pass)
-                      (auth     basic))
-             (sina (username ,binjo-private-sina-username)
-                   (auth oauth))
-             (douban (username ,twit-user)
-                     (auth oauth))))
+                      (auth basic))))
 
-     (setq twittering-enabled-services '(twitter sina douban))
-     (setq twittering-initial-timeline-spec-string '(":home@twitter" ":home@sina" ":home@douban"))
+     (setq twittering-initial-timeline-spec-string
+           '(":home@twitter" ":home@sina" ":home@douban" ":mentions@twitter"))
 
      (setq twittering-oauth-use-ssl       nil
            twittering-use-ssl             nil
+           twittering-allow-insecure-server-cert t
            twittering-use-master-password t)
 
      (set-face-background twittering-zebra-1-face "gray24")
      (set-face-background twittering-zebra-2-face "gray22")
 
      (setq twittering-status-format
-           "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FOLD[       ]{%t} %FOLD[       ]{%T}}\n"
+           "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FOLD[       ]{%t}}\n"
            twittering-retweet-format "RT @%s: %t")
 
      (setq twittering-url-show-status nil
