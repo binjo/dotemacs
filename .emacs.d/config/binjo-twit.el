@@ -142,6 +142,8 @@ switch back to the last non-twittering-mode buffer visited."
 
      (setq twittering-status-format
            "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FOLD[       ]{%t}}\n"
+           twittering-my-status-format
+           "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FOLD[       ]{%t}}\n"
            twittering-retweet-format "RT @%s: %t")
 
      (setq twittering-url-show-status nil
