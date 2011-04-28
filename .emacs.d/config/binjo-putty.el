@@ -41,6 +41,9 @@
 (defvar binjo-putty-sessions-list '()
   "A list of putty sessions")
 
+(defvar binjo-putty-pscp-history '()
+  "A list of putty pscp history.")
+
 (defun binjo-putty-sessions-sentinel (proc event)
   "Sentinel for killing buffer when finished."
   (when (eq "finished" event)
@@ -70,6 +73,17 @@
   (let* ((s (ido-completing-read "Session "
                                  (binjo-putty-sessions))))
     (w32-shell-execute "open" "putty" (concat "-load " s))))
+
+(defun binjo-start-pscp ()
+  "Start pscp.exe with param read from `ido-completing-read'."
+  (interactive)
+  (let* ((localf (ido-completing-read "pscp(local) "
+                                      binjo-putty-pscp-history))
+         (remotf (ido-completing-read "pscp(remote) "
+                                      binjo-putty-pscp-history)))
+    (add-to-list 'binjo-putty-pscp-history localf)
+    (add-to-list 'binjo-putty-pscp-history remotf)
+    (async-shell-command (concat "pscp " localf " " remotf))))
 
 (provide 'binjo-putty)
 ;;; binjo-putty.el ends here

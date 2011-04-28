@@ -186,4 +186,5 @@ and `require' PACKAGE dynamically."
 
 ;; putty
 (binjo-m-global-set-key-dynamic 'binjo-putty
-  ((kbd "C-c t p") . 'binjo-start-putty))
+  ((kbd "C-c p t") . 'binjo-start-putty)
+  ((kbd "C-c p c") . 'binjo-start-pscp))
