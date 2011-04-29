@@ -188,3 +188,19 @@ and `require' PACKAGE dynamically."
 (binjo-m-global-set-key-dynamic 'binjo-putty
   ((kbd "C-c p t") . 'binjo-start-putty)
   ((kbd "C-c p c") . 'binjo-start-pscp))
+
+;; keep history of `async-shell-command'
+;; TODO new file?
+(defvar binjo-async-shell-cmd-history '()
+  "Histtory yof `async-shell-command'.")
+
+(defun binjo-async-shell-cmd ()
+  "Save cmd history, prompt via `ido-completing-read'."
+  (interactive)
+  (let ((cmd (ido-completing-read "cmd "
+                                  binjo-async-shell-cmd-history)))
+    (add-to-list 'binjo-async-shell-cmd-history cmd)
+    ;; FIXME what about the optional params?
+    (async-shell-command cmd)))
+
+(global-set-key (kbd "M-&") 'binjo-async-shell-cmd)
