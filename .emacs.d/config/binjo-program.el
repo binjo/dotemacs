@@ -66,8 +66,7 @@
 
 ;;; c# highlighting
 (autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
-(eval-after-load 'csharp-mode
-  '(add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode)))
+(add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
 
 ;;;; highlight special keywords, copy from xwl's xwl-programming.el
 (setq binjo-keyword-highlight-modes
@@ -92,8 +91,7 @@
 
 ;; asp highlight
 (autoload 'asp-mode "asp-mode")
-(eval-after-load 'asp-mode
-  '(add-to-list 'auto-mode-alist '("\\.aspx?" . asp-mode)))
+(add-to-list 'auto-mode-alist '("\\.aspx?" . asp-mode))
 
 ;; haskell
 (autoload 'haskell-mode "haskell-mode")
