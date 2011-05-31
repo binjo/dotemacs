@@ -6,7 +6,7 @@
 	url = git://github.com/xwl/twittering-mode.git
 [submodule ".emacs.d/site-lisp/magit"]
 	path = .emacs.d/site-lisp/magit
-	url = git://github.com/philjackson/magit.git
+	url = git://github.com/magit/magit.git
 [submodule ".emacs.d/site-lisp/undo-tree"]
 	path = .emacs.d/site-lisp/undo-tree
 	url = http://www.dr-qubit.org/git/undo-tree.git
