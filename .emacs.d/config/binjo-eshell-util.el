@@ -49,7 +49,7 @@
   (executable-find "hiew32.exe"))
 
 (defconst program-ida
-  (executable-find "idag.exe"))
+  (executable-find "idaq.exe"))
 
 (defconst program-bintext
   (executable-find "BinText.exe"))
