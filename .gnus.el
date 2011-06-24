@@ -24,34 +24,31 @@
                                             (nntp-address "news.gmane.org")
                                             (nnir-search-engine gmane)
                                             (nntp-open-connection-function network-only))
-;;                                      (nnfolder "")
+
                                       (nnimap ,binjo-imap-label1
                                               (nnimap-address "127.0.0.1")
                                               (nnimap-server-port 9939)
                                               (nnimap-stream network)
                                               )
+
                                       (nnimap ,binjo-imap-label2
                                               (nnimap-address "127.0.0.1")
                                               (nnimap-server-port 9940)
                                               (nnimap-stream network)
                                               )
+
                                       (nnimap ,binjo-imap-label3
                                               (nnimap-address "127.0.0.1")
                                               (nnimap-server-port 9557)
                                               (nnimap-stream network)
                                               )
-                                      (nnml ,binjo-comp-server
-                                            ;; (nnml-directory "~/Mail")
-                                            ;; (nnir-search-engine find-grep)
-                                            )
+
+                                      (nnimap ,binjo-imap-label4
+                                              (nnimap-address ,binjo-comp-server)
+                                              (nnimap-server-port 143)
+                                              (nnimap-stream network)
+                                              )
 ))
-
-(setq mail-sources
-      `((pop :server ,binjo-comp-server
-             :user ,binjo-comp-user
-             :password ,binjo-comp-pass)
-
-        ))
 
 
 ;;;; Send/Fetch Mails/Messages
@@ -83,7 +80,7 @@ PORT smtp service."
                              "127.0.0.1"
                              4659)
 
-(setq pop3-leave-mail-on-server t)
+;; (setq pop3-leave-mail-on-server t)
 (setq mail-source-delete-incoming t)
 (setq nnimap-split-inbox '("INBOX"))
 ;; to let gnus show group name like "[Gmail]" in server buffer
@@ -145,7 +142,7 @@ PORT smtp service."
                                        "127.0.0.1"
                                        4659)))
 
-        ("nnml.*"
+        (,binjo-label4-filter
          (name ,binjo-comp-name)
          (address ,binjo-comp-account)
          (From (format "\"%s\" <%s>" ,binjo-comp-name ,binjo-comp-account))
@@ -205,27 +202,24 @@ PORT smtp service."
        '(gnus-score-find-hierarchical gnus-score-find-bnews)
        gnus-use-adaptive-scoring t)
 
-;; split
-(setq nnmail-split-fancy-match-partial-words t)
+;; (setq nnimap-split-fancy
+;;       `(|
+;;         (from ,(regexp-opt binjo-private-avlab-group)
+;;               "avlab")
+;;         (from ,(regexp-opt binjo-private-staff-group)
+;;               "staff")
+;;         (from ,(regexp-opt
+;;                 '("bugzilla-daemon@"))
+;;               "bugzilla")
+;;         (to ,binjo-private-avlab-account
+;;             (| ("from" ,(regexp-opt binjo-private-not-spam-group)
+;;                 "avlab")
+;;                "spam"))
+;;         (to ,binjo-private-psm-group
+;;             "psm")
+;;         "misc"))
 
-(setq nnmail-split-fancy
-      `(|
-        (from ,(regexp-opt binjo-private-avlab-group)
-              "mail.avlab")
-        (from ,(regexp-opt binjo-private-staff-group)
-              "mail.staff")
-        (from ,(regexp-opt
-                '("bugzilla-daemon@"))
-              "mail.bugzilla")
-        (to ,binjo-private-avlab-account
-            (| ("from" ,(regexp-opt binjo-private-not-spam-group)
-                "mail.avlab")
-               "mail.spam"))
-        (to ,binjo-private-psm-group
-            "mail.psm")
-        "mail.misc"))
-
-(setq nnmail-split-methods 'nnmail-split-fancy)
+;; (setq nnmail-split-methods 'nnmail-split-fancy)
 
 ;; sent copy
 (setq gnus-message-archive-group
@@ -234,12 +228,13 @@ PORT smtp service."
           "nnml:mail.sent.mail")))
 
 ;; expire
-(setq nnmail-expiry-wait-function
-      (lambda (group)
-        (cond ((string-match "avlab" group) 'never)
-              ((string-match "mail\\.misc" group) 'never)
-              ((string-match "staff" group) 'never)
-              (t 7))))
+;; (setq nnmail-expiry-wait-function
+;;       (lambda (group)
+;;         (cond ((string-match "avlab" group) 'never)
+;;               ((string-match "mail\\.misc" group) 'never)
+;;               ((string-match "staff" group) 'never)
+;;               (t 7))))
+
 ;;;
 (setq gnus-confirm-mail-reply-to-news t
       message-kill-buffer-on-exit t
@@ -272,82 +267,6 @@ PORT smtp service."
 ;; - `B c': copy article to some group
 ;; - `*': put it in the cache, and use `Y c' to show it later
 (setq gnus-use-cache 'passive)
-
-;;; fuck pop3-movemail
-;;; FIXME or get the latest index from "~/Mail/active"  ??
-(defun binjo-pop3-latest-index (dir-name)
-  "Get latest index to be fetched from DIR-NAME."
-  (let ((n 1)
-        file-name)
-    (mapc (lambda (sub-dir-name)
-            (unless (or (string= "." sub-dir-name)
-                        (string= ".." sub-dir-name))
-              (setq file-name (concat dir-name sub-dir-name "/.overview"))
-              (if (file-exists-p file-name)
-                  (with-temp-buffer
-                    (insert-file-literally file-name)
-                    (goto-char (point-max))
-                    (forward-line -1)
-                    (setq n (+ n (string-to-number
-                                  (car (split-string
-                                        (thing-at-point 'line))))))))))
-          (directory-files dir-name))
-    n))
-
-;; TODO stick to the latest pop3-movemail, 20101015
-(eval-after-load "pop3"
-  '(defun pop3-movemail (&optional crashbox)
-     "Transfer contents of a maildrop to the specified CRASHBOX.
-
-A dirty hack to let `pop3-movemail' fetch newest mail if '.overview' exists."
-     (or crashbox (setq crashbox (expand-file-name "~/.crashbox")))
-     (let* ((process (pop3-open-server pop3-mailhost pop3-port))
-            (crashbuf (get-buffer-create " *pop3-retr*"))
-            (n 1)
-            message-count
-            (pop3-password pop3-password))
-       (if (file-exists-p "~/Mail/mail/")
-           (setq n (binjo-pop3-latest-index "~/Mail/mail/")))
-       ;; for debugging only
-       (if pop3-debug (switch-to-buffer (process-buffer process)))
-       ;; query for password
-       (if (and pop3-password-required (not pop3-password))
-           (setq pop3-password
-                 (read-passwd (format "Password for %s: " pop3-maildrop))))
-       (cond ((equal 'apop pop3-authentication-scheme)
-              (pop3-apop process pop3-maildrop))
-             ((equal 'pass pop3-authentication-scheme)
-              (pop3-user process pop3-maildrop)
-              (pop3-pass process))
-             (t (error "Invalid POP3 authentication scheme")))
-       (setq message-count (car (pop3-stat process)))
-       (unwind-protect
-           (while (<= n message-count)
-             (message "Retrieving message %d of %d from %s..."
-                      n message-count pop3-mailhost)
-             (pop3-retr process n crashbuf)
-             (save-excursion
-               (set-buffer crashbuf)
-               (let ((coding-system-for-write 'binary))
-                 (write-region (point-min) (point-max) crashbox t 'nomesg))
-               (set-buffer (process-buffer process))
-               (while (> (buffer-size) 5000)
-                 (goto-char (point-min))
-                 (forward-line 50)
-                 (delete-region (point-min) (point))))
-             (unless pop3-leave-mail-on-server
-               (pop3-dele process n))
-             (setq n (+ 1 n))
-             (pop3-accept-process-output process))
-         (when (and pop3-leave-mail-on-server
-                    (> n 1))
-;;            (message "pop3.el doesn't support UIDL.  Setting `pop3-leave-mail-on-server'
-;; to %s might not give the result you'd expect." pop3-leave-mail-on-server)
-           (sit-for 1))
-         (pop3-quit process))
-       (kill-buffer crashbuf))
-     t)
-)
 
 ;;; fuck mm-inline-wash-with-stdin
 (defadvice mm-inline-wash-with-stdin (around binjo-adv-set-lynx-param

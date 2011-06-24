@@ -204,12 +204,27 @@
 
 ;;; for GNUS
 ;; can't put this in .gnus.el, since that's t000 late...
-(defun binjo-gnus-group-get-new-news ()
-  "Only get news for groups with a level lower than 4.
+(defun binjo-gnus-group-get-new-news (level)
+  "Only get news for groups with a specified `level'.
 This is because some levels' updating takes too long time."
   (interactive)
-  (gnus-group-get-new-news 3)
+  (gnus-group-get-new-news level)
   (force-mode-line-update))
+
+(defun binjo-gnus-group-get-new-news-2 ()
+  "level 2."
+  (interactive)
+  (binjo-gnus-group-get-new-news 2))
+
+(defun binjo-gnus-group-get-new-news-3 ()
+  "level 3."
+  (interactive)
+  (binjo-gnus-group-get-new-news 3))
+
+(defun binjo-gnus-group-get-new-news-4 ()
+  "level 4."
+  (interactive)
+  (binjo-gnus-group-get-new-news 4))
 
 ;; checking news periodly
 (defadvice gnus (around switch-or-start)
@@ -221,7 +236,10 @@ This is because some levels' updating takes too long time."
     (binjo-gnus-enable-unread-notify)
     ad-do-it
     ;; idle 2 minutes, then check news every 3 minutes.
-    (gnus-demon-add-handler 'binjo-gnus-group-get-new-news 3 2)))
+    (gnus-demon-add-handler 'binjo-gnus-group-get-new-news-2 3 2)
+    (gnus-demon-add-handler 'binjo-gnus-group-get-new-news-3 30 2)
+    (gnus-demon-add-handler 'binjo-gnus-group-get-new-news-4 60 2)
+    ))
 
 (ad-activate 'gnus)
 (global-set-key (kbd "C-x g") 'gnus)
