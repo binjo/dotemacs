@@ -80,6 +80,32 @@ switch back to the last non-twittering-mode buffer visited."
            (set-window-configuration binjo-twittering-last-window-config)
            (setq binjo-twittering-last-window-config nil)))))
 
+(defun binjo-twittering-expand-url (short-url)
+  "Expand `short-url' via longurl.org"
+  (interactive "s")
+  (let* ((json-object-type 'plist)
+         (buf (url-retrieve-synchronously
+               (format "http://api.longurl.org/v2/expand?url=%s&format=json"
+                       short-url))))
+    (with-current-buffer buf
+      (goto-char (point-min))
+      (search-forward "\n\n")
+      (plist-get (json-read) :long-url))))
+
+(defun binjo-twittering-browse-short-url (&optional backward?)
+  "Find short url and browse via browser."
+  (interactive "P")
+  (let (expanded-url)
+    (if backward?
+        (search-backward "http://")
+      (search-forward "http://"))
+    (setq expanded-url (binjo-twittering-expand-url
+                        (get-text-property (point) 'uri)))
+    (if expanded-url
+        (browse-url expanded-url))
+      (message "twmode: expanded url %s..."
+               (or expanded-url "shit happen"))))
+
 ;; twittering-mode
 (eval-after-load 'twittering-mode
   '(progn
@@ -193,6 +219,7 @@ enable icon mode and unread status notifier."
      (define-key twittering-mode-map "K" 'twittering-unfollow)
      (define-key twittering-mode-map "R" 'twittering-reply-to-user)
      (define-key twittering-mode-map "f" 'binjo-twittering-track-switch-buffer)
+     (define-key twittering-mode-map "o" 'binjo-twittering-browse-short-url)
 
      (global-set-key (kbd "C-c t t") 'binjo-twittering-jmp)
      (global-set-key (kbd "C-c t j") 'binjo-twittering-track-switch-buffer)
