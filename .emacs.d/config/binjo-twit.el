@@ -192,6 +192,19 @@ switch back to the last non-twittering-mode buffer visited."
 
      (setq twittering-new-tweets-count-excluding-me t)
 
+     (defadvice twittering-register-image-data
+       (around binjo-ad-fuck-twmode-register-image-data activate)
+       "Sina has a lot of 22x22 emotion gifs, stop `twittering-register-image-data' from converting."
+       (let ((image-url (ad-get-arg 0)))
+         (if (string-match "face/ext/" image-url)
+             ;; FIXME url fp prone?
+             (progn
+               (setq twittering-use-convert nil)
+               ad-do-it
+               (setq twittering-use-convert t))
+           ;; otherwise, do nothing
+           ad-do-it)))
+
      (defadvice twittering-initialize-global-variables-if-necessary
        (before binjo-ad-set-convert-var activate)
        "Set proper convert before calling `twittering-initialize-global-variables-if-necessary',
