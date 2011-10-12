@@ -105,6 +105,18 @@
 (add-hook 'find-tag-hook 'set-view-find-tag-hook)
 
 ;; etags-select
+;; TODO recursively add tags file to tags table list?
+(defadvice etags-select-find-tag (before binjo-ad-fix-tag-table activate)
+  "Set proper `tags-table-list'."
+  (let* ((cur-dir (expand-file-name (directory-file-name ".")))
+         (tag-fil (concat cur-dir "/TAGS")))
+    (setq tags-table-list
+          (remove-if (lambda (elt)
+                       (not (file-exists-p elt)))
+                     tags-table-list))
+    (if (file-exists-p tag-fil)
+        (add-to-list 'tags-table-list tag-fil))))
+
 (binjo-m-global-set-key-dynamic 'etags-select
                                 ((kbd "M-?") . 'etags-select-find-tag-at-point)
                                 ((kbd "M-.") . 'etags-select-find-tag))
