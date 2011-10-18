@@ -32,7 +32,7 @@
 ;; Turn off the annoying default backup behaviour
 (if (file-directory-p "~/.emacs.d/backup")
     (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
-  (message "Directory does not exist: ~/.emacs.d/backup"))
+  (make-directory "~/.emacs.d/backup"))
 
 ;; ,----
 ;; | coding system, xwl
@@ -48,9 +48,9 @@
   (let* ((all-fonts
           `(;; (mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
             ;; (ns  . ("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN"))
-            (w32 . ("ÎÄÈªæäµÈ¿íÎ¢Ã×ºÚ-10" "ÎÄÈªæäµÈ¿íÎ¢Ã×ºÚ" "NSimSun"
-                    ;; "ºº¶¦·±ÖÐ±ä" "ºº¶¦·±ÖÐ±ä" "ºº¶¦·±ÖÐ±ä"
-                    ;; "Î¢ÈíÑÅºÚ" "Î¢ÈíÑÅºÚ"
+            (w32 . ("æ–‡æ³‰é©¿ç­‰å®½å¾®ç±³é»‘-10" "æ–‡æ³‰é©¿ç­‰å®½å¾®ç±³é»‘" "NSimSun"
+                    ;; "æ±‰é¼Žç¹ä¸­å˜" "æ±‰é¼Žç¹ä¸­å˜" "æ±‰é¼Žç¹ä¸­å˜"
+                    ;; "å¾®è½¯é›…é»‘" "å¾®è½¯é›…é»‘"
                     ))
             ;; (x   . ,(if (string= system-name "debian..xwl")
             ;;             '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")
@@ -75,13 +75,13 @@
       scroll-conservatively 10000)
 
 (setq frame-title-format "GNU Emacs@%b")
-;; (setq uniquify-buffer-name-style 'forward)
-;; (require 'uniquify)
-;; (setq frame-title-format
-;;       (list '((buffer-file-name " %f" (dired-directory
-;;                                        dired-directory
-;;                                        (revert-buffer-function " %b"
-;;                                                                ("%b - Dir:  " default-directory)))))))
+(setq uniquify-buffer-name-style 'forward)
+(require 'uniquify)
+(setq frame-title-format
+      (list '((buffer-file-name " %f" (dired-directory
+                                       dired-directory
+                                       (revert-buffer-function " %b"
+                                                               ("%b - Dir:  " default-directory)))))))
 (defun binjo-modeline-proper-full-path ()
   (let ((cur-dir default-directory))
     (if (> (length cur-dir) 48)
@@ -260,16 +260,17 @@ This is because some levels' updating takes too long time."
 (binjo-m-global-set-key-dynamic 'grep
                                 ((kbd "C-c m g") . 'grep)
                                 ((kbd "C-c m G") . 'grep-find))
-(eval-after-load 'grep
-  '(progn
-     (grep-apply-setting 'grep-command "grep -r -nH -i -e ")
-     (grep-apply-setting 'grep-find-command
-                         (cons (concat
-                                (shell-quote-argument
-                                 (expand-file-name "find.exe"
-                                                   (file-name-directory (executable-find "git"))))
-                                " . -type f -exec grep -r -nH -i -e  {} NUL \";\"") 71))
-     (grep-apply-setting 'grep-use-null-device nil)))
+(when (eq system-type 'windows-nt)
+  (eval-after-load 'grep
+    '(progn
+       (grep-apply-setting 'grep-command "grep -r -nH -i -e ")
+       (grep-apply-setting 'grep-find-command
+                           (cons (concat
+                                  (shell-quote-argument
+                                   (expand-file-name "find.exe"
+                                                     (file-name-directory (executable-find "git"))))
+                                  " . -type f -exec grep -r -nH -i -e  {} NUL \";\"") 71))
+       (grep-apply-setting 'grep-use-null-device nil))))
 
 (require 'binjo-bindings)
 

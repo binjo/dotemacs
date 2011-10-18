@@ -4,6 +4,8 @@
        (setenv "HOME" "d:/repos/emacs/"))
       ((eq system-type 'gnu/linux)
        (setenv "HOME" "/home/binjo/repos/emacs/"))
+      ((eq system-type 'darwin)
+       (setenv "HOME" (concat "/Users/" user-login-name "/repos/dotemacs/")))
       (t
        (error "not implemented...")))
 
