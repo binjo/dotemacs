@@ -43,11 +43,11 @@
                                               (nnimap-stream network)
                                               )
 
-                                      (nnimap ,binjo-imap-label4
-                                              (nnimap-address ,binjo-comp-server)
-                                              (nnimap-server-port 143)
-                                              (nnimap-stream network)
-                                              )
+                                      ;; (nnimap ,binjo-imap-label4
+                                      ;;         (nnimap-address ,binjo-comp-server)
+                                      ;;         (nnimap-server-port 143)
+                                      ;;         (nnimap-stream network)
+                                      ;;         )
 ))
 
 
@@ -269,11 +269,13 @@ PORT smtp service."
 (setq gnus-use-cache 'passive)
 
 ;;; fuck mm-inline-wash-with-stdin
-(defadvice mm-inline-wash-with-stdin (around binjo-adv-set-lynx-param
-                                             (post-func cmd &rest args))
-  "Set proper parameters before calling lynx."
-  (if (string= "lynx" cmd)
-      (setq args `("-cfg=c:/Lynx/lynx.cfg" "-lss=c:/Lynx/lynx.lss" ,@args)))
-  ad-do-it)
-(eval-after-load "mm-view"
-  '(ad-activate 'mm-inline-wash-with-stdin))
+(when (eq system-type 'windows-nt)
+  (progn
+    (defadvice mm-inline-wash-with-stdin (around binjo-adv-set-lynx-param
+                                                 (post-func cmd &rest args))
+      "Set proper parameters before calling lynx."
+      (if (string= "lynx" cmd)
+          (setq args `("-cfg=c:/Lynx/lynx.cfg" "-lss=c:/Lynx/lynx.lss" ,@args)))
+      ad-do-it)
+    (eval-after-load "mm-view"
+      '(ad-activate 'mm-inline-wash-with-stdin))))

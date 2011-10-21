@@ -202,7 +202,7 @@
   (define-key erc-mode-map (kbd "M-m") 'erc-bol))
 
 ;;; C-c C-@ is kind of annoying...
-(global-set-key (kbd "C-c C-2") 'binjo-erc-track-switch-buffer)
+(global-set-key (kbd "C-c C-0") 'binjo-erc-track-switch-buffer)
 
 (add-hook 'erc-mode-hook 'xwl-erc-mode-hook)
 
@@ -225,10 +225,11 @@
               :nick erc-nick
               :password erc-0x557-password)
   ;; bitlbee
-  (erc-select :server "im.bitlbee.org"
-              :port 6667
-              :nick erc-nick
-              :password erc-bitlbee-pwd))
+  ;; (erc-select :server "im.bitlbee.org"
+  ;;             :port 6667
+  ;;             :nick erc-nick
+  ;;             :password erc-bitlbee-pwd)
+  )
 
 (provide 'binjo-erc)
 (eval-when-compile

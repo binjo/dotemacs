@@ -68,7 +68,8 @@
 (dolist (path binjo-my-load-pathes)
   (add-to-list 'load-path path))
 
-(when (file-readable-p "~/.emacs.d/config/mypath")
+(when (and (eq system-type 'windows-nt)
+           (file-readable-p "~/.emacs.d/config/mypath"))
   (with-temp-buffer
     (insert-file-contents "~/.emacs.d/config/mypath")
     (goto-char (point-min))
@@ -77,6 +78,9 @@
                    (buffer-substring
                     (line-beginning-position) (line-end-position)))
       (forward-line))))
+
+(when (eq system-type 'darwin)
+  (add-to-list 'exec-path "/usr/local/bin/"))
 
 (provide 'binjo-path)
 ;;; binjo-path.el ends here
