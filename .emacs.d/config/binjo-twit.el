@@ -205,17 +205,18 @@ switch back to the last non-twittering-mode buffer visited."
            ;; otherwise, do nothing
            ad-do-it)))
 
-     (defadvice twittering-initialize-global-variables-if-necessary
-       (before binjo-ad-set-convert-var activate)
-       "Set proper convert before calling `twittering-initialize-global-variables-if-necessary',
+     (when (eq system-type 'windows-nt)
+       (defadvice twittering-initialize-global-variables-if-necessary
+         (before binjo-ad-set-convert-var activate)
+         "Set proper convert before calling `twittering-initialize-global-variables-if-necessary',
 enable icon mode and unread status notifier."
-       (if (string-match "c:" twittering-convert-program 0)
-           (setq twittering-convert-program
-                 (expand-file-name
-                  "convert.exe"
-                  (expand-file-name
-                   "w32"
-                   (file-name-directory (symbol-file 'twit)))))))
+         (if (string-match "c:" twittering-convert-program 0)
+             (setq twittering-convert-program
+                   (expand-file-name
+                    "convert.exe"
+                    (expand-file-name
+                     "w32"
+                     (file-name-directory (symbol-file 'twit))))))))
 
      (add-hook 'twittering-mode-hook (lambda ()
                                        (twittering-icon-mode 1)

@@ -87,7 +87,7 @@
                       ("life"      . ?l)
                       ("mail"      . ?m)
                       ("misc"      . ?i)
-                      ("paper"     . ?p)
+                      ("paper"     . ?P)
                       ("reading"   . ?r)
                       ("twitter"   . ?t)))
 
