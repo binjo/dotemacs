@@ -66,7 +66,8 @@
             "~/.emacs.d/site-lisp/haskell-mode"
             ))
 (dolist (path binjo-my-load-pathes)
-  (add-to-list 'load-path path))
+  (when (file-exists-p path)
+    (add-to-list 'load-path path)))
 
 (when (and (eq system-type 'windows-nt)
            (file-readable-p "~/.emacs.d/config/mypath"))
