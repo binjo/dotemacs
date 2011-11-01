@@ -64,6 +64,7 @@
             "~/.emacs.d/site-lisp/google-weather-el"
             "~/.emacs.d/site-lisp/php-mode"
             "~/.emacs.d/site-lisp/haskell-mode"
+            "~/share/emacs/site-lisp/gnus"
             ))
 (dolist (path binjo-my-load-pathes)
   (when (file-exists-p path)

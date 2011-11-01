@@ -207,6 +207,7 @@
 ;; custom info
 (setq Info-directory-list
       `("~/.emacs.d/info" ,@Info-default-directory-list))
+(add-to-list 'Info-directory-list "~/share/info")
 
 ;; Emacs-fu: making buffer names unique
 (require 'uniquify)
