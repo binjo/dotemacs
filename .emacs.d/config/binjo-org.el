@@ -41,7 +41,7 @@
 
 (require 'org-install)
 (require 'org-google-weather)
-(require 'org-contacts)
+(ignore-errors (require 'org-contacts))
 
 (defvar binjo-org-files
   '("works.org" "todo.org" "exploits.org" "remember.org" "archive.org"))
