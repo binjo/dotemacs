@@ -156,7 +156,7 @@ switch back to the last non-twittering-mode buffer visited."
                       (auth basic))))
 
      (setq twittering-initial-timeline-spec-string
-           '(":home@twitter" ":home@sina" ":home@douban" ":mentions@twitter"))
+           '(":home@twitter" ":home@sina" ":home@douban" ":mentions@twitter" ":replies@sina"))
 
      (setq twittering-oauth-use-ssl       nil
            twittering-use-ssl             nil
