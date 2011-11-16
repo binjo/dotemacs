@@ -1,0 +1,36 @@
+
+* setup
+
+1. if under *windows*:
+
+   1. cd d:/
+
+   2. mkdir repos
+
+   3. cd repos
+
+   nix/mac os x:
+
+   1. cd ~
+
+   2. mkdir repos
+
+   3. cd repos
+
+2. git clone git://github.com/binjo/dotemacs.git
+
+3. git submodule init
+
+4. git submodule update
+
+5. if under windows:
+
+   1. copy dotemacs/.emacs %documents%
+
+   nix/mac os x:
+
+   1. copy dotemacs/.emacs ~/
+
+happy zheteng xDD
+
+@binjo
