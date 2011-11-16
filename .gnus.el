@@ -43,11 +43,11 @@
                                               (nnimap-stream network)
                                               )
 
-                                      ;; (nnimap ,binjo-imap-label4
-                                      ;;         (nnimap-address ,binjo-comp-server)
-                                      ;;         (nnimap-server-port 143)
-                                      ;;         (nnimap-stream network)
-                                      ;;         )
+                                      (nnimap ,binjo-imap-label4
+                                              (nnimap-address "127.0.0.1")
+                                              (nnimap-server-port 9941)
+                                              (nnimap-stream network)
+                                              )
 ))
 
 
@@ -130,7 +130,7 @@ PORT smtp service."
           (binjo-sendmail-with-account ,binjo-fake-account
                                        nil
                                        "127.0.0.1"
-                                       4659)))
+                                       4660)))
 
         (,binjo-label3-filter
          (name "Binjo")
@@ -140,20 +140,20 @@ PORT smtp service."
           (binjo-sendmail-with-account ,binjo-0x557-account
                                        nil
                                        "127.0.0.1"
-                                       4659)))
+                                       4661)))
 
         (,binjo-label4-filter
          (name ,binjo-comp-name)
          (address ,binjo-comp-account)
          (From (format "\"%s\" <%s>" ,binjo-comp-name ,binjo-comp-account))
          (signature ,binjo-private-mail-sig)
-         (organization "Anchiva System Inc.")
+         (organization ,binjo-private-org)
          (eval
           (progn
             (binjo-sendmail-with-account ,binjo-comp-account
-                                         ,binjo-comp-pass
-                                         ,binjo-comp-server
-                                         25)
+                                         nil
+                                         "127.0.0.1"
+                                         4662)
             ;; top post
             (set (make-local-variable 'message-cite-style)
                  (binjo-mk-message-cite-style)))))))
