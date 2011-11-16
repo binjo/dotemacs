@@ -41,7 +41,8 @@
 
 ;; path and private thing first.
 (load "~/.emacs.d/config/binjo-path.el")
-(load "~/.emacs.d/config/binjo-private.el")
+(ignore-errors
+  (load "~/.emacs.d/config/binjo-private.el"))
 
 (setq custom-file "~/.emacs.d/config/binjo-custom.el")
 
