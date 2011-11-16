@@ -1,9 +1,9 @@
 ;;; Binjo @ Anchiva - refactor @ 2009-03-18 wed. 15:00
 ;;;                            @ 2010-02-04 wed. 18:00
 (cond ((eq system-type 'windows-nt)
-       (setenv "HOME" "d:/repos/emacs/"))
+       (setenv "HOME" "d:/repos/dotemacs/"))
       ((eq system-type 'gnu/linux)
-       (setenv "HOME" "/home/binjo/repos/emacs/"))
+       (setenv "HOME" (concat "/home/" user-login-name "/repos/dotemacs/")))
       ((eq system-type 'darwin)
        (setenv "HOME" (concat "/Users/" user-login-name "/repos/dotemacs/")))
       (t
