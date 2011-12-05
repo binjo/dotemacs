@@ -108,7 +108,7 @@ NOWARN and RAWFILE arguments are accepted for compatibility with
 
 (defadvice switch-to-buffer (before load-slothful-before-buffer-displayed
                                     (buffer-or-name
-                                     &optional norecord))
+                                     &optional norecord force-same-window))
   "Load slothful buffers before they are displayed."
   (when buffer-or-name
     (let ((buf (get-buffer buffer-or-name)))
@@ -155,4 +155,3 @@ buffer is created. Otherwise, proceed as normal."
 ;;         (revert-buffer nil t)))))
 ;;
 ;;(ad-activate 'display-buffer)
-
