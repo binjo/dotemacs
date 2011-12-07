@@ -185,9 +185,10 @@ and `require' PACKAGE dynamically."
   ((kbd "C-c j x") . 'jabber-activity-switch-to))
 
 ;; putty
-(binjo-m-global-set-key-dynamic 'binjo-putty
-  ((kbd "C-c p t") . 'binjo-start-putty)
-  ((kbd "C-c p c") . 'binjo-start-pscp))
+(when (eq system-type 'windows-nt)
+  (binjo-m-global-set-key-dynamic 'binjo-putty
+    ((kbd "C-c p t") . 'binjo-start-putty)
+    ((kbd "C-c p c") . 'binjo-start-pscp)))
 
 ;; keep history of `async-shell-command'
 ;; TODO new file?
