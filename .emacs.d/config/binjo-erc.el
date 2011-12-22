@@ -71,7 +71,6 @@
 (setq  erc-server-coding-system '(utf-8 . utf-8)
        erc-encoding-coding-alist '(("#segfault" . gb2312)
                                    ("#music" . gb2312)
-                                   ("#superman" . gb2312)
                                    ("#ph4nt0m" . gb2312)
                                    ("&bitlbee" . gb2312)))
 (setq erc-autojoin-channels-alist
