@@ -111,14 +111,14 @@ switch back to the last non-twittering-mode buffer visited."
   '(progn
      ;; redefine service method table
      (setq twittering-service-method-table
-           ;; `((twitter (api ,binjo-twitter-api-url)
-           ;;            (search ,binjo-twitter-search-url)
-           ;;            (web ,binjo-twitter-api-url)
-           ;;            (stream ,binjo-twitter-stream-url)
-           ;;            (userstream ,binjo-twitter-userstream-url)
-           ;;            (api-prefix "1/")
-           ;;            (status-url twittering-get-status-url-twitter)
-           ;;            (search-url twittering-get-search-url-twitter))
+           `((twitter (api ,binjo-twitter-api-url)
+                      (search ,binjo-twitter-search-url)
+                      (web ,binjo-twitter-api-url)
+                      (stream ,binjo-twitter-stream-url)
+                      (userstream ,binjo-twitter-userstream-url)
+                      (api-prefix "1/")
+                      (status-url twittering-get-status-url-twitter)
+                      (search-url twittering-get-search-url-twitter))
              (sina (api "api.t.sina.com.cn")
                    (web "t.sina.com.cn")
                    (oauth-request-token-url-without-scheme "://api.t.sina.com.cn/oauth/request_token")
