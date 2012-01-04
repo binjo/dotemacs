@@ -185,7 +185,7 @@ switch back to the last non-twittering-mode buffer visited."
                 (appspot-p (and call-args
                                 (string-match binjo-twitter-host-url (car (reverse call-args))))))
            (when appspot-p
-               (ad-set-args 3 `(,@call-args "-x" "www.google.cn:80"))))))
+               (ad-set-args 3 `(,@call-args "-x" "localhost:8087"))))))
 
      (setq twittering-update-status-function
            'twittering-update-status-from-pop-up-buffer)
