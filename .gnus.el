@@ -279,3 +279,153 @@ PORT smtp service."
       ad-do-it)
     (eval-after-load "mm-view"
       '(ad-activate 'mm-inline-wash-with-stdin))))
+
+;;;; Faces ;;;;
+;;; http://www.stanford.edu/~rgm/comp/dotgnus.html
+
+;; Group level faces.
+
+(defface my-gnus-face-0 '((t (:foreground "aquamarine3" :weight bold)))
+  "Gnus face for gnus-face-0 (default bold). Used for topics.")
+
+(defface my-gnus-face-1 '((t (:foreground "aquamarine3" :weight normal)))
+  "Gnus face for gnus-face-1.  Used for from.")
+
+(defface my-gnus-face-2 '((t (:foreground "aquamarine1" :weight normal)))
+  "Gnus face for gnus-face-2.  Used for date.")
+
+(defface my-gnus-face-3 '((t (:foreground "turquoise" :weight normal)))
+  "Gnus face for gnus-face-3.  Used for subject.")
+
+(defface my-gnus-group-face-1 '((t (:foreground "LightBlue")))
+  "Gnus face for group buffer highlighting.")
+
+(defface my-gnus-group-face-2 '((t (:foreground "cyan")))
+  "Gnus face for group buffer highlighting.")
+
+(defface my-gnus-group-face-3 '((t (:foreground "MidnightBlue")))
+  "Gnus face for group buffer highlighting.")
+
+(defface my-gnus-group-face-4 '((t (:foreground "RoyalBlue1")))
+  "Gnus face for group buffer highlighting.")
+
+(defface my-gnus-group-face-5 '((t (:foreground "MediumSeaGreen")))
+  "Gnus face for group buffer highlighting.")
+
+(defface my-gnus-article-button-face
+  '((t (:foreground "yellow" :weight bold)))
+  "Gnus face for article buttons (urls, etc).")
+
+;; Annoyingly, affects from: headers, etc.
+;; Could adjust `gnus-header-button-alist' to remove most entries.
+;;;(setq gnus-article-button-face 'my-gnus-article-button-face)
+
+
+(defun my-gnus-article-prepare-hook-fn ()
+  "Function added to `gnus-article-prepare-hook'."
+  (require 'gnus-cite)                  ; NB why?
+  ;; "X wrote:" font.
+  (face-spec-set 'gnus-cite-attribution-face
+                 '((t (:slant italic :family "helv"
+                              :foreground "SkyBlue"))))
+  (face-spec-set 'gnus-cite-face-1
+                 '((((type x)) (:foreground "light blue"))
+                   (t (:foreground "turquoise")))))
+
+(add-hook 'gnus-article-prepare-hook 'my-gnus-article-prepare-hook-fn)
+
+
+(defun my-gnus-article-mode-hook-fn ()
+  "Function added to `gnus-article-mode-hook'."
+  ;; Misc faces.
+  (face-spec-set 'gnus-emphasis-bold-italic
+                 '((t (:slant italic :family "helv" :weight bold))))
+
+  (face-spec-set 'gnus-emphasis-italic
+                 '((t (:slant italic :family "helv"))))
+
+  (face-spec-set 'gnus-emphasis-strikethru '((t (:strike-through t))))
+
+  (face-spec-set 'gnus-emphasis-underline-bold-italic
+                 '((t (:slant italic :family "helv" :weight bold
+                              :underline t))))
+
+  (face-spec-set 'gnus-emphasis-underline-italic
+                 '((t (:slant italic :family "helv" :underline t))))
+
+  ;; Article header faces.
+  (face-spec-set 'gnus-header-name-face '((t (:foreground "SeaGreen"))))
+
+  (face-spec-set 'gnus-header-from-face '((t (:foreground "spring green"))))
+
+  (face-spec-set 'gnus-header-newsgroups-face '((t (:foreground "yellow"))))
+
+  (face-spec-set 'gnus-header-subject-face '((t (:foreground "SeaGreen3"))))
+
+  (face-spec-set 'gnus-header-content-face '((t (:foreground "forest green"))))
+
+  (face-spec-set 'gnus-signature-face '((t (:foreground "pink")))))
+
+(add-hook 'gnus-article-mode-hook 'my-gnus-article-mode-hook-fn)
+
+
+;; Summary faces.
+(face-spec-set 'gnus-summary-high-unread-face
+               '((t (:foreground "DarkSlateGray1" :weight bold))))
+
+(face-spec-set 'gnus-summary-normal-unread-face
+               '((t (:foreground "DarkSlateGray1")))) ; default wheat
+
+(face-spec-set 'gnus-summary-low-unread-face
+               '((t (:slant italic :family "helv"))))
+
+(face-spec-set 'gnus-summary-high-read-face
+               '((t (:foreground "PaleGreen" :weight bold))))
+
+(face-spec-set 'gnus-summary-normal-read-face
+               '((t (:foreground "PaleGreen"))))
+
+;; Eg those marked down by scoring, so should be inconspicuous.
+(face-spec-set 'gnus-summary-low-read-face
+               '((t (:foreground "slate gray"))))
+
+(face-spec-set 'gnus-summary-normal-ticked-face
+               '((t (:foreground "Pink"))))
+
+(face-spec-set 'gnus-summary-low-ticked-face
+               '((t (:foreground "SkyBlue"))))
+
+(face-spec-set 'gnus-summary-normal-ancient-face
+               '((t (:foreground "SkyBlue"))))
+
+(face-spec-set 'gnus-summary-low-ancient-face
+               '((t (:foreground "SkyBlue"))))
+
+(face-spec-set 'gnus-summary-high-ancient-face
+               '((t (:foreground "SkyBlue"))))
+
+
+;; Message faces.
+(face-spec-set 'message-header-name-face
+               '((t (:foreground "SeaGreen"))))
+
+(face-spec-set 'message-header-to-face
+               '((t (:foreground "yellow" :weight bold))))
+
+(face-spec-set 'message-header-cc-face
+               '((t (:foreground "yellow"))))
+
+(face-spec-set 'message-header-subject-face
+               '((t (:foreground "lawngreen"))))
+
+(face-spec-set 'message-header-other-face
+               '((t (:foreground "yellow"))))
+
+(face-spec-set 'message-separator-face
+               '((t (:foreground "pink"))))
+
+(face-spec-set 'message-header-newsgroups-face
+               '((t (:foreground "yellow" :weight bold))))
+
+(face-spec-set 'message-cited-text-face
+               '((t (:foreground "DarkSlateGray1" :weight bold))))
