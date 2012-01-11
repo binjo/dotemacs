@@ -57,22 +57,24 @@
         (setq tab-stop-list (cons (* x 4) tab-stop-list))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(if (eq system-type 'windows-nt)
-    (progn
-      (defun w32-minimize-frame ()
-        "Minimized the current frame"
-        (interactive)
-        (w32-send-sys-command #xf020))
-      (defun w32-restore-frame ()
-        "Restore a minimized frame"
-        (interactive)
-        (w32-send-sys-command #xf120))
-      (defun w32-maximize-frame ()
-        "Maximize the current frame"
-        (interactive)
-        (w32-send-sys-command 61488))
-      ;; Maximum Windows Frame
-      (add-hook 'window-setup-hook 'w32-maximize-frame t)))
+(cond ((eq system-type 'windows-nt)
+       (progn
+         (defun w32-minimize-frame ()
+           "Minimized the current frame"
+           (interactive)
+           (w32-send-sys-command #xf020))
+         (defun w32-restore-frame ()
+           "Restore a minimized frame"
+           (interactive)
+           (w32-send-sys-command #xf120))
+         (defun w32-maximize-frame ()
+           "Maximize the current frame"
+           (interactive)
+           (w32-send-sys-command 61488))
+         ;; Maximum Windows Frame
+         (add-hook 'window-setup-hook 'w32-maximize-frame t)))
+      ((eq system-type 'darwin)
+       (add-hook 'window-setup-hook 'ns-toggle-fullscreen t)))
 
 (add-hook 'window-setup-hook 'server-start t)
 
