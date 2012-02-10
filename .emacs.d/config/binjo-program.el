@@ -62,7 +62,7 @@
                                 ((kbd "C-c j c") . 'run-js)
                                 ((kbd "C-c j r") . 'js-send-region-and-go))
 (eval-after-load 'js-comint
-  '(setq inferior-js-program-command "java -jar d:\\Datas\\source\\rhino1_7R2\\js.jar"))
+  '(setq inferior-js-program-command "java -jar /usr/local/bin/rhino1_7R3/js.jar"))
 
 ;;; c# highlighting
 (autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
