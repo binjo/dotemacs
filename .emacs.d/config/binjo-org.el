@@ -44,7 +44,7 @@
 (ignore-errors (require 'org-contacts))
 
 (defvar binjo-org-files
-  '("works.org" "todo.org" "exploits.org" "remember.org" "archive.org"))
+  '("works.org" "todo.org" "exploits.org" "remember.org" "archive.org" "things.org"))
 
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
@@ -115,6 +115,10 @@
          :empty-lines 1)
         ("t" "ToDo" entry
          (file+headline "todo.org" "Todo")
+         "* TODO %^{Summary}\n  :TIMESTAMP: %T\n"
+         :empty-lines 1)
+        ("T" "ToDo Things" entry
+         (file+headline "things.org" "Things")
          "* TODO %^{Summary}\n  :TIMESTAMP: %T\n"
          :empty-lines 1)
         ("e" "Exploit" entry
