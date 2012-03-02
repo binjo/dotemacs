@@ -20,35 +20,23 @@
 
 (setq gnus-select-method '(nntp "nntp.aioe.org"
                                 (nntp-open-connection-function network-only)))
-(setq gnus-secondary-select-methods `((nntp "news.gmane.org"
-                                            (nntp-address "news.gmane.org")
-                                            (nnir-search-engine gmane)
-                                            (nntp-open-connection-function network-only))
 
-                                      (nnimap ,binjo-imap-label1
-                                              (nnimap-address "127.0.0.1")
-                                              (nnimap-server-port 9939)
-                                              (nnimap-stream network)
-                                              )
+(setq gnus-secondary-select-methods
+      `((nntp "news.gmane.org"
+              (nntp-address "news.gmane.org")
+              (nnir-search-engine gmane)
+              (nntp-open-connection-function network-only))
 
-                                      (nnimap ,binjo-imap-label2
-                                              (nnimap-address "127.0.0.1")
-                                              (nnimap-server-port 9940)
-                                              (nnimap-stream network)
-                                              )
-
-                                      (nnimap ,binjo-imap-label3
-                                              (nnimap-address "127.0.0.1")
-                                              (nnimap-server-port 9557)
-                                              (nnimap-stream network)
-                                              )
-
-                                      (nnimap ,binjo-imap-label4
-                                              (nnimap-address "127.0.0.1")
-                                              (nnimap-server-port 9941)
-                                              (nnimap-stream network)
-                                              )
-))
+        ,@(mapcar '(lambda (x)
+                     (let ((imap-lable (plist-get x :imap-labl))
+                           (imap-address (plist-get x :imap-addr))
+                           (imap-port (plist-get x :imap-port))
+                           (imap-stream (plist-get x :imap-strm)))
+                       `(nnimap ,imap-lable
+                                (nnimap-address ,imap-address)
+                                (nnimap-server-port ,imap-port)
+                                (nnimap-stream ,imap-stream))))
+                  binjo-private-gnus-imap-settings)))
 
 
 ;;;; Send/Fetch Mails/Messages
@@ -115,48 +103,33 @@ PORT smtp service."
          (eval (set (make-local-variable 'mm-coding-system-priorities)
                     '(gb2312 utf-8))))
 
-        (,binjo-label1-filter
-         (eval
-          (binjo-sendmail-with-account ,binjo-main-account
-                                       nil
-                                       "127.0.0.1"
-                                       4659)))
-
-        (,binjo-label2-filter
-         (name ,binjo-fake-name)
-         (address ,binjo-fake-account)
-         (From (format "\"%s\" <%s>" ,binjo-fake-name ,binjo-fake-account))
-         (eval
-          (binjo-sendmail-with-account ,binjo-fake-account
-                                       nil
-                                       "127.0.0.1"
-                                       4660)))
-
-        (,binjo-label3-filter
-         (name "Binjo")
-         (address ,binjo-0x557-account)
-         (From (format "\"%s\" <%s>" "Binjo" ,binjo-0x557-account))
-         (eval
-          (binjo-sendmail-with-account ,binjo-0x557-account
-                                       nil
-                                       "127.0.0.1"
-                                       4661)))
-
-        (,binjo-label4-filter
-         (name ,binjo-comp-name)
-         (address ,binjo-comp-account)
-         (From (format "\"%s\" <%s>" ,binjo-comp-name ,binjo-comp-account))
-         (signature ,binjo-private-mail-sig)
-         (organization ,binjo-private-org)
-         (eval
-          (progn
-            (binjo-sendmail-with-account ,binjo-comp-account
-                                         nil
-                                         "127.0.0.1"
-                                         4662)
-            ;; top post
-            (set (make-local-variable 'message-cite-style)
-                 (binjo-mk-message-cite-style)))))))
+        ,@(mapcar '(lambda (x)
+                     (let ((filter-name (plist-get x :imap-filter))
+                           (my-name (plist-get x :imap-name))
+                           (my-addr (plist-get x :imap-email))
+                           (my-smtp-addr (plist-get x :imap-smtp-addr))
+                           (my-smtp-port (plist-get x :imap-smtp-port))
+                           (my-sig (plist-get x :imap-signature))
+                           (my-org (plist-get x :imap-org)))
+                       `(,filter-name
+                         (name ,my-name)
+                         (address ,my-addr)
+                         (From (format "\"%s\" <%s>" ,my-name ,my-addr))
+                         ,@(if my-sig
+                               `((signature ,my-sig)))
+                         ,@(if my-org
+                               `((organization ,my-org)))
+                         (eval
+                          (progn
+                            (binjo-sendmail-with-account ,my-addr
+                                                         nil
+                                                         ,my-smtp-addr
+                                                         ,my-smtp-port)
+                            ,@(if (plist-get x :imap-top-post-p)
+                                  `((set (make-local-variable 'message-cite-style)
+                                         (binjo-mk-message-cite-style)))))))))
+                  binjo-private-gnus-imap-settings)
+        ))
 
 ;; auto fill
 (add-hook 'message-mode-hook
@@ -201,23 +174,6 @@ PORT smtp service."
 (setq  gnus-score-find-score-files-function
        '(gnus-score-find-hierarchical gnus-score-find-bnews)
        gnus-use-adaptive-scoring t)
-
-;; (setq nnimap-split-fancy
-;;       `(|
-;;         (from ,(regexp-opt binjo-private-avlab-group)
-;;               "avlab")
-;;         (from ,(regexp-opt binjo-private-staff-group)
-;;               "staff")
-;;         (from ,(regexp-opt
-;;                 '("bugzilla-daemon@"))
-;;               "bugzilla")
-;;         (to ,binjo-private-avlab-account
-;;             (| ("from" ,(regexp-opt binjo-private-not-spam-group)
-;;                 "avlab")
-;;                "spam"))
-;;         (to ,binjo-private-psm-group
-;;             "psm")
-;;         "misc"))
 
 ;; (setq nnmail-split-methods 'nnmail-split-fancy)
 
