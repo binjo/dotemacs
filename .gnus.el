@@ -1,7 +1,6 @@
 ;; gnus
-(when (eq 0
-        (string-match "No" (gnus-version)))
-    (require 'gnus-load))
+(ignore-errors
+  (require 'gnus-load))
 
 (require 'gnushush)
 (setq gnushush-fqdn "unknown")
