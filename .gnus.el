@@ -192,9 +192,7 @@ PORT smtp service."
 
 ;;;
 (setq gnus-confirm-mail-reply-to-news t
-      message-kill-buffer-on-exit t
-      message-elide-ellipsis "[...]\n"
-      )
+      message-kill-buffer-on-exit t)
 
 ;; sort
 (setq gnus-thread-sort-functions
