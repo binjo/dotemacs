@@ -43,6 +43,7 @@
        (prefer-coding-system 'utf-8-emacs)))
 
 ;; font set
+;; TODO refactor this
 (when (eq system-type 'windows-nt)
   ;; copy from xwl's xwl-window.el
   (let* ((all-fonts
@@ -70,6 +71,23 @@
                               (car cf)
                               (font-spec :family (cdr cf) :size 16)))
           charset-fonts)))
+
+;; http://jff.googlecode.com/svn/trunk/XDE/xde/emacs/dot_emacs.d/site-start.d/01_font.el
+;; https://github.com/wd/emacs.d/blob/master/site-lisp/config/wd-misc.el
+(when (eq system-type 'darwin)
+  (let ((zh-font "STHeiTi:pixelsize=14")
+        (fontset "fontset-my"))
+    (create-fontset-from-fontset-spec
+     (concat
+      ;; "-unknown-DejaVu Sans Mono-*-*-*-*-15-*-*-*-*-*-" fontset
+      "-unknown-Monaco-*-*-*-*-12-*-*-*-*-*-" fontset
+      ",kana:"          zh-font
+      ",han:"           zh-font
+      ",symbol:"        zh-font
+      ",cjk-misc:"      zh-font
+      ",bopomofo:"      zh-font))
+    (set-default-font fontset)
+    (add-to-list 'default-frame-alist `(font . ,fontset))))
 
 (setq scroll-margin 3
       scroll-conservatively 10000)
