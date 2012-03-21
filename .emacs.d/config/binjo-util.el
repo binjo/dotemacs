@@ -204,3 +204,7 @@ and `require' PACKAGE dynamically."
     (async-shell-command cmd)))
 
 (global-set-key (kbd "M-&") 'binjo-async-shell-cmd)
+
+;; anything - helm
+(binjo-m-global-set-key-dynamic 'helm-config
+  ((kbd "C-c i") . 'helm-mini))

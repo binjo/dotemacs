@@ -67,6 +67,7 @@
             "~/.emacs.d/site-lisp/auto-complete"
             "~/share/emacs/site-lisp/gnus"
             "~/.emacs.d/site-lisp/slime"
+            "~/.emacs.d/site-lisp/helm"
             ))
 (dolist (path binjo-my-load-pathes)
   (when (file-exists-p path)
