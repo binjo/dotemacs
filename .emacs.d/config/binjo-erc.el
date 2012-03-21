@@ -38,7 +38,7 @@
 
 (setq erc-server-history-list '("irc.0x557.net"
                                 "irc.freenode.net"
-                                "im.bitlbee.org"
+                                "irc.mozilla.org"
                                 "127.0.0.1" ; stunnel to irc.0x557.net
                                 "irc.oftc.net"))
 
@@ -71,12 +71,12 @@
 (setq  erc-server-coding-system '(utf-8 . utf-8)
        erc-encoding-coding-alist '(("#segfault" . gb2312)
                                    ("#music" . gb2312)
-                                   ("#ph4nt0m" . gb2312)
-                                   ("&bitlbee" . gb2312)))
+                                   ("#ph4nt0m" . gb2312)))
 (setq erc-autojoin-channels-alist
       '(("freenode.net" "#metasploit" "#corelan" "##re")
         ("0x557.net" "#segfault" "#darpa" "#music")
-        ("oftc.net" "#emacs-cn")))
+        ("oftc.net" "#emacs-cn")
+        ("mozilla.org" "#security")))
 
 ;; trim erc nicks
 ;; (setq erc-format-nick-function 'xwl-erc-format-nick)
@@ -223,11 +223,11 @@
               :port 6667
               :nick erc-nick
               :password erc-0x557-password)
-  ;; bitlbee
-  ;; (erc-select :server "im.bitlbee.org"
-  ;;             :port 6667
-  ;;             :nick erc-nick
-  ;;             :password erc-bitlbee-pwd)
+  ;; mozilla
+  (erc-select :server "irc.mozilla.org"
+              :port 6667
+              :nick erc-nick
+              :password erc-password)
   )
 
 (provide 'binjo-erc)
