@@ -111,14 +111,14 @@ switch back to the last non-twittering-mode buffer visited."
   '(progn
      ;; redefine service method table
      (setq twittering-service-method-table
-           `((twitter (api ,binjo-twitter-api-url)
-                      (search ,binjo-twitter-search-url)
-                      (web ,binjo-twitter-api-url)
-                      (stream ,binjo-twitter-stream-url)
-                      (userstream ,binjo-twitter-userstream-url)
-                      (api-prefix "1/")
-                      (status-url twittering-get-status-url-twitter)
-                      (search-url twittering-get-search-url-twitter))
+           ;; `((twitter (api ,binjo-twitter-api-url)
+           ;;            (search ,binjo-twitter-search-url)
+           ;;            (web ,binjo-twitter-api-url)
+           ;;            (stream ,binjo-twitter-stream-url)
+           ;;            (userstream ,binjo-twitter-userstream-url)
+           ;;            (api-prefix "1/")
+           ;;            (status-url twittering-get-status-url-twitter)
+           ;;            (search-url twittering-get-search-url-twitter))
              (sina (api "api.t.sina.com.cn")
                    (web "t.sina.com.cn")
                    (oauth-request-token-url-without-scheme "://api.t.sina.com.cn/oauth/request_token")
@@ -156,21 +156,21 @@ switch back to the last non-twittering-mode buffer visited."
                       (auth basic))))
 
      (setq twittering-initial-timeline-spec-string
-           '(":home@twitter" ":home@sina" ":home@douban" ":mentions@twitter" ":replies@sina"))
+           '(":home@sina" ":home@douban" ":replies@sina"))
 
      (setq twittering-oauth-use-ssl       nil
            twittering-use-ssl             nil
            twittering-allow-insecure-server-cert t
            twittering-use-master-password t)
 
-     (set-face-background twittering-zebra-1-face "gray24")
-     (set-face-background twittering-zebra-2-face "gray22")
+     ;; (set-face-background twittering-zebra-1-face "gray24")
+     ;; (set-face-background twittering-zebra-2-face "gray22")
 
-     (setq twittering-status-format
-           "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FOLD[       ]{%t}}\n"
-           twittering-my-status-format
-           "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FOLD[       ]{%t}}\n"
-           twittering-retweet-format "RT @%s: %t")
+     ;; (setq twittering-status-format
+     ;;       "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FOLD[       ]{%t}}\n"
+     ;;       twittering-my-status-format
+     ;;       "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FOLD[       ]{%t}}\n"
+     ;;       twittering-retweet-format "RT @%s: %t")
 
      (setq twittering-url-show-status nil
            twittering-notify-successful-http-get nil)
@@ -222,18 +222,18 @@ enable icon mode and unread status notifier."
                                        (twittering-icon-mode 1)
                                        (twittering-enable-unread-status-notifier)))
 
-     (define-key twittering-mode-map "c" 'twittering-current-timeline)
+     ;; (define-key twittering-mode-map "c" 'twittering-current-timeline)
 
-     (define-key twittering-mode-map "n" 'twittering-goto-next-status)
-     (define-key twittering-mode-map "p" 'twittering-goto-previous-status)
-     (define-key twittering-mode-map "N" 'twittering-goto-next-status-of-user)
-     (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
-     (define-key twittering-mode-map "q" 'twittering-suspend)
-     (define-key twittering-mode-map "F" 'twittering-follow)
-     (define-key twittering-mode-map "K" 'twittering-unfollow)
-     (define-key twittering-mode-map "R" 'twittering-reply-to-user)
-     (define-key twittering-mode-map "f" 'binjo-twittering-track-switch-buffer)
-     (define-key twittering-mode-map "o" 'binjo-twittering-browse-short-url)
+     ;; (define-key twittering-mode-map "n" 'twittering-goto-next-status)
+     ;; (define-key twittering-mode-map "p" 'twittering-goto-previous-status)
+     ;; (define-key twittering-mode-map "N" 'twittering-goto-next-status-of-user)
+     ;; (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
+     ;; (define-key twittering-mode-map "q" 'twittering-suspend)
+     ;; (define-key twittering-mode-map "F" 'twittering-follow)
+     ;; (define-key twittering-mode-map "K" 'twittering-unfollow)
+     ;; (define-key twittering-mode-map "R" 'twittering-reply-to-user)
+     ;; (define-key twittering-mode-map "f" 'binjo-twittering-track-switch-buffer)
+     ;; (define-key twittering-mode-map "o" 'binjo-twittering-browse-short-url)
 
      (global-set-key (kbd "C-c t t") 'binjo-twittering-jmp)
      (global-set-key (kbd "C-c t j") 'binjo-twittering-track-switch-buffer)

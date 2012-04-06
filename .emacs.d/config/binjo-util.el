@@ -78,8 +78,8 @@ and `require' PACKAGE dynamically."
                                 (require 'binjo-org)))
 
 ;; twit.el
-(add-hook 'window-setup-hook '(lambda ()
-                                (require 'binjo-twit)))
+;; (add-hook 'window-setup-hook '(lambda ()
+;;                                 (require 'binjo-twit)))
 
 ;; smex
 (binjo-m-global-set-key-dynamic 'smex
