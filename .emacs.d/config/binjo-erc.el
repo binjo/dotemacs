@@ -36,11 +36,10 @@
 ;;; Code:
 (require 'erc)
 
-(setq erc-server-history-list '("irc.0x557.net"
-                                "irc.freenode.net"
-                                "irc.mozilla.org"
-                                "127.0.0.1" ; stunnel to irc.0x557.net
-                                "irc.oftc.net"))
+(setq erc-server-history-list
+      (mapcar '(lambda (x)
+                 (plist-get x :server))
+              binjo-private-erc-hosts))
 
 (setq erc-mode-line-format "%t %a"
       erc-timestamp-format "%H:%M "
@@ -72,11 +71,16 @@
        erc-encoding-coding-alist '(("#segfault" . gb2312)
                                    ("#music" . gb2312)
                                    ("#ph4nt0m" . gb2312)))
+
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#metasploit" "#corelan" "##re")
-        ("0x557.net" "#segfault" "#darpa" "#music")
-        ("oftc.net" "#emacs-cn")
-        ("mozilla.org" "#security")))
+      (mapcar '(lambda (x)
+                 (let* ((server (plist-get x :server))
+                        (channels (plist-get x :channels))
+                        (revres (reverse (split-string server "\\.")))
+                        server-regex)
+                   (setq server-regex (concat (nth 1 revres) "." (nth 0 revres)))
+                   (cons server-regex channels)))
+              binjo-private-erc-hosts))
 
 ;; trim erc nicks
 ;; (setq erc-format-nick-function 'xwl-erc-format-nick)
@@ -208,27 +212,22 @@
 (defun binjo-erc-select ()
   "Copy of xwl's xwl-erc-select."
   (interactive)
-  ;; freenode
-  (erc-select :server "irc.freenode.net"
-              :port 6667
-              :nick erc-nick
-              :password erc-password)
-  ;; #emacs-cn
-  (erc-select :server "irc.oftc.net"
-              :port 6667
-              :nick erc-nick
-              :password erc-password)
-  ;; 0x557
-  (erc-select :server "localhost"
-              :port 6667
-              :nick erc-nick
-              :password erc-0x557-password)
-  ;; mozilla
-  (erc-select :server "irc.mozilla.org"
-              :port 6667
-              :nick erc-nick
-              :password erc-password)
-  )
+  (mapc '(lambda (x)
+           (let ((server (plist-get x :server))
+                 (port (plist-get x :port))
+                 (nick (plist-get x :nick))
+                 (password (plist-get x :password))
+                 (ssl-p (plist-get x :ssl-p)))
+             (if ssl-p
+                 (erc-ssl :server server
+                          :port port
+                          :nick nick
+                          :password password)
+               (erc-select :server server
+                           :port port
+                           :nick nick
+                           :password password))))
+        binjo-private-erc-hosts))
 
 (provide 'binjo-erc)
 (eval-when-compile
