@@ -56,8 +56,6 @@
             "~/.emacs.d/site-lisp/twittering-mode"
             "~/.emacs.d/site-lisp/magit"
             "~/.emacs.d/site-lisp/magithub"
-            "~/.emacs.d/site-lisp/org/lisp"
-            "~/.emacs.d/site-lisp/org/contrib/lisp"
             "~/.emacs.d/site-lisp/ioccur"
             "~/.emacs.d/site-lisp/undo-tree"
             "~/.emacs.d/site-lisp/emacs-jabber"
@@ -65,7 +63,6 @@
             "~/.emacs.d/site-lisp/php-mode"
             "~/.emacs.d/site-lisp/haskell-mode"
             "~/.emacs.d/site-lisp/auto-complete"
-            "~/share/emacs/site-lisp/gnus"
             "~/.emacs.d/site-lisp/slime"
             "~/.emacs.d/site-lisp/helm"
             ))

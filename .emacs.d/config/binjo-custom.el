@@ -7,7 +7,7 @@
  '(canlock-password "31f72e77a9331e61ce98a230d1fbff79785c568a")
  '(column-number-mode t)
  '(custom-enabled-themes (quote (jschaf)))
- '(custom-safe-themes (quote ("9bfadc3257f16106c57a3511e85d26db32555528" default)))
+ '(custom-safe-themes (quote ("f58e069374e891fdddb372c61f648956813cf3c9803429986d56ef76fdc2c84c" "9bfadc3257f16106c57a3511e85d26db32555528" default)))
  '(default-tab-width 4 t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -26,8 +26,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(erc-timestamp-face ((t (:foreground "brown" :weight bold))))
- '(highlight-changes ((((min-colors 88) (class color)) (:background "purple1"))))
- )
+ '(highlight-changes ((((min-colors 88) (class color)) (:background "purple1")))))
 
 ;; Turn off the annoying default backup behaviour
 (if (file-directory-p "~/.emacs.d/backup")
