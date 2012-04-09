@@ -130,6 +130,14 @@ PORT smtp service."
                   binjo-private-gnus-imap-settings)
         ))
 
+;; banner alist for hiding
+(dolist (banner-item binjo-private-gnus-banner-alist)
+  (let ((banner-name (intern (plist-get banner-item :name)))
+        (banner-regx (plist-get banner-item :regexp))
+        (banner-bner (plist-get banner-item :banner)))
+    (add-to-list 'gnus-parameter-banner-alist `(,banner-regx . ,banner-name))
+    (add-to-list 'gnus-article-banner-alist `(,banner-name . ,banner-bner))))
+
 ;; auto fill
 (add-hook 'message-mode-hook
    (lambda ()
