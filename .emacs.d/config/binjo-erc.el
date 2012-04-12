@@ -36,6 +36,14 @@
 ;;; Code:
 (require 'erc)
 
+(defadvice erc-generate-new-buffer-name (after binjo-ad-rename-buffer-uniquify activate)
+  "Uniquify erc buffer names with parts of server name."
+  (let* ((server (ad-get-arg 0))
+         (target (ad-get-arg 2))
+         (server-name (nth 1 (reverse (split-string server "\\.")))))
+    (if (string-match ">$" ad-return-value)
+        (setq ad-return-value (concat target ":" server-name)))))
+
 (setq erc-server-history-list
       (mapcar '(lambda (x)
                  (plist-get x :server))
