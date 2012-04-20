@@ -166,7 +166,7 @@ PORT smtp service."
       gnus-sum-thread-tree-vertical "│"
       gnus-sum-thread-tree-single-leaf "└─▶ ")
 
-(setq gnus-summary-line-format "%8{%4L│%}%9{%U%R%z%}%8{│%}%*%(%-23,23f%)%8{│%}%9{%-23,23&user-date;%}%7{│%} %6{%B%} %s\n")
+(setq gnus-summary-line-format "%8{%4L│%}%9{%U%R%z%}%8{│%}%*%(%-23,23f%)%8{│%}%9{%-23,23&user-date;%}%7{%*│%} %6{%B%} %s\n")
 
 ;; score
 (setq gnus-use-adaptive-scoring t
