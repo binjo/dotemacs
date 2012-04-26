@@ -82,7 +82,9 @@
       (forward-line))))
 
 (when (eq system-type 'darwin)
-  (add-to-list 'exec-path "/usr/local/bin/"))
+  (add-to-list 'exec-path "/usr/local/bin/")
+  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/gnus/")
+  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/org/"))
 
 (provide 'binjo-path)
 ;;; binjo-path.el ends here
