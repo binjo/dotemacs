@@ -127,7 +127,11 @@
          :empty-lines 1)
         ("C" "Contacts" entry
          (file+headline "contacts.org" "Contacts")
-         "* %(org-contacts-template-name)\n  :PROPERTIES:\n  :EMAIL: %(org-contacts-template-email)\n  :END:")))
+         "* %(org-contacts-template-name)\n  :PROPERTIES:\n  :EMAIL: %(org-contacts-template-email)\n  :END:")
+        ("m" "Mail" entry
+         (file+headline "todo.org" "Todo")
+         "* %^{Summary}\n  :TIMESTAMP: %T\n\n   %a"
+         :empty-lines 1)))
 
 (setq org-default-notes-file (concat org-directory "notes.org"))
 
