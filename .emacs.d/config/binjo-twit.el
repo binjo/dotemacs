@@ -175,17 +175,17 @@ switch back to the last non-twittering-mode buffer visited."
      (setq twittering-url-show-status nil
            twittering-notify-successful-http-get nil)
 
-     (if binjo-at-company-p
-         (twittering-toggle-proxy)
-       ;; fuck gfw
-       (defadvice start-process (before binjo-ad-proxy-on-appspot activate)
-         "Set proxy for appspot.com, uri in call-args should be the last one."
-         (let* ((name (ad-get-arg 0))
-                (call-args (ad-get-args 3))
-                (appspot-p (and call-args
-                                (string-match binjo-twitter-host-url (car (reverse call-args))))))
-           (when appspot-p
-               (ad-set-args 3 `(,@call-args "-x" "localhost:8087"))))))
+     ;; (if binjo-at-company-p
+     ;;     (twittering-toggle-proxy)
+     ;;   ;; fuck gfw
+     ;;   (defadvice start-process (before binjo-ad-proxy-on-appspot activate)
+     ;;     "Set proxy for appspot.com, uri in call-args should be the last one."
+     ;;     (let* ((name (ad-get-arg 0))
+     ;;            (call-args (ad-get-args 3))
+     ;;            (appspot-p (and call-args
+     ;;                            (string-match binjo-twitter-host-url (car (reverse call-args))))))
+     ;;       (when appspot-p
+     ;;           (ad-set-args 3 `(,@call-args "-x" "localhost:8087"))))))
 
      (setq twittering-update-status-function
            'twittering-update-status-from-pop-up-buffer)

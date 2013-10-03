@@ -102,14 +102,14 @@ and `require' PACKAGE dynamically."
                                 ((kbd "C-c b y") . 'boxquote-yank))
 
 ;; YASnippet
-(add-hook 'window-setup-hook '(lambda ()
-                                (require 'yasnippet)
-                                (setq yas/snippet-dirs "~/.emacs.d/snippets")
-                                (yas/initialize)
-                                (set-default 'yas/dont-activate
-                                             #'(lambda ()
-                                                 (and yas/root-directory
-                                                      (null (yas/get-snippet-tables)))))))
+;; (add-hook 'window-setup-hook '(lambda ()
+;;                                 (require 'yasnippet)
+;;                                 (setq yas/snippet-dirs "~/.emacs.d/snippets")
+;;                                 (yas/initialize)
+;;                                 (set-default 'yas/dont-activate
+;;                                              #'(lambda ()
+;;                                                  (and yas/root-directory
+;;                                                       (null (yas/get-snippet-tables)))))))
 
 ;;; anchiva
 (binjo-m-global-set-key-dynamic 'anchiva
@@ -127,17 +127,17 @@ and `require' PACKAGE dynamically."
   '(setq babel-preferred-to-language "Chinese (Simplified)"))
 
 ;; emms
-(add-hook 'window-setup-hook '(lambda ()
-                                (require 'binjo-emms)))
+;; (add-hook 'window-setup-hook '(lambda ()
+;;                                 (require 'binjo-emms)))
 
 ;; douban
 (binjo-m-global-set-key-dynamic 'douban-emacs
                                 ((kbd "C-c d n") . 'douban-create-note))
 
-(if binjo-at-company-p
-    (progn
-      (require 'edit-server)
-      (edit-server-start)))
+;; (if binjo-at-company-p
+;;     (progn
+;;       (require 'edit-server)
+;;       (edit-server-start)))
 
 (binjo-m-global-set-key-dynamic 'binjo-magit
                                 ((kbd "C-c g m") . 'magit-status)

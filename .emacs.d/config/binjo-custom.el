@@ -299,9 +299,9 @@ This is because some levels' updating takes too long time."
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; proxy
-(if binjo-at-company-p
-    (setq url-proxy-services '(("http" . "172.25.25.4:808"))
-          url-using-proxy t))
+;; (if binjo-at-company-p
+;;     (setq url-proxy-services '(("http" . "172.25.25.4:808"))
+;;           url-using-proxy t))
 
 ;; Shut off compiler error pop-up warning about
 ;;    save-excursion defeated by set-buffer
