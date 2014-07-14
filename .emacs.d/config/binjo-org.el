@@ -39,8 +39,7 @@
 (eval-when-compile
   (require 'cl))
 
-(require 'org-install)
-(require 'org-google-weather)
+(require 'org)
 (ignore-errors (require 'org-contacts))
 
 (defvar binjo-org-files
@@ -56,10 +55,9 @@
 
 (setq org-directory "~/.emacs.d/org/")
 
-(setq org-agenda-files (mapcar
-                        (lambda (f)
-                          (concat org-directory f))
-                        binjo-org-files))
+(dolist (f binjo-org-files)
+  (when (file-exists-p (concat org-directory f))
+    (add-to-list 'org-agenda-files (concat org-directory f))))
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "STARTED(s!)" "LATER(l)" "|" "DONE(d!)" "CANCELLED(c!)")))
@@ -129,17 +127,20 @@
          (file+headline "contacts.org" "Contacts")
          "* %(org-contacts-template-name)\n  :PROPERTIES:\n  :EMAIL: %(org-contacts-template-email)\n  :END:")))
 
+(setq org-capture-templates
+      (append org-capture-templates binjo-private-org-symc-template))
+
 (setq org-default-notes-file (concat org-directory "notes.org"))
-
-;; org-google-weather
-(setq org-google-weather-icon-directory
-      "~/w32/GNOME_Weather_Icons_by_DarKobra/48x48/status")
-
-;; fuck gfw...
-(setq google-weather-use-https nil)
 
 ;; org contacts
 (setq org-contacts-files `(,(concat org-directory "contacts.org")))
+
+;; org-babel
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)))
+(setq org-confirm-babel-evaluate nil)
+(add-to-list 'org-structure-template-alist binjo-private-org-symc-babel)
 
 
 (provide 'binjo-org)

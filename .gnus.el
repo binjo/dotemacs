@@ -26,16 +26,17 @@
               (nnir-search-engine gmane)
               (nntp-open-connection-function network-only))
 
-        ,@(mapcar '(lambda (x)
-                     (let ((imap-lable (plist-get x :imap-labl))
-                           (imap-address (plist-get x :imap-addr))
-                           (imap-port (plist-get x :imap-port))
-                           (imap-stream (plist-get x :imap-strm)))
-                       `(nnimap ,imap-lable
-                                (nnimap-address ,imap-address)
-                                (nnimap-server-port ,imap-port)
-                                (nnimap-stream ,imap-stream))))
-                  binjo-private-gnus-imap-settings)))
+        ;; ,@(mapcar '(lambda (x)
+        ;;              (let ((imap-lable (plist-get x :imap-labl))
+        ;;                    (imap-address (plist-get x :imap-addr))
+        ;;                    (imap-port (plist-get x :imap-port))
+        ;;                    (imap-stream (plist-get x :imap-strm)))
+        ;;                `(nnimap ,imap-lable
+        ;;                         (nnimap-address ,imap-address)
+        ;;                         (nnimap-server-port ,imap-port)
+        ;;                         (nnimap-stream ,imap-stream))))
+        ;;           binjo-private-gnus-imap-settings)
+        ))
 
 
 ;;;; Send/Fetch Mails/Messages

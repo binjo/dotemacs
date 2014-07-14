@@ -115,9 +115,16 @@
 (binjo-m-global-set-key-dynamic 'cdb-gud
   ((kbd "C-c d b") . 'cdb))
 
-;; auto-complete
-(when (not (eq system-type 'windows-nt))
-  (require 'auto-complete-config)
-  (add-to-list 'ac-dictionary-directories
-               "~/.emacs.d/site-lisp/auto-complete/ac-dict")
-  (ac-config-default))
+;; ;; auto-complete
+;; (when (not (eq system-type 'windows-nt))
+;;   (require 'auto-complete-config)
+;;   (add-to-list 'ac-dictionary-directories
+;;                "~/.emacs.d/site-lisp/auto-complete/ac-dict")
+;;   (ac-config-default))
+
+;; symcsig-mode
+(require 'symcsig-mode)
+(add-to-list 'auto-mode-alist '("\\.sig$" . symcsig-mode))
+
+;; canary
+(add-to-list 'auto-mode-alist '("\\.can$" . c-mode))

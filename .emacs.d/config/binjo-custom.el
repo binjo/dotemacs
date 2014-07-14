@@ -14,11 +14,13 @@
  '(initial-scratch-message nil)
  '(menu-bar-mode nil)
  '(message-log-max 2000)
+ '(org-agenda-files nil)
  '(parens-require-spaces nil)
  '(safe-local-variable-values (quote ((insert-tabs-mode) (encoding . utf-8) (TeX-master . t))))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-stop-list nil)
+ '(global-auto-revert-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -26,7 +28,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(erc-timestamp-face ((t (:foreground "brown" :weight bold))))
- '(highlight-changes ((((min-colors 88) (class color)) (:background "purple1")))))
+ '(highlight-changes ((((min-colors 88) (class color)) (:background "purple1"))) t))
 
 ;; Turn off the annoying default backup behaviour
 (if (file-directory-p "~/.emacs.d/backup")
@@ -213,7 +215,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'window-setup-hook '(lambda ()
                                 (require 'template)
-                                (template-initialize)))
+                                (template-initialize)
+                                ;; set template's date format for symcsig
+                                (add-to-list 'template-default-expansion-alist
+                                             '("SYMC_DATE" (template-insert-time "%m/%d/%Y" "00/00/0000")))))
 
 ;; saveplace - emacs-fu
 (add-hook 'window-setup-hook '(lambda ()
