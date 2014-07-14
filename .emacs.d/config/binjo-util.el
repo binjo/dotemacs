@@ -102,14 +102,14 @@ and `require' PACKAGE dynamically."
                                 ((kbd "C-c b y") . 'boxquote-yank))
 
 ;; YASnippet
-(add-hook 'window-setup-hook '(lambda ()
-                                (require 'yasnippet)
-                                (setq yas/snippet-dirs "~/.emacs.d/snippets")
-                                (yas/initialize)
-                                (set-default 'yas/dont-activate
-                                             #'(lambda ()
-                                                 (and yas/root-directory
-                                                      (null (yas/get-snippet-tables)))))))
+;; (add-hook 'window-setup-hook '(lambda ()
+;;                                 (require 'yasnippet)
+;;                                 (setq yas/snippet-dirs "~/.emacs.d/snippets")
+;;                                 (yas/initialize)
+;;                                 (set-default 'yas/dont-activate
+;;                                              #'(lambda ()
+;;                                                  (and yas/root-directory
+;;                                                       (null (yas/get-snippet-tables)))))))
 
 ;;; anchiva
 (binjo-m-global-set-key-dynamic 'anchiva

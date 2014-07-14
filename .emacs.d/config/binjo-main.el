@@ -73,8 +73,9 @@
            (w32-send-sys-command 61488))
          ;; Maximum Windows Frame
          (add-hook 'window-setup-hook 'w32-maximize-frame t)))
-      ((eq system-type 'darwin)
-       (add-hook 'window-setup-hook 'ns-toggle-fullscreen t)))
+      ;; ((eq system-type 'darwin)
+      ;;  (add-hook 'window-setup-hook 'ns-toggle-fullscreen t))
+      )
 
 (add-hook 'window-setup-hook 'server-start t)
 

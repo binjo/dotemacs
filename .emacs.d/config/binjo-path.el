@@ -65,6 +65,7 @@
             "~/.emacs.d/site-lisp/auto-complete"
             "~/.emacs.d/site-lisp/slime"
             "~/.emacs.d/site-lisp/helm"
+            "~/.emacs.d/site-lisp/web-mode"
             ))
 (dolist (path binjo-my-load-pathes)
   (when (file-exists-p path)

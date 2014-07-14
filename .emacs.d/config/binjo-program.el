@@ -33,13 +33,21 @@
   '(progn
      (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
      (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
-     (autoload 'run-ruby "inf-ruby"
-       "Run an inferior Ruby process")
-     (autoload 'inf-ruby-keys "inf-ruby"
-       "Set local key defs for inf-ruby in ruby-mode")
+     ;; (autoload 'run-ruby "inf-ruby"
+     ;;   "Run an inferior Ruby process")
+     ;; (autoload 'inf-ruby-keys "inf-ruby"
+     ;;   "Set local key defs for inf-ruby in ruby-mode")
      (add-hook 'ruby-mode-hook
                '(lambda ()
-                  (inf-ruby-keys)))
+                  ;; (inf-ruby-keys)
+                  (if (string-match "metasploit" buffer-file-name)
+                      (progn
+                        (make-local-variable 'indent-tabs-mode)
+                        (make-local-variable 'ruby-indent-tabs-mode)
+                        (make-local-variable 'ruby-indent-level)
+                        (setq indent-tabs-mode t)
+                        (setq ruby-indent-level 4)
+                        (setq ruby-indent-tabs-mode t)))))
      ;; If you have Emacs 19.2x or older, use rubydb2x
      (autoload 'rubydb "rubydb3x" "Ruby debugger" t)
      ;; uncomment the next line if you want syntax highlighting
