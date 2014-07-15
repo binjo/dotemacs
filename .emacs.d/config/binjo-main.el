@@ -40,17 +40,19 @@
 
 
 (add-to-list 'load-path "~/.emacs.d/config")
-(load "init-el-get.el")
+
+(require 'init-el-get)
 
 (ignore-errors
-  (load "binjo-private.el"))
+  (require 'binjo-private))
 
 (setq custom-file "~/.emacs.d/config/binjo-custom.el")
 
 ;; load config files
-(load "binjo-custom.el")
-(load "binjo-util.el")
-(load "binjo-program.el")
+(require 'binjo-path)
+(require 'binjo-custom)
+(require 'binjo-util)
+(require 'binjo-program)
 
 ;; awkward hack...
 (eval-after-load "binjo-custom.el"

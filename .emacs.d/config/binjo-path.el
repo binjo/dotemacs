@@ -39,37 +39,6 @@
 
 
 
-(setq binjo-my-load-pathes
-      (list "~/.emacs.d/site-lisp"
-            "~/.emacs.d/config"
-            "~/.emacs.d/site-lisp/wubi"
-            "~/.emacs.d/site-lisp/template/lisp"
-            "~/.emacs.d/site-lisp/ruby-mode"
-            "~/.emacs.d/site-lisp/ejacs"
-            "~/.emacs.d/site-lisp/bbdb-2.35/lisp"
-            "~/.emacs.d/site-lisp/smex"
-            "~/.emacs.d/site-lisp/yasnippet"
-            "~/.emacs.d/site-lisp/emms/lisp"
-            "~/.emacs.d/site-lisp/douban"
-            "~/.emacs.d/site-lisp/emacs_chrome/servers"
-            "~/.emacs.d/site-lisp/twit"
-            "~/.emacs.d/site-lisp/twittering-mode"
-            "~/.emacs.d/site-lisp/magit"
-            "~/.emacs.d/site-lisp/magithub"
-            "~/.emacs.d/site-lisp/ioccur"
-            "~/.emacs.d/site-lisp/undo-tree"
-            "~/.emacs.d/site-lisp/emacs-jabber"
-            "~/.emacs.d/site-lisp/google-weather-el"
-            "~/.emacs.d/site-lisp/php-mode"
-            "~/.emacs.d/site-lisp/haskell-mode"
-            "~/.emacs.d/site-lisp/auto-complete"
-            "~/.emacs.d/site-lisp/slime"
-            "~/.emacs.d/site-lisp/helm"
-            ))
-(dolist (path binjo-my-load-pathes)
-  (when (file-exists-p path)
-    (add-to-list 'load-path path)))
-
 (when (and (eq system-type 'windows-nt)
            (file-readable-p "~/.emacs.d/config/mypath"))
   (with-temp-buffer
@@ -82,9 +51,7 @@
       (forward-line))))
 
 (when (eq system-type 'darwin)
-  (add-to-list 'exec-path "/usr/local/bin/")
-  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/gnus/")
-  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/org/"))
+  (add-to-list 'exec-path "/usr/local/bin/"))
 
 (provide 'binjo-path)
 ;;; binjo-path.el ends here

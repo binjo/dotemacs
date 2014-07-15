@@ -128,3 +128,5 @@
 
 ;; canary
 (add-to-list 'auto-mode-alist '("\\.can$" . c-mode))
+
+(provide 'binjo-program)

@@ -50,6 +50,8 @@
 (setq binjo:el-get-packages
       '(el-get
         slothful
+        pymacs
+        company-mode
         browse-kill-ring
         emacs-template
         session
@@ -65,3 +67,5 @@
         ))
 
 (el-get 'sync binjo:el-get-packages)
+
+(provide 'init-el-get)

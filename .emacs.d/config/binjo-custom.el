@@ -379,3 +379,5 @@ This is because some levels' updating takes too long time."
 
 (add-hook 'c++-mode-hook 'binjo-set-c-c++-style)
 (add-hook 'c-mode-hook 'binjo-set-c-c++-style)
+
+(provide 'binjo-custom)
