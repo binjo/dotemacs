@@ -1,0 +1,10 @@
+(:name emacs-template
+       :description "When you create a new file with Emacs, package Template supplies an initial
+buffer content via a template: a file with normal text and expansion
+forms. There is a menu to easily create such templates. You can also use new
+commands to decorate comments."
+       :type http-tar
+       :options ("xzf")
+       :load-path ("lisp")
+       :url "http://downloads.sourceforge.net/project/emacs-template/template/3.1c/template-3.1c.tar.gz"
+       :features "template")

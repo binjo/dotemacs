@@ -6,9 +6,11 @@
  '(ansi-color-for-comint-mode nil)
  '(canlock-password "31f72e77a9331e61ce98a230d1fbff79785c568a")
  '(column-number-mode t)
- '(custom-enabled-themes (quote (jschaf)))
- '(custom-safe-themes (quote ("f58e069374e891fdddb372c61f648956813cf3c9803429986d56ef76fdc2c84c" "9bfadc3257f16106c57a3511e85d26db32555528" default)))
+ '(custom-safe-themes
+   (quote
+    ("f58e069374e891fdddb372c61f648956813cf3c9803429986d56ef76fdc2c84c" "9bfadc3257f16106c57a3511e85d26db32555528" default)))
  '(default-tab-width 4 t)
+ '(global-auto-revert-mode t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
@@ -16,11 +18,27 @@
  '(message-log-max 2000)
  '(org-agenda-files nil)
  '(parens-require-spaces nil)
- '(safe-local-variable-values (quote ((insert-tabs-mode) (encoding . utf-8) (TeX-master . t))))
+ '(safe-local-variable-values
+   (quote
+    ((eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
+           (add-hook
+            (quote write-contents-functions)
+            (lambda nil
+              (delete-trailing-whitespace)
+              nil))
+           (require
+            (quote whitespace))
+           "Sometimes the mode needs to be toggled off and on."
+           (whitespace-mode 0)
+           (whitespace-mode 1))
+     (whitespace-line-column . 80)
+     (whitespace-style face tabs trailing lines-tail)
+     (insert-tabs-mode)
+     (encoding . utf-8)
+     (TeX-master . t))))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-stop-list nil)
- '(global-auto-revert-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -136,9 +154,8 @@
     (if (file-exists-p tag-fil)
         (add-to-list 'tags-table-list tag-fil))))
 
-(binjo-m-global-set-key-dynamic 'etags-select
-                                ((kbd "M-?") . 'etags-select-find-tag-at-point)
-                                ((kbd "M-.") . 'etags-select-find-tag))
+(global-set-key (kbd "M-?") 'etags-select-find-tag-at-point)
+(global-set-key (kbd "M-.") 'etags-select-find-tag)
 
 ;; Color theme related
 ;; (add-hook 'window-setup-hook '(lambda ()
@@ -171,8 +188,7 @@
 ;; (require 'ibuffer)
 
 ;; browser-kill-ring
-(binjo-m-global-set-key-dynamic 'browse-kill-ring
-                                ((kbd "C-c k") . 'browse-kill-ring))
+(global-set-key (kbd "C-c k") 'browse-kill-ring)
 (eval-after-load 'browse-kill-ring
   '(browse-kill-ring-default-keybindings))
 
@@ -193,22 +209,22 @@
     (define-key dired-mode-map "X" 'dired-custom-execute-file))
   (add-hook 'dired-mode-hook 'dired-custom-dired-mode-hook))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wubi
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(register-input-method
- "chinese-wubi" "Chinese-GB" 'quail-use-package
- "WuBi" "WuBi"
- "wubi")
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;; wubi
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (register-input-method
+;;  "chinese-wubi" "Chinese-GB" 'quail-use-package
+;;  "WuBi" "WuBi"
+;;  "wubi")
 
-(setq default-input-method "chinese-wubi")
-(defadvice toggle-input-method (before load-wubi activate)
-  (require 'wubi))
+;; (setq default-input-method "chinese-wubi")
+;; (defadvice toggle-input-method (before load-wubi activate)
+;;   (require 'wubi))
 
-(eval-after-load 'wubi
-  '(progn
-     (setq wubi-phrases-file "~/.wubi-phrases.el")
-     (ignore-errors (wubi-load-local-phrases))))
+;; (eval-after-load 'wubi
+;;   '(progn
+;;      (setq wubi-phrases-file "~/.wubi-phrases.el")
+;;      (ignore-errors (wubi-load-local-phrases))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; template
@@ -280,9 +296,8 @@ This is because some levels' updating takes too long time."
 (global-set-key (kbd "C-x g") 'gnus)
 
 ;; grep
-(binjo-m-global-set-key-dynamic 'grep
-                                ((kbd "C-c m g") . 'grep)
-                                ((kbd "C-c m G") . 'grep-find))
+(global-set-key (kbd "C-c m g") 'grep)
+(global-set-key (kbd "C-c m G") 'grep-find)
 (when (eq system-type 'windows-nt)
   (eval-after-load 'grep
     '(progn
@@ -302,11 +317,6 @@ This is because some levels' updating takes too long time."
 
 ;; get rid of 'yes/no'
 (defalias 'yes-or-no-p 'y-or-n-p)
-
-;; proxy
-;; (if binjo-at-company-p
-;;     (setq url-proxy-services '(("http" . "172.25.25.4:808"))
-;;           url-using-proxy t))
 
 ;; Shut off compiler error pop-up warning about
 ;;    save-excursion defeated by set-buffer

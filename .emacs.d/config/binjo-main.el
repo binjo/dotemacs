@@ -39,20 +39,21 @@
 
 
 
-;; path and private thing first.
-(load "~/.emacs.d/config/binjo-path.el")
+(add-to-list 'load-path "~/.emacs.d/config")
+(load "init-el-get.el")
+
 (ignore-errors
-  (load "~/.emacs.d/config/binjo-private.el"))
+  (load "binjo-private.el"))
 
 (setq custom-file "~/.emacs.d/config/binjo-custom.el")
 
 ;; load config files
-(load "~/.emacs.d/config/binjo-util.el")
-(load "~/.emacs.d/config/binjo-custom.el")
-(load "~/.emacs.d/config/binjo-program.el")
+(load "binjo-custom.el")
+(load "binjo-util.el")
+(load "binjo-program.el")
 
 ;; awkward hack...
-(eval-after-load "~/.emacs.d/config/binjo-custom.el"
+(eval-after-load "binjo-custom.el"
   (loop for x downfrom 40 to 1 do
         (setq tab-stop-list (cons (* x 4) tab-stop-list))))
 
@@ -73,8 +74,9 @@
            (w32-send-sys-command 61488))
          ;; Maximum Windows Frame
          (add-hook 'window-setup-hook 'w32-maximize-frame t)))
-      ((eq system-type 'darwin)
-       (add-hook 'window-setup-hook 'ns-toggle-fullscreen t)))
+      ;; ((eq system-type 'darwin)
+      ;;  (add-hook 'window-setup-hook 'ns-toggle-fullscreen t))
+      )
 
 (add-hook 'window-setup-hook 'server-start t)
 

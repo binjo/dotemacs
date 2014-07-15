@@ -111,33 +111,12 @@ and `require' PACKAGE dynamically."
 ;;                                                  (and yas/root-directory
 ;;                                                       (null (yas/get-snippet-tables)))))))
 
-;;; anchiva
-(binjo-m-global-set-key-dynamic 'anchiva
-                                ((kbd "C-c v u") . 'anchiva-submit-sample)
-                                ((kbd "C-c v t") . 'anchiva-check-mwcs-test)
-                                ((kbd "C-c v m") . 'anchiva-submit-sig-mwcs)
-                                ((kbd "C-c v b") . 'anchiva-browse-all-urls)
-                                ((kbd "C-c v s") . 'anchiva-pop-sig-buffer))
-
 ;; babel, use online api to translate
 (binjo-m-global-set-key-dynamic 'babel
                                 ((kbd "C-c t r") . 'babel-region)
                                 ((kbd "C-c t b") . 'babel))
 (eval-after-load 'babel
   '(setq babel-preferred-to-language "Chinese (Simplified)"))
-
-;; emms
-;; (add-hook 'window-setup-hook '(lambda ()
-;;                                 (require 'binjo-emms)))
-
-;; douban
-(binjo-m-global-set-key-dynamic 'douban-emacs
-                                ((kbd "C-c d n") . 'douban-create-note))
-
-;; (if binjo-at-company-p
-;;     (progn
-;;       (require 'edit-server)
-;;       (edit-server-start)))
 
 (binjo-m-global-set-key-dynamic 'binjo-magit
                                 ((kbd "C-c g m") . 'magit-status)
@@ -177,11 +156,11 @@ and `require' PACKAGE dynamically."
                                 (require 'undo-tree)
                                 (global-undo-tree-mode)))
 
-;; jabber
-(binjo-m-global-set-key-dynamic 'binjo-jabber
-  ((kbd "C-c j j") . 'jabber)
-  ;; C-x C-j C-l is tedious
-  ((kbd "C-c j x") . 'jabber-activity-switch-to))
+;; ;; jabber
+;; (binjo-m-global-set-key-dynamic 'binjo-jabber
+;;   ((kbd "C-c j j") . 'jabber)
+;;   ;; C-x C-j C-l is tedious
+;;   ((kbd "C-c j x") . 'jabber-activity-switch-to))
 
 ;; putty
 (when (eq system-type 'windows-nt)

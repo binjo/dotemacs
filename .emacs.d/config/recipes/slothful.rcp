@@ -1,0 +1,6 @@
+(:name slothful
+       :type hg
+       :website "https://bitbucket.org/eeeickythump/slothful"
+       :description "Extension for GNU Emacs that allows truly lazy loading of files."
+       :url "https://bitbucket.org/eeeickythump/slothful"
+       :features "slothful")
