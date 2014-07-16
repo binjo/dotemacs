@@ -59,7 +59,6 @@
         undo-tree
         js2-mode
         smex
-        paredit
         smartparens
         web-mode
         magit
