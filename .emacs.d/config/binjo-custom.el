@@ -181,6 +181,8 @@
       desktop-buffers-not-to-save "\\.wubi-phrases.*\\|\\.bbdb"
       desktop-restore-eager 50
       desktop-lazy-verbose nil)
+;; (add-hook 'after-init-hook '(lambda ()
+;;                               (desktop-read)))
 (desktop-read)
 (add-hook 'kill-emacs-hook '(lambda ()
                               (desktop-save-mode 1)))
@@ -226,15 +228,6 @@
 ;;      (setq wubi-phrases-file "~/.wubi-phrases.el")
 ;;      (ignore-errors (wubi-load-local-phrases))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; template
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'window-setup-hook '(lambda ()
-                                (require 'template)
-                                (template-initialize)
-                                ;; set template's date format for symcsig
-                                (add-to-list 'template-default-expansion-alist
-                                             '("SYMC_DATE" (template-insert-time "%m/%d/%Y" "00/00/0000")))))
 
 ;; saveplace - emacs-fu
 (add-hook 'window-setup-hook '(lambda ()
