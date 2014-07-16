@@ -123,10 +123,12 @@
 ;;   (ac-config-default))
 
 ;; symcsig-mode
-(require 'symcsig-mode)
-(add-to-list 'auto-mode-alist '("\\.sig$" . symcsig-mode))
+(when (boundp 'binjo-private-org-symc-template)
+  (progn
+    (require 'symcsig-mode)
+    (add-to-list 'auto-mode-alist '("\\.sig$" . symcsig-mode))
 
-;; canary
-(add-to-list 'auto-mode-alist '("\\.can$" . c-mode))
+    ;; canary
+    (add-to-list 'auto-mode-alist '("\\.can$" . c-mode))))
 
 (provide 'binjo-program)
