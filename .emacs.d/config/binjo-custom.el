@@ -170,10 +170,6 @@
 (add-hook 'window-setup-hook '(lambda ()
                                 (setq vc-handled-backends '(SVN Git Hg))))
 
-;; session
-(add-hook 'after-init-hook '(lambda ()
-                              (require 'session)
-                              (session-initialize)))
 ;; desktop
 ;; http://permalink.gmane.org/gmane.emacs.devel/138373
 (require 'slothful)
@@ -188,11 +184,6 @@
                               (desktop-save-mode 1)))
 ;; ibuffer
 ;; (require 'ibuffer)
-
-;; browser-kill-ring
-(global-set-key (kbd "C-c k") 'browse-kill-ring)
-(eval-after-load 'browse-kill-ring
-  '(browse-kill-ring-default-keybindings))
 
 ;;; ido
 (require 'ido)
@@ -210,24 +201,6 @@
   (defun dired-custom-dired-mode-hook ()
     (define-key dired-mode-map "X" 'dired-custom-execute-file))
   (add-hook 'dired-mode-hook 'dired-custom-dired-mode-hook))
-
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ;; wubi
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (register-input-method
-;;  "chinese-wubi" "Chinese-GB" 'quail-use-package
-;;  "WuBi" "WuBi"
-;;  "wubi")
-
-;; (setq default-input-method "chinese-wubi")
-;; (defadvice toggle-input-method (before load-wubi activate)
-;;   (require 'wubi))
-
-;; (eval-after-load 'wubi
-;;   '(progn
-;;      (setq wubi-phrases-file "~/.wubi-phrases.el")
-;;      (ignore-errors (wubi-load-local-phrases))))
-
 
 ;; saveplace - emacs-fu
 (add-hook 'window-setup-hook '(lambda ()
@@ -288,6 +261,12 @@ This is because some levels' updating takes too long time."
 (ad-activate 'gnus)
 (global-set-key (kbd "C-x g") 'gnus)
 
+(eval-after-load 'gnus
+  '(progn
+     (setq mm-verify-option 'known
+           mm-decrypt-option 'known)
+     (setq gnus-buttonized-mime-types '("multipart/signed" "multipart/encrypted"))))
+
 ;; grep
 (global-set-key (kbd "C-c m g") 'grep)
 (global-set-key (kbd "C-c m G") 'grep-find)
@@ -323,12 +302,6 @@ This is because some levels' updating takes too long time."
 ;;       mml2015-cache-passphrase t
 ;;       mml2015-passphrase-cache-expiry 60000
 ;;       mml2015-verbose t)
-
-(eval-after-load 'gnus
-  '(progn
-     (setq mm-verify-option 'known
-           mm-decrypt-option 'known)
-     (setq gnus-buttonized-mime-types '("multipart/signed" "multipart/encrypted"))))
 
 ;; ,----
 ;; | Track changes for some buffer
