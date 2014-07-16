@@ -66,30 +66,16 @@ and `require' PACKAGE dynamically."
 (binjo-m-global-set-key-dynamic 'binjo-erc
                                 ((kbd "C-c n e") . 'binjo-erc-select))
 
-;; sql-config
-(binjo-m-global-set-key-dynamic 'binjo-sql
-                                ((kbd "C-c s w") . 'sql-webfilter)
-                                ((kbd "C-c s f") . 'sql-fips)
-                                ((kbd "C-c s a") . 'sql-av-feedback)
-                                ((kbd "C-c s m") . 'sql-av-webmon))
+;; ;; sql-config
+;; (binjo-m-global-set-key-dynamic 'binjo-sql
+;;                                 ((kbd "C-c s w") . 'sql-webfilter)
+;;                                 ((kbd "C-c s f") . 'sql-fips)
+;;                                 ((kbd "C-c s a") . 'sql-av-feedback)
+;;                                 ((kbd "C-c s m") . 'sql-av-webmon))
 
 ;; org-mode
 (add-hook 'window-setup-hook '(lambda ()
                                 (require 'binjo-org)))
-
-;; twit.el
-;; (add-hook 'window-setup-hook '(lambda ()
-;;                                 (require 'binjo-twit)))
-
-;; ;; smex
-;; (binjo-m-global-set-key-dynamic 'smex
-;;                                 ((kbd "M-x") . 'smex)
-;;                                 ((kbd "M-X") . 'smex-major-mode-commands)
-;;                                 ((kbd "C-c M-x") . 'smex-update-and-run))
-;; (eval-after-load 'smex
-;;   '(smex-initialize))
-;; ;; This is your old M-x.
-;; (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; boxquote
 (binjo-m-global-set-key-dynamic 'boxquote
@@ -118,12 +104,8 @@ and `require' PACKAGE dynamically."
 (eval-after-load 'babel
   '(setq babel-preferred-to-language "Chinese (Simplified)"))
 
-;; (binjo-m-global-set-key-dynamic 'binjo-magit
-;;                                 ((kbd "C-c g m") . 'magit-status)
-;;                                 ((kbd "C-c m c") . 'magit-clone))
-
-(binjo-m-global-set-key-dynamic 'kmacro-ring-list
-                                ((kbd "C-c m r") . 'kmacro-ring-list))
+;; (binjo-m-global-set-key-dynamic 'kmacro-ring-list
+;;                                 ((kbd "C-c m r") . 'kmacro-ring-list))
 
 (binjo-m-global-set-key-dynamic 'binjo-calendar
   ((kbd "C-x C") . (lambda ()
@@ -137,24 +119,6 @@ and `require' PACKAGE dynamically."
                            (calendar)))
                        (switch-to-buffer cal)
                        (calendar-cursor-holidays)))))
-
-;; ;; ioccur
-;; (binjo-m-global-set-key-dynamic 'ioccur
-;;   ((kbd "C-c o c") . 'ioccur))
-;; (eval-after-load 'ioccur
-;;   '(progn
-;;      (set-face-background 'ioccur-match-overlay-face "SkyBlue")
-;;      (set-face-background 'ioccur-title-face "MediumOrchid")
-
-;;      (define-key ioccur-mode-map (kbd "j") 'ioccur-scroll-down)
-;;      (define-key ioccur-mode-map (kbd "k") 'ioccur-scroll-up)
-
-;;      (add-to-list 'desktop-globals-to-save 'ioccur-history)))
-
-;; undo-tree
-(add-hook 'window-setup-hook '(lambda ()
-                                (require 'undo-tree)
-                                (global-undo-tree-mode)))
 
 ;; ;; jabber
 ;; (binjo-m-global-set-key-dynamic 'binjo-jabber
@@ -184,8 +148,8 @@ and `require' PACKAGE dynamically."
 
 (global-set-key (kbd "M-&") 'binjo-async-shell-cmd)
 
-;; anything - helm
-(binjo-m-global-set-key-dynamic 'helm-config
-  ((kbd "C-c i") . 'helm-mini))
+;; ;; anything - helm
+;; (binjo-m-global-set-key-dynamic 'helm-config
+;;   ((kbd "C-c i") . 'helm-mini))
 
 (provide 'binjo-util)
