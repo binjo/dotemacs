@@ -39,8 +39,6 @@
 
 
 
-(require 'company)
-
 (setq company-auto-complete t)
 (setq company-global-modes t)
 (setq company-idle-delay 0.2)

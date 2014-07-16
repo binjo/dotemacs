@@ -38,7 +38,6 @@
   (require 'cl))
 
 
-(require 'smex)
 
 (smex-initialize)
 

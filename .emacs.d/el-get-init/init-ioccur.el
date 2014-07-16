@@ -38,7 +38,6 @@
   (require 'cl))
 
 
-(require 'ioccur)
 
 (set-face-background 'ioccur-match-overlay-face "SkyBlue")
 (set-face-background 'ioccur-title-face "MediumOrchid")
@@ -52,4 +51,3 @@
 
 (provide 'init-ioccur)
 ;;; init-ioccur.el ends here
-

@@ -36,9 +36,7 @@
 
 (eval-when-compile
   (require 'cl))
-(require 'magit)
-;; (require 'magit-svn)
-;; (require 'magithub)
+
 
 
 (setq magit-repo-dirs `("~/.emacs.d/"
