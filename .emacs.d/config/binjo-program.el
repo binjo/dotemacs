@@ -46,27 +46,25 @@
      (add-hook 'ruby-mode-hook 'turn-on-font-lock)))
 
 ;; Php
-(autoload 'php-mode "php-mode" "Php editing mode." t)
-(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-(eval-after-load 'php-mode
-  '(add-to-list 'interpreter-mode-alist '("php" . php-mode)))
+;; (autoload 'php-mode "php-mode" "Php editing mode." t)
+;; (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+;; (eval-after-load 'php-mode
+;;   '(add-to-list 'interpreter-mode-alist '("php" . php-mode)))
 
 ;; Js related setting
-(autoload 'js2-mode "js2-mode" nil t)
-(eval-after-load 'js2-mode
-  '(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
-(binjo-m-global-set-key-dynamic 'js-console
-                                ((kbd "C-c j s") . 'js-console))
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;; (binjo-m-global-set-key-dynamic 'js-console
+;;                                 ((kbd "C-c j s") . 'js-console))
 
-(binjo-m-global-set-key-dynamic 'js-comint
-                                ((kbd "C-c j c") . 'run-js)
-                                ((kbd "C-c j r") . 'js-send-region-and-go))
-(eval-after-load 'js-comint
-  '(setq inferior-js-program-command "java -jar /usr/local/bin/rhino1_7R3/js.jar"))
+;; (binjo-m-global-set-key-dynamic 'js-comint
+;;                                 ((kbd "C-c j c") . 'run-js)
+;;                                 ((kbd "C-c j r") . 'js-send-region-and-go))
+;; (eval-after-load 'js-comint
+;;   '(setq inferior-js-program-command "java -jar /usr/local/bin/rhino1_7R3/js.jar"))
 
 ;;; c# highlighting
-(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
-(add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
+;; (autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
+;; (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
 
 ;;;; highlight special keywords, copy from xwl's xwl-programming.el
 (setq binjo-keyword-highlight-modes
@@ -89,25 +87,25 @@
 
 (add-hook 'window-setup-hook 'xwl-highlight-special-keywords)
 
-;; asp highlight
-(autoload 'asp-mode "asp-mode")
-(add-to-list 'auto-mode-alist '("\\.aspx?" . asp-mode))
+;; ;; asp highlight
+;; (autoload 'asp-mode "asp-mode")
+;; (add-to-list 'auto-mode-alist '("\\.aspx?" . asp-mode))
 
-;; haskell
-(autoload 'haskell-mode "haskell-mode")
-(add-to-list 'auto-mode-alist        '("\\.\\(?:[gh]s\\|hi\\)\\'" . haskell-mode))
-(add-to-list 'auto-mode-alist        '("\\.l[gh]s\\'" . literate-haskell-mode))
-(add-to-list 'interpreter-mode-alist '("runghc" . haskell-mode))
-(add-to-list 'interpreter-mode-alist '("runhaskell" . haskell-mode))
+;; ;; haskell
+;; (autoload 'haskell-mode "haskell-mode")
+;; (add-to-list 'auto-mode-alist        '("\\.\\(?:[gh]s\\|hi\\)\\'" . haskell-mode))
+;; (add-to-list 'auto-mode-alist        '("\\.l[gh]s\\'" . literate-haskell-mode))
+;; (add-to-list 'interpreter-mode-alist '("runghc" . haskell-mode))
+;; (add-to-list 'interpreter-mode-alist '("runhaskell" . haskell-mode))
 
-(eval-after-load 'haskell-mode
-  '(progn
-     (load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file.el")
-     (setq haskell-program-name
-           (shell-quote-argument "c:/Program Files/Haskell Platform/bin/ghci.exe")
-           haskell-font-lock-symbols t)
-     (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-     (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)))
+;; (eval-after-load 'haskell-mode
+;;   '(progn
+;;      (load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file.el")
+;;      (setq haskell-program-name
+;;            (shell-quote-argument "c:/Program Files/Haskell Platform/bin/ghci.exe")
+;;            haskell-font-lock-symbols t)
+;;      (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+;;      (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)))
 
 ;; pintool's header
 (add-to-list 'auto-mode-alist  '("\\.PH$" . c++-mode))
