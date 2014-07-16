@@ -63,6 +63,8 @@
         web-mode
         magit
         ioccur
+        boxquote
+        cal-china-x
         ))
 
 (el-get 'sync binjo:el-get-packages)

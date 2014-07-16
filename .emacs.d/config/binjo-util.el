@@ -77,16 +77,6 @@ and `require' PACKAGE dynamically."
 (add-hook 'window-setup-hook '(lambda ()
                                 (require 'binjo-org)))
 
-;; boxquote
-(binjo-m-global-set-key-dynamic 'boxquote
-                                ((kbd "C-c b r") . 'boxquote-region)
-                                ((kbd "C-c b t") . 'boxquote-title)
-                                ((kbd "C-c b f") . 'boxquote-describe-function)
-                                ((kbd "C-c b v") . 'boxquote-describe-variable)
-                                ((kbd "C-c b k") . 'boxquote-describe-key)
-                                ((kbd "C-c b !") . 'boxquote-shell-command)
-                                ((kbd "C-c b y") . 'boxquote-yank))
-
 ;; YASnippet
 ;; (add-hook 'window-setup-hook '(lambda ()
 ;;                                 (require 'yasnippet)
