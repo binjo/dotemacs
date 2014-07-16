@@ -127,8 +127,9 @@
          (file+headline "contacts.org" "Contacts")
          "* %(org-contacts-template-name)\n  :PROPERTIES:\n  :EMAIL: %(org-contacts-template-email)\n  :END:")))
 
-(setq org-capture-templates
-      (append org-capture-templates binjo-private-org-symc-template))
+(when (boundp 'binjo-private-org-symc-template)
+  (setq org-capture-templates
+        (append org-capture-templates binjo-private-org-symc-template)))
 
 (setq org-default-notes-file (concat org-directory "notes.org"))
 
@@ -140,7 +141,8 @@
  'org-babel-load-languages
  '((python . t)))
 (setq org-confirm-babel-evaluate nil)
-(add-to-list 'org-structure-template-alist binjo-private-org-symc-babel)
+(when (boundp 'binjo-private-org-symc-babel)
+  (add-to-list 'org-structure-template-alist binjo-private-org-symc-babel))
 
 
 (provide 'binjo-org)
