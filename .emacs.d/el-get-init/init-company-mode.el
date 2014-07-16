@@ -1,4 +1,4 @@
-;;; init-company.el --- company
+;;; init-company-mode.el --- company
 
 ;; Copyright 2014 Binjo
 ;;
@@ -42,8 +42,8 @@
 (setq company-auto-complete t)
 (setq company-global-modes t)
 (setq company-idle-delay 0.2)
-(setq company-minimum-prefix-length 3)
-(setq company-show-numbers t)
+(setq company-minimum-prefix-length 2)
+(setq company-show-numbers nil)
 (setq company-tooltip-limit 30)
 (setq company-dabbrev-downcase nil)
 (setq company-dabbrev-ignore-case nil)

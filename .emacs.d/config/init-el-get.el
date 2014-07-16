@@ -53,7 +53,7 @@
         pymacs
         company-mode
         browse-kill-ring
-        emacs-template
+        template
         session
         etags-select
         undo-tree
