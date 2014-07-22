@@ -45,8 +45,6 @@
 (setq company-minimum-prefix-length 2)
 (setq company-show-numbers nil)
 (setq company-tooltip-limit 30)
-(setq company-dabbrev-downcase nil)
-(setq company-dabbrev-ignore-case nil)
 
 (add-hook 'after-init-hook 'global-company-mode)
 
