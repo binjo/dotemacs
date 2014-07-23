@@ -44,6 +44,13 @@
 (setq company-show-numbers nil)
 (setq company-tooltip-limit 30)
 
+;; https://github.com/company-mode/company-mode/issues/75
+(setq company-selection-wrap-around t)
+(eval-after-load 'company
+  '(progn
+     (define-key company-active-map (kbd "TAB") 'company-select-next)
+     (define-key company-active-map [tab] 'company-select-next)))
+
 (add-hook 'after-init-hook 'global-company-mode)
 
 (provide 'init-company)
