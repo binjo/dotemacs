@@ -124,6 +124,8 @@
 (when (boundp 'binjo-private-org-symc-template)
   (progn
     (require 'symcsig-mode)
+    (require 'smartparens-symcsig)
+    (require 'company-symcsig)
     (add-to-list 'auto-mode-alist '("\\.sig$" . symcsig-mode))
 
     ;; canary
