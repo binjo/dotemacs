@@ -124,9 +124,13 @@
 (when (boundp 'binjo-private-org-symc-template)
   (progn
     (require 'symcsig-mode)
-    (require 'smartparens-symcsig)
-    (require 'company-symcsig)
     (add-to-list 'auto-mode-alist '("\\.sig$" . symcsig-mode))
+    (add-hook 'symcsig-mode-hook (lambda ()
+                                   (require 'smartparens-symcsig)
+                                   (require 'company-symcsig)
+                                   (company-mode)
+                                   (set (make-local-variable 'company-backends)
+                                        '(company-symcsig))))
 
     ;; canary
     (add-to-list 'auto-mode-alist '("\\.can$" . c-mode))))
