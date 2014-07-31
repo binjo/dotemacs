@@ -53,7 +53,7 @@
 (when (eq system-type 'darwin)
   (add-to-list 'exec-path "/usr/local/bin/"))
 
-(when binjo-private-org-symc-template
+(when (boundp 'binjo-private-org-symc-template)
   (add-to-list 'load-path "~/.emacs.d/el-get/symcsig-mode"))
 
 (provide 'binjo-path)
