@@ -282,6 +282,9 @@ This is because some levels' updating takes too long time."
                                   " . -type f -exec grep -r -nH -i -e  {} NUL \";\"") 71))
        (grep-apply-setting 'grep-use-null-device nil))))
 
+;; pt.el
+(global-set-key (kbd "C-c p t") 'pt-regexp)
+
 (require 'binjo-bindings)
 
 ;; redefines for archive-mode
@@ -345,5 +348,9 @@ This is because some levels' updating takes too long time."
 
 (add-hook 'c++-mode-hook 'binjo-set-c-c++-style)
 (add-hook 'c-mode-hook 'binjo-set-c-c++-style)
+
+;; hydra
+(add-hook 'after-init-hook '(lambda ()
+                              (require 'binjo-hydra)))
 
 (provide 'binjo-custom)

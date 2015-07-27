@@ -40,14 +40,15 @@
   (require 'cl))
 
 (require 'org)
+(require 'org-protocol)
 (ignore-errors (require 'org-contacts))
 
 (defvar binjo-org-files
-  '("works.org" "todo.org" "exploits.org" "remember.org" "archive.org" "things.org"))
+  '("works.org" "todo.org" "exploits.org" "remember.org" "archive.org" "things.org" "mapp.org"))
 
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c k") 'org-capture)
 
 (setq org-log-done t)
 (add-hook 'org-mode-hook 'turn-on-font-lock)

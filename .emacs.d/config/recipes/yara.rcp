@@ -1,0 +1,6 @@
+(:name yara-mode
+       :type git
+       :website "https://github.com/binjo/yara-mode"
+       :description "yara mode for GNU Emacs to edit yara related files."
+       :url "https://github.com/binjo/yara-mode.git"
+       :features "yara-mode")

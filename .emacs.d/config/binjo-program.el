@@ -110,6 +110,9 @@
 ;; pintool's header
 (add-to-list 'auto-mode-alist  '("\\.PH$" . c++-mode))
 
+;; actionscript
+(add-to-list 'auto-mode-alist  '("\\.as$" . actionscript-mode))
+
 (binjo-m-global-set-key-dynamic 'cdb-gud
   ((kbd "C-c d b") . 'cdb))
 

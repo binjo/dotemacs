@@ -52,7 +52,7 @@
         slothful
         pymacs
         company-mode
-        browse-kill-ring
+        ;; browse-kill-ring
         template
         session
         etags-select
@@ -65,6 +65,7 @@
         ioccur
         boxquote
         cal-china-x
+        hydra
         ))
 
 (el-get 'sync binjo:el-get-packages)

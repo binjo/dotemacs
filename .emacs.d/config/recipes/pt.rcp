@@ -1,0 +1,6 @@
+(:name pt
+       :type git
+       :website "https://github.com/bling/pt.el"
+       :description "An emacs front-end for Pt, the Platinum Searcher."
+       :url "https://github.com/bling/pt.el.git"
+       :features "pt")
